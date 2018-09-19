@@ -244,6 +244,28 @@ INSERT INTO `MessagePropertiesLookup` (`RequirementType`, `RequirementDesc`) VAL
 (2, 'O'),
 (3, 'R');
 
+
+--- Dumping enum data and property data
+
+INSERT INTO `MessageProperties`(`MessageName`,`MessageID`, `SentDateTime`, `MessageContentType`, `MessageDescription`, `OriginatingMessageID`, `PrecedingMessageID`, `Incident Information`, `MessageRecall`, `Funding`, `ContactInformation`, `Resource Information`, `IncidentID`, `IncidentDescription`, `RecalledMessageID`, `RecallType`, `FundCode`, `FundingInfo`, `ResourceInfoElementID`, `Response Information`, `Resource`, `AssignmentInformation`, `ScheduleInformation`, `PrecedingResourceInfoElementID`, `ResponseType`, `ReasonCode`, `ResponseReason`, `ResourceID`, `Name`, `TypeStructure`, `TypeInfo`, `Keyword`, `Description`, `Credentials`, `Certifications`, `SpecialRequirements`, `ResponsibleParty`, `OwnershipInformation`, `Resource Status`, `Owner`, `OwningJurisdiction`, `HomeDispatch`, `HomeUnit`, `InventoryRefreshDateTime`, `DeploymentStatus`, `Availability`, `Quantity`, `Restrictions`, `AnticipatedFunction`, `PriceQuote`, `OrderID`, `Assignment Instructions`, `ModeOfTransportation`, `NavigationInstructions`, `ReportingInstructions`, `ScheduleType`, `DateTime`, `Location`) VALUES 
+('Request Resource',3,3,3,2,3,0,2,2,2,3,3,1,1,3,3,1,1,3,0,3,2,2,0,0,0,0,1,1,1,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,2,2,2,0,0,0,0,0,0,3,2,2),
+('ResponseTo Request Resource',3,3,3,2,3,3,2,2,2,3,3,1,1,3,3,1,1,3,3,2,2,2,3,3,1,1,1,1,1,2,2,2,2,2,2,2,2,2,1,1,2,2,2,2,2,1,2,2,2,0,2,2,2,2,3,2,2),
+('Requisition Resource',3,3,3,2,3,2,2,2,3,3,3,1,1,3,3,1,1,3,0,3,3,2,0,0,0,0,1,1,1,2,2,2,2,2,2,2,2,0,1,1,2,2,0,0,0,3,2,2,2,0,2,2,2,2,3,2,2),
+('Commit Resource',3,3,3,2,3,3,2,2,2,3,3,1,1,3,3,1,1,3,3,1,1,1,3,3,1,1,1,1,1,2,2,2,2,2,2,2,2,2,1,1,2,2,2,2,0,3,2,2,2,2,2,2,2,2,3,2,2),
+('Request Information',3,3,3,3,3,2,2,2,2,3,2,1,1,3,3,1,1,3,0,2,2,2,0,0,0,0,1,1,1,2,2,2,2,2,2,2,2,2,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,2,2),
+('ResponseTo RequestInformation',3,3,3,2,3,3,2,2,2,3,2,1,1,3,3,1,1,3,2,2,2,2,3,3,1,1,1,1,1,2,2,2,2,2,2,2,2,2,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,2,2),
+('Offer Unsolicited Resource',3,3,3,2,3,0,2,2,0,3,3,1,1,3,3,0,0,3,0,3,2,2,0,0,0,0,1,1,1,2,2,2,2,2,2,2,2,2,1,1,2,2,2,2,2,2,2,2,2,0,2,2,2,2,3,2,2),
+('Release Resource',3,3,3,2,3,2,2,2,2,3,3,1,1,3,3,1,1,3,2,3,2,2,3,3,1,1,1,1,1,2,2,2,2,2,2,2,2,2,1,1,2,2,0,2,2,3,2,2,2,2,2,2,2,2,3,2,2),
+('Request Return',3,3,3,2,3,2,2,2,2,3,3,1,1,3,3,1,1,3,0,3,2,2,0,0,0,0,1,1,1,2,2,2,2,2,2,2,2,2,1,1,2,2,0,2,2,2,2,2,2,2,2,2,2,2,3,2,2),
+('ResponseTo Request Return',3,3,3,2,3,3,2,2,2,3,3,1,1,3,3,1,1,3,3,2,2,2,3,3,1,1,1,1,1,2,2,2,2,2,2,2,2,3,1,1,2,2,0,3,3,2,2,2,2,2,2,2,2,2,3,2,2),
+('Request Quote',3,3,3,2,3,2,2,2,2,3,3,1,1,3,3,1,1,3,2,3,2,2,3,3,1,1,1,1,1,2,2,2,2,2,2,2,2,0,1,1,2,2,0,0,0,2,2,2,0,0,2,2,2,2,3,2,2),
+('ResponseTo Request Quote',3,3,3,2,3,3,2,2,2,3,3,1,1,3,3,1,1,3,3,1,2,2,3,3,1,1,1,1,1,2,2,2,2,2,2,2,2,2,1,1,2,2,2,2,2,2,2,2,3,0,2,2,2,2,3,2,2),
+('Request Resource Deployment Status',3,3,3,2,3,2,2,2,2,3,3,1,1,3,3,1,1,3,0,3,2,2,0,0,0,0,1,1,1,2,2,2,2,2,2,2,2,0,1,1,2,2,0,0,0,2,2,2,2,2,2,2,2,2,3,2,2),
+('Report Resource Deployment Status',3,3,3,2,3,2,2,2,2,3,3,1,1,3,3,1,1,3,2,2,2,2,3,3,1,1,1,1,1,2,2,2,2,2,2,2,2,2,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,2,2),
+('Request Extended Deployment Duration',3,3,3,2,3,2,2,2,2,3,3,1,1,3,3,1,1,3,0,3,2,2,0,0,0,0,1,1,1,2,2,2,2,2,2,2,2,2,1,1,2,2,0,2,2,2,2,2,2,2,0,0,0,0,3,2,2),
+('ResponseTo Request Extended Deployment Duration',3,3,3,2,3,3,2,2,2,3,3,1,1,3,3,1,1,3,3,1,2,2,3,3,1,1,1,1,1,2,2,2,2,2,2,2,2,2,1,1,2,2,0,2,2,2,2,2,2,2,2,2,2,2,3,2,2);
+
+
 -- --------------------------------------------------------
 
 --
@@ -526,6 +548,16 @@ ALTER TABLE `ContactInformationType`
 --
 ALTER TABLE `ContactRoleLookup`
   ADD PRIMARY KEY (`ContactRoleID`);
+
+
+INSERT INTO `ContactRoleLookup`(`ContactRoleID`, `Description`) VALUES 
+(1, 'Sender'),
+(2, 'Requester'),
+(3,'SubjectMatterExpert'),
+(4,'Approver'),
+(5,'RespondingOrg'),
+(6,'Owner');
+
 
 --
 -- Indexes for table `Funding`
