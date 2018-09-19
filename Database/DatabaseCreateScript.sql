@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 18, 2018 at 06:08 PM
+-- Generation Time: Sep 19, 2018 at 12:43 PM
 -- Server version: 5.7.23-0ubuntu0.18.04.1
 -- PHP Version: 7.2.10-0ubuntu0.18.04.1
 
@@ -98,6 +98,18 @@ CREATE TABLE `ContactRoleLookup` (
 -- RELATIONS FOR TABLE `ContactRoleLookup`:
 --
 
+--
+-- Dumping data for table `ContactRoleLookup`
+--
+
+INSERT INTO `ContactRoleLookup` (`ContactRoleID`, `Description`) VALUES
+(1, 'Sender'),
+(2, 'Requester'),
+(3, 'SubjectMatterExpert'),
+(4, 'Approver'),
+(5, 'RespondingOrg'),
+(6, 'Owner');
+
 -- --------------------------------------------------------
 
 --
@@ -153,6 +165,7 @@ CREATE TABLE `LocationType` (
 
 CREATE TABLE `MessageProperties` (
   `id` int(11) NOT NULL,
+  `MessageTypeName` varchar(255) NOT NULL,
   `MessageID` tinyint(4) NOT NULL DEFAULT '0',
   `SentDateTime` tinyint(4) NOT NULL DEFAULT '0',
   `MessageContentType` tinyint(4) NOT NULL DEFAULT '0',
@@ -218,6 +231,28 @@ CREATE TABLE `MessageProperties` (
 --   `MessagePropertyLookupID`
 --       `MessagePropertiesLookup` -> `RequirementType`
 --
+
+--
+-- Dumping data for table `MessageProperties`
+--
+
+INSERT INTO `MessageProperties` (`id`, `MessageTypeName`, `MessageID`, `SentDateTime`, `MessageContentType`, `MessageDescription`, `OriginatingMessageID`, `PrecedingMessageID`, `Incident Information`, `MessageRecall`, `Funding`, `ContactInformation`, `Resource Information`, `IncidentID`, `IncidentDescription`, `RecalledMessageID`, `RecallType`, `FundCode`, `FundingInfo`, `ResourceInfoElementID`, `Response Information`, `Resource`, `AssignmentInformation`, `ScheduleInformation`, `PrecedingResourceInfoElementID`, `ResponseType`, `ReasonCode`, `ResponseReason`, `ResourceID`, `Name`, `TypeStructure`, `TypeInfo`, `Keyword`, `Description`, `Credentials`, `Certifications`, `SpecialRequirements`, `ResponsibleParty`, `OwnershipInformation`, `Resource Status`, `Owner`, `OwningJurisdiction`, `HomeDispatch`, `HomeUnit`, `InventoryRefreshDateTime`, `DeploymentStatus`, `Availability`, `Quantity`, `Restrictions`, `AnticipatedFunction`, `PriceQuote`, `OrderID`, `Assignment Instructions`, `ModeOfTransportation`, `NavigationInstructions`, `ReportingInstructions`, `ScheduleType`, `DateTime`, `Location`, `MessagePropertyLookupID`) VALUES
+(1, 'Request Resource', 3, 3, 3, 2, 3, 0, 2, 2, 2, 3, 3, 1, 1, 3, 3, 1, 1, 3, 0, 3, 2, 2, 0, 0, 0, 0, 1, 1, 1, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 3, 2, 2, 0),
+(2, 'ResponseTo Request Resource', 3, 3, 3, 2, 3, 3, 2, 2, 2, 3, 3, 1, 1, 3, 3, 1, 1, 3, 3, 2, 2, 2, 3, 3, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 0, 2, 2, 2, 2, 3, 2, 2, 0),
+(3, 'Requisition Resource', 3, 3, 3, 2, 3, 2, 2, 2, 3, 3, 3, 1, 1, 3, 3, 1, 1, 3, 0, 3, 3, 2, 0, 0, 0, 0, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 0, 1, 1, 2, 2, 0, 0, 0, 3, 2, 2, 2, 0, 2, 2, 2, 2, 3, 2, 2, 0),
+(4, 'Commit Resource', 3, 3, 3, 2, 3, 3, 2, 2, 2, 3, 3, 1, 1, 3, 3, 1, 1, 3, 3, 1, 1, 1, 3, 3, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 0, 3, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 0),
+(5, 'Request Information', 3, 3, 3, 3, 3, 2, 2, 2, 2, 3, 2, 1, 1, 3, 3, 1, 1, 3, 0, 2, 2, 2, 0, 0, 0, 0, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 0),
+(6, 'ResponseTo RequestInformation', 3, 3, 3, 2, 3, 3, 2, 2, 2, 3, 2, 1, 1, 3, 3, 1, 1, 3, 2, 2, 2, 2, 3, 3, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 0),
+(7, 'Offer Unsolicited Resource', 3, 3, 3, 2, 3, 0, 2, 2, 0, 3, 3, 1, 1, 3, 3, 0, 0, 3, 0, 3, 2, 2, 0, 0, 0, 0, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 3, 2, 2, 0),
+(8, 'Release Resource', 3, 3, 3, 2, 3, 2, 2, 2, 2, 3, 3, 1, 1, 3, 3, 1, 1, 3, 2, 3, 2, 2, 3, 3, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 0, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 0),
+(9, 'Request Return', 3, 3, 3, 2, 3, 2, 2, 2, 2, 3, 3, 1, 1, 3, 3, 1, 1, 3, 0, 3, 2, 2, 0, 0, 0, 0, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 0),
+(10, 'ResponseTo Request Return', 3, 3, 3, 2, 3, 3, 2, 2, 2, 3, 3, 1, 1, 3, 3, 1, 1, 3, 3, 2, 2, 2, 3, 3, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 1, 1, 2, 2, 0, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 0),
+(11, 'Request Quote', 3, 3, 3, 2, 3, 2, 2, 2, 2, 3, 3, 1, 1, 3, 3, 1, 1, 3, 2, 3, 2, 2, 3, 3, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 0, 1, 1, 2, 2, 0, 0, 0, 2, 2, 2, 0, 0, 2, 2, 2, 2, 3, 2, 2, 0),
+(12, 'ResponseTo Request Quote', 3, 3, 3, 2, 3, 3, 2, 2, 2, 3, 3, 1, 1, 3, 3, 1, 1, 3, 3, 1, 2, 2, 3, 3, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 0, 2, 2, 2, 2, 3, 2, 2, 0),
+(13, 'Request Resource Deployment Status', 3, 3, 3, 2, 3, 2, 2, 2, 2, 3, 3, 1, 1, 3, 3, 1, 1, 3, 0, 3, 2, 2, 0, 0, 0, 0, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 0, 1, 1, 2, 2, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 0),
+(14, 'Report Resource Deployment Status', 3, 3, 3, 2, 3, 2, 2, 2, 2, 3, 3, 1, 1, 3, 3, 1, 1, 3, 2, 2, 2, 2, 3, 3, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 0),
+(15, 'Request Extended Deployment Duration', 3, 3, 3, 2, 3, 2, 2, 2, 2, 3, 3, 1, 1, 3, 3, 1, 1, 3, 0, 3, 2, 2, 0, 0, 0, 0, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 3, 2, 2, 0),
+(16, 'ResponseTo Request Extended Deployment Duration', 3, 3, 3, 2, 3, 3, 2, 2, 2, 3, 3, 1, 1, 3, 3, 1, 1, 3, 3, 1, 2, 2, 3, 3, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -649,6 +684,15 @@ ALTER TABLE `TypeInfoType`
 ALTER TABLE `ValueListType`
   ADD PRIMARY KEY (`ValueListID`);
 
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `MessageProperties`
+--
+ALTER TABLE `MessageProperties`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- Constraints for dumped tables
 --
