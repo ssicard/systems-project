@@ -116,6 +116,7 @@ void communication(pool *p) {
         printf("Server received %d (%d total) bytes on fd %d\n", n, byte_cnt, connfd);
         int j = 0;
         while(p->clientfd[j] >= 0){
+          //TODO: buf needs to be turned into json or xml before sending back out to the clients
           Rio_writen(p->clientfd[j], buf, n); // write buffer into fd
           j++;
           std::stringstream ss;
