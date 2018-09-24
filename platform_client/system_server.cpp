@@ -134,12 +134,11 @@ void communication(pool *p) {
             client_fd_list.push_back(p->clientfd[j]);
           } else if (std::find(client_list.begin(), client_list.end(), current_id) != client_list.end() && std::find(client_fd_list.begin(), client_fd_list.end(), p->clientfd[j]) == client_fd_list.end()){
             std::cout << "[Error] same user name: " << current_id << std::endl;
-            char* login_error = "Login failed";
-            Rio_writen(p->clientfd[j], login_error, sizeof(login_error));
-            //send_login_error();
+            l.log(Logger::ERROR, "An additional user is trying yo log in as: " + current_id);
+            //TODO: maybe kicking the client out since this client has the same identification with another client we already know about?
+            //char* login_error = "Login failed";
+            //Rio_writen(p->clientfd[j], login_error, sizeof(login_error));
           }
-          //client_list.push_back(current_id); 
-	  //Fputs(buf, stdout);
         }
       } else {/* EOF detected, remove descriptor from pool */
         Close(connfd); 

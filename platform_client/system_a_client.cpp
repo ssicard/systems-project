@@ -1,4 +1,5 @@
 #include "./csapp/csapp.h"
+#include "../logger/logger.cpp"
 
 int main(int argc, char **argv){
   

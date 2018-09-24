@@ -11,7 +11,7 @@ LDLIBS = -lpthread
 
 LOG = ../logger/logger.cpp
 PROGS = system_a_client\
-	system_a_server\
+	system_server\
 
 all: $(CSAPP_SRC)/csapp.o $(PROG) $(LOG) $(PROGS)
 $(PROGS): $(CSAPP_SRC)/csapp.o
