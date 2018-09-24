@@ -36,6 +36,7 @@ int main(int argc, char **argv){
       /*getting the inputs from stdin */
       Fgets(buf, MAXLINE, stdin);
       if(buf[0] == '\\'){
+        //TODO: TURN THIS TO JSON FORMAT OR XML
         if (buf[1] == 'q'){
           printf("\\q innitiated, are you sure you want to quit session? (enter c to continue, type any other keys to quit)\n");
           Fgets(buf, MAXLINE, stdin);
