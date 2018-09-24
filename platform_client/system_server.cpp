@@ -131,10 +131,10 @@ void communication(pool *p) {
             l.log(Logger::INFO, "New client connected: " + current_id + "\n");
             //client_list.emplace(current_id, p->clientfd[j]);
             client_list.push_back(current_id);
-            client_fd_list.push_back(p->clientfd[j]);
-          } else if (std::find(client_list.begin(), client_list.end(), current_id) != client_list.end() && std::find(client_fd_list.begin(), client_fd_list.end(), p->clientfd[j]) == client_fd_list.end()){
+            client_fd_list.push_back(connfd);
+          } else if (std::find(client_list.begin(), client_list.end(), current_id) != client_list.end() && std::find(client_fd_list.begin(), client_fd_list.end(), connfd) == client_fd_list.end()){
             std::cout << "[Error] same user name: " << current_id << std::endl;
-            l.log(Logger::ERROR, "An additional user is trying yo log in as: " + current_id);
+            l.log(Logger::ERROR, "An additional user is trying to log in as: " + current_id);
             //TODO: maybe kicking the client out since this client has the same identification with another client we already know about?
             //char* login_error = "Login failed";
             //Rio_writen(p->clientfd[j], login_error, sizeof(login_error));
