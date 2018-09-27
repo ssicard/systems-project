@@ -1,5 +1,8 @@
 #include "./csapp/csapp.h"
 #include "../logger/logger.cpp"
+#include "./dependencies/json.hpp"
+#include <sstream>
+#include <string>
 
 int main(int argc, char **argv){
   
@@ -15,6 +18,11 @@ int main(int argc, char **argv){
   host = argv[1];
   port = argv[2];
   name = argv[3];
+  std::stringstream ss;
+  std::string name_string;
+  //std::string name_string(name, sizeof(name));
+  ss << name;
+  ss >> name_string;
 
   clientfd = Open_clientfd(host, port); /* Open client for connection */
   Rio_readinitb(&rio, clientfd); /* initialize rio */
@@ -31,13 +39,15 @@ int main(int argc, char **argv){
     if(FD_ISSET(STDIN_FILENO, &ready_set)){
       /* Copying username into the buffer */
       memset(&data, 0, sizeof(data));
-      strcat(data,"<");
-      strcat(data, name);
-      strcat(data, "> [+] "); 
+      nlohmann::json j;
+      j["identity"] = name_string;
+      j["Client"] = "A";
+      //strcat(data,"<");
+      //strcat(data, name);
+      //strcat(data, "> [+] "); 
       /*getting the inputs from stdin */
       Fgets(buf, MAXLINE, stdin);
       if(buf[0] == '\\'){
-        //TODO: TURN THIS TO JSON FORMAT OR XML
         if (buf[1] == 'q'){
           printf("\\q innitiated, are you sure you want to quit session? (enter c to continue, type any other keys to quit)\n");
           Fgets(buf, MAXLINE, stdin);
@@ -51,8 +61,15 @@ int main(int argc, char **argv){
           }
         }
       }
-      strcat(data, buf);
-      Rio_writen(clientfd, data, strlen(data));
+      buf[strlen(buf)-1] = '\0';
+      j["message"] = buf;
+      std::string send_this = j.dump(3);
+      send_this += "\n";
+      std::cout << send_this.c_str() << std::endl;
+      //strcat(data, buf);
+      char char_star[send_this.length()];
+      strcpy(char_star,send_this.c_str());
+      Rio_writen(clientfd, char_star, strlen(data));
       memset(&data, 0, sizeof(data));
     }
     if(FD_ISSET(clientfd, &ready_set)){
