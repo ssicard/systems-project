@@ -37,14 +37,10 @@ int main(int argc, char **argv){
     /* waiting for event */ 
     select(clientfd+1, &ready_set, NULL, NULL, NULL);
     if(FD_ISSET(STDIN_FILENO, &ready_set)){
-      /* Copying username into the buffer */
       memset(&data, 0, sizeof(data));
       nlohmann::json j;
       j["identity"] = name_string;
       j["Client"] = "A";
-      //strcat(data,"<");
-      //strcat(data, name);
-      //strcat(data, "> [+] "); 
       /*getting the inputs from stdin */
       Fgets(buf, MAXLINE, stdin);
       if(buf[0] == '\\'){
@@ -63,13 +59,12 @@ int main(int argc, char **argv){
       }
       buf[strlen(buf)-1] = '\0';
       j["message"] = buf;
-      std::string send_this = j.dump(3);
+      std::string send_this = j.dump();
       send_this += "\n";
-      std::cout << send_this.c_str() << std::endl;
-      //strcat(data, buf);
       char char_star[send_this.length()];
       strcpy(char_star,send_this.c_str());
-      Rio_writen(clientfd, char_star, strlen(data));
+      std::cout << "char_star: " << char_star << std::endl;
+      Rio_writen(clientfd, char_star, strlen(char_star));
       memset(&data, 0, sizeof(data));
     }
     if(FD_ISSET(clientfd, &ready_set)){

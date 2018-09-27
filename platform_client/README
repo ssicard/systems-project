@@ -1,4 +1,4 @@
-Mon Sep 24, Nam Vu:
+[Mon Sep 24, Nam Vu]
 
 I've switched the old gcc compiler to the g++ with c++17 standard. 
 Just type 'make' to compile, we shouldn't mess with the csapp directory, as the 'csapp.o' file needs to be compiles with the old gcc compiler.
@@ -42,3 +42,7 @@ will log to the LogError.txt:
 
 These are all suggestions, you guys can delete or add what ever is needed to keep the project going!
 
+[Thur Sep 27, Nam Vu]
+
+I just added json library for client_a it is now sending json strings to the server.
+As of now, the server's behavior is weird because I did not handle the new changes, however, client_a's implementation is pretty much done. Same guideline can be used to continuing client_B, with xml format.
