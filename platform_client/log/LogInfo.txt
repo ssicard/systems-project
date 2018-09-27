@@ -1807,3 +1807,45 @@ rewr[3~
 [INFO]: Thu Sep 27 11:37:25 2018
 rewr
 
+[INFO]: Thu Sep 27 11:55:04 2018
+{"Client":"A","identity":"nam","message":"fds"}
+
+[INFO]: Thu Sep 27 11:55:04 2018
+New client connected: ClientAidentitynammessagefds
+
+[INFO]: Thu Sep 27 11:55:11 2018
+{"Client":"A","identity":"nam","message":"rewewrrew"}
+
+[INFO]: Thu Sep 27 11:55:11 2018
+New client connected: ClientAidentitynammessagerewewrrew
+
+[INFO]: Thu Sep 27 11:55:12 2018
+{"Client":"A","identity":"nam","message":"rwer"}
+
+[INFO]: Thu Sep 27 11:55:12 2018
+New client connected: ClientAidentitynammessagerwer
+
+[INFO]: Thu Sep 27 11:55:13 2018
+{"Client":"A","identity":"nam","message":"rew"}
+
+[INFO]: Thu Sep 27 11:55:13 2018
+New client connected: ClientAidentitynammessagerew
+
+[INFO]: Thu Sep 27 11:55:14 2018
+{"Client":"A","identity":"nam","message":"rewr"}
+
+[INFO]: Thu Sep 27 11:55:14 2018
+New client connected: ClientAidentitynammessagerewr
+
+[INFO]: Thu Sep 27 11:55:15 2018
+{"Client":"A","identity":"nam","message":"rew"}
+
+[INFO]: Thu Sep 27 11:55:16 2018
+{"Client":"A","identity":"nam","message":"rewrwe"}
+
+[INFO]: Thu Sep 27 11:55:16 2018
+New client connected: ClientAidentitynammessagerewrwe
+
+[INFO]: Thu Sep 27 11:55:17 2018
+{"Client":"A","identity":"nam","message":"rewr"}
+
