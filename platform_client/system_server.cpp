@@ -46,11 +46,10 @@ int main(int argc, char **argv) {
   listenfd = Open_listenfd(argv[1]); // listening to port
   init_pool(listenfd, &pool); // initializing pool
 
-  while (1) {
+  for(;;) {
     /* Wait for listening/connected descriptor(s) to become ready */
     pool.ready_set = pool.read_set;
     pool.nready = Select(pool.maxfd+1, &pool.ready_set, NULL, NULL, NULL);
-
     /* If listening descriptor ready, add new client to pool */
     if (FD_ISSET(listenfd, &pool.ready_set)) { 
       clientlen = sizeof(struct sockaddr_storage);
@@ -91,9 +90,9 @@ void add_client(int connfd, pool *p) {
       Rio_writen(p->clientfd[i], logon, strlen(logon));
       /* Update max descriptor and pool highwater mark */
       if (connfd > p->maxfd) 
-	 p->maxfd = connfd; 
+	    p->maxfd = connfd; 
       if (i > p->maxi)       
-	 p->maxi = i;       
+	    p->maxi = i;       
       break;
     }
     if (i == FD_SETSIZE){ /* Couldn't find an empty slot */
@@ -112,18 +111,19 @@ void communication(pool *p) {
   for (i = 0; (i <= p->maxi) && (p->nready > 0); i++) {
     connfd = p->clientfd[i];
     rio = p->clientrio[i];
-    /* If the descriptor is ready, echo a text line from it */
+    // check if any fd is ready 
     if ((connfd > 0) && (FD_ISSET(connfd, &p->ready_set))) { 
       p->nready--;
       // reading rio to buf
       if ((n = Rio_readlineb(&rio, buf, MAXLINE)) != 0) {
-        int j = 0;
+        int j = 0; // going through all j
         strcpy(tmp, buf); // we don't wanna mess with buf
         while(p->clientfd[j] >= 0){
-          //TODO: at this point we're just sending back the data 
+          // TODO: at this point we're just sending back the data to all p->client[j]
+          // but we need to convert this buf to both formats
+          // and iterate through both maps and send the right format to the right client
           Rio_writen(p->clientfd[j], buf, n); // write buffer into fd
-          l.log(Logger::INFO, buf);
-          // but we need to convert this to xml and send back to all client 
+          l.log(Logger::INFO, buf); // 
           if (tmp[0] == '{'){ // json client
             json_byte_cnt += n; // increment bytes received by json client
             printf("Received %d (%d total) bytes by a json client with fd[%d]\n",n,json_byte_cnt,connfd);
@@ -153,7 +153,7 @@ void handle_json_client(char* tmp, int connfd){
   std::string identity = j["identity"]; // name is here
   if (json_name_to_fd.find(identity) == json_name_to_fd.end()){
     //never seen this name before, adding to map
-    printf("This is a new json client, adding %s with fd %d to map\n",identity.c_str(),connfd);
+    printf("[This is a new json client, adding %s with fd %d to map]\n",identity.c_str(),connfd);
     json_name_to_fd[j["identity"]] = connfd; // addding this connection fd to map
     //show_current_map(json_name_to_fd); //for debugging purposes  
   } 
