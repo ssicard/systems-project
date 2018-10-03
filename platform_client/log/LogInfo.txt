@@ -2128,3 +2128,141 @@ New client connected: ClientAidentitynammessagerewr
 [INFO]: Wed Oct  3 10:36:37 2018
 {"Client":"A","identity":"nam","message":"rewrew"}
 
+[INFO]: Wed Oct  3 10:53:33 2018
+{"Client":"A","identity":"nam","message":"rew"}
+
+[INFO]: Wed Oct  3 10:53:34 2018
+{"Client":"A","identity":"nam","message":"rew"}
+
+[INFO]: Wed Oct  3 10:53:35 2018
+{"Client":"A","identity":"nam","message":"rwer"}
+
+[INFO]: Wed Oct  3 10:53:36 2018
+{"Client":"A","identity":"nam","message":"rewr"}
+
+[INFO]: Wed Oct  3 10:53:36 2018
+{"Client":"A","identity":"nam","message":"rew"}
+
+[INFO]: Wed Oct  3 10:57:21 2018
+{"Client":"A","identity":"nam","message":"fewr"}
+
+[INFO]: Wed Oct  3 10:57:22 2018
+{"Client":"A","identity":"nam","message":"rwer"}
+
+[INFO]: Wed Oct  3 10:57:23 2018
+{"Client":"A","identity":"nam","message":"tewr"}
+
+[INFO]: Wed Oct  3 10:57:24 2018
+{"Client":"A","identity":"nam","message":"rewre"}
+
+[INFO]: Wed Oct  3 10:57:25 2018
+{"Client":"A","identity":"nam","message":"rewr"}
+
+[INFO]: Wed Oct  3 10:57:28 2018
+{"Client":"A","identity":"nam","message":"rew"}
+
+[INFO]: Wed Oct  3 10:57:30 2018
+{"Client":"A","identity":"nam","message":"rew"}
+
+[INFO]: Wed Oct  3 10:57:49 2018
+{"Client":"A","identity":"chaneo","message":"rew"}
+
+[INFO]: Wed Oct  3 10:57:49 2018
+{"Client":"A","identity":"chaneo","message":"rew"}
+
+[INFO]: Wed Oct  3 10:57:50 2018
+{"Client":"A","identity":"chaneo","message":"rew"}
+
+[INFO]: Wed Oct  3 10:57:50 2018
+{"Client":"A","identity":"chaneo","message":"rew"}
+
+[INFO]: Wed Oct  3 10:57:51 2018
+{"Client":"A","identity":"chaneo","message":"rewr"}
+
+[INFO]: Wed Oct  3 10:57:51 2018
+{"Client":"A","identity":"chaneo","message":"rewr"}
+
+[INFO]: Wed Oct  3 10:57:56 2018
+{"Client":"A","identity":"nam","message":"rew"}
+
+[INFO]: Wed Oct  3 10:57:56 2018
+{"Client":"A","identity":"nam","message":"rew"}
+
+[INFO]: Wed Oct  3 10:57:57 2018
+{"Client":"A","identity":"nam","message":"rewrew"}
+
+[INFO]: Wed Oct  3 10:57:57 2018
+{"Client":"A","identity":"nam","message":"rewrew"}
+
+[INFO]: Wed Oct  3 10:57:58 2018
+{"Client":"A","identity":"nam","message":"rewrew"}
+
+[INFO]: Wed Oct  3 10:57:58 2018
+{"Client":"A","identity":"nam","message":"rewrew"}
+
+[INFO]: Wed Oct  3 10:58:02 2018
+{"Client":"A","identity":"nam","message":"rewrw"}
+
+[INFO]: Wed Oct  3 10:58:02 2018
+{"Client":"A","identity":"nam","message":"rewrw"}
+
+[INFO]: Wed Oct  3 10:58:03 2018
+{"Client":"A","identity":"nam","message":"rew"}
+
+[INFO]: Wed Oct  3 10:58:03 2018
+{"Client":"A","identity":"nam","message":"rew"}
+
+[INFO]: Wed Oct  3 10:58:05 2018
+{"Client":"A","identity":"nam","message":"rewr"}
+
+[INFO]: Wed Oct  3 10:58:05 2018
+{"Client":"A","identity":"nam","message":"rewr"}
+
+[INFO]: Wed Oct  3 10:58:07 2018
+{"Client":"A","identity":"nam","message":"rqwqew"}
+
+[INFO]: Wed Oct  3 10:58:07 2018
+{"Client":"A","identity":"nam","message":"rqwqew"}
+
+[INFO]: Wed Oct  3 10:58:30 2018
+{"Client":"A","identity":"chaneo","message":"432432"}
+
+[INFO]: Wed Oct  3 10:58:30 2018
+{"Client":"A","identity":"chaneo","message":"432432"}
+
+[INFO]: Wed Oct  3 10:58:32 2018
+{"Client":"A","identity":"chaneo","message":"432fwtewr"}
+
+[INFO]: Wed Oct  3 10:58:32 2018
+{"Client":"A","identity":"chaneo","message":"432fwtewr"}
+
+[INFO]: Wed Oct  3 11:04:24 2018
+{"Client":"A","identity":"chaneo","message":"rewr"}
+
+[INFO]: Wed Oct  3 11:04:27 2018
+{"Client":"A","identity":"chaneo","message":"rewrwetew"}
+
+[INFO]: Wed Oct  3 11:04:28 2018
+{"Client":"A","identity":"chaneo","message":"rwer"}
+
+[INFO]: Wed Oct  3 11:04:29 2018
+{"Client":"A","identity":"chaneo","message":"rwer"}
+
+[INFO]: Wed Oct  3 11:04:30 2018
+{"Client":"A","identity":"chaneo","message":"rewr"}
+
+[INFO]: Wed Oct  3 11:04:31 2018
+{"Client":"A","identity":"chaneo","message":"rewr"}
+
+[INFO]: Wed Oct  3 11:04:36 2018
+{"Client":"A","identity":"nam","message":"rerw"}
+
+[INFO]: Wed Oct  3 11:04:36 2018
+{"Client":"A","identity":"nam","message":"rerw"}
+
+[INFO]: Wed Oct  3 11:04:37 2018
+{"Client":"A","identity":"nam","message":"rewr"}
+
+[INFO]: Wed Oct  3 11:04:37 2018
+{"Client":"A","identity":"nam","message":"rewr"}
+
