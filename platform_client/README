@@ -46,3 +46,8 @@ These are all suggestions, you guys can delete or add what ever is needed to kee
 
 I just added json library for client_a it is now sending json strings to the server.
 As of now, the server's behavior is weird because I did not handle the new changes, however, client_a's implementation is pretty much done. Same guideline can be used to continuing client_B, with xml format.
+
+[Wed Oct 3, Nam Vu]
+
+Really should be studying rt now for the exam lol, but anyways server is now able to communicate and parse json client without being stupid. 
+
