@@ -7,7 +7,7 @@
 int main(int argc, char **argv){
   
   int clientfd;
-  char *host, *port, *name, data[MAXLINE], buf[MAXLINE];
+  char *host, *port, data[MAXLINE], buf[MAXLINE];
   rio_t rio;
   fd_set read_set, ready_set;
   if (argc != 4) {
@@ -17,12 +17,7 @@ int main(int argc, char **argv){
   }
   host = argv[1];
   port = argv[2];
-  name = argv[3];
-  std::stringstream ss;
-  std::string name_string;
-  //std::string name_string(name, sizeof(name));
-  ss << name;
-  ss >> name_string;
+  std::string name_string(argv[3]);
 
   clientfd = Open_clientfd(host, port); /* Open client for connection */
   Rio_readinitb(&rio, clientfd); /* initialize rio */
@@ -39,13 +34,14 @@ int main(int argc, char **argv){
     if(FD_ISSET(STDIN_FILENO, &ready_set)){
       memset(&data, 0, sizeof(data));
       nlohmann::json j;
-      j["identity"] = name_string;
-      j["Client"] = "A";
+      j["identity"] = name_string; // setting identity to name_string
+      j["Client"] = "A"; // client = A? idk mang
       /*getting the inputs from stdin */
       Fgets(buf, MAXLINE, stdin);
       if(buf[0] == '\\'){
         if (buf[1] == 'q'){
-          printf("\\q innitiated, are you sure you want to quit session? (enter c to continue, type any other keys to quit)\n");
+          printf("\\q innitiated, are you sure you want to quit session"); 
+          printf("(enter c to continue, type any other keys to quit)?\n");
           Fgets(buf, MAXLINE, stdin);
           printf("%c\n", buf[0]);
           if(buf[0]=='c'){
@@ -53,6 +49,7 @@ int main(int argc, char **argv){
             continue;
           } else {
             printf("<<<---Session Terminating--->>>\n");
+            // TODO: send log out message
             exit(0);
           }
         }
@@ -63,7 +60,6 @@ int main(int argc, char **argv){
       send_this += "\n";
       char char_star[send_this.length()];
       strcpy(char_star,send_this.c_str());
-      std::cout << "char_star: " << char_star << std::endl;
       Rio_writen(clientfd, char_star, strlen(char_star));
       memset(&data, 0, sizeof(data));
     }
