@@ -7,6 +7,63 @@ using namespace std;
 typedef pugi::xml_node Node;
 typedef pugi::xml_document Document;
 
+//Source: https://pugixml.org/docs/samples/save_custom_writer.cpp
+
+struct xml_string_writer : pugi::xml_writer
+{
+	std::string result;
+
+	virtual void write(const void* data, size_t size)
+	{
+		result.append(static_cast<const char*>(data), size);
+	}
+};
+// end::code[]
+
+struct xml_memory_writer : pugi::xml_writer
+{
+	char* buffer;
+	size_t capacity;
+
+	size_t result;
+
+	xml_memory_writer() : buffer(0), capacity(0), result(0)
+	{
+	}
+
+	xml_memory_writer(char* buffer, size_t capacity) : buffer(buffer), capacity(capacity), result(0)
+	{
+	}
+
+	size_t written_size() const
+	{
+		return result < capacity ? result : capacity;
+	}
+
+	virtual void write(const void* data, size_t size)
+	{
+		if (result < capacity)
+		{
+			size_t chunk = (capacity - result < size) ? capacity - result : size;
+
+			memcpy(buffer + result, data, chunk);
+		}
+
+		result += size;
+	}
+};
+
+
+std::string node_to_string(pugi::xml_node node)
+{
+	xml_string_writer writer;
+	node.print(writer);
+
+	return writer.result;
+}
+
+//End Source
+
 void append_data_to_node(Node *node, string title, string data) {
 	node->append_child(title.c_str()).append_child(pugi::node_pcdata).set_value(data.c_str());
 }
@@ -97,18 +154,74 @@ void CreateResponseToRequestResourceElement(Document *doc, string MessageID, str
 
 
 
-int main()
-{ 
+int main(int argc, char **argv) {
+
+	int clientfd;
+	char *host, *port, data[MAXLINE], buf[MAXLINE];
+	rio_t rio;
+	fd_set read_set, ready_set;
+	if (argc != 4) {
+		printf("<<<---Error:Invalid number of arguments--->>>\n");
+		fprintf(stderr, "usage: %s <host> <port> <name>\n", argv[0]);
+		exit(0);
+	}
+	host = argv[1];
+	port = argv[2];
+	std::string name_string(argv[3]);
+
 	pugi::xml_document doc;
-	pugi::xml_document doc2;
+	//Set the description to the third argument for now..
+	CreateRequestResourceElement(&doc, "fdfdf-342rwe-23drftg-e999", "2323232455", "RequestResource", argv[3], "0000-0000-0000-0000");
 
+	clientfd = Open_clientfd(host, port); /* Open client for connection */
+	Rio_readinitb(&rio, clientfd); /* initialize rio */
 
-	CreateRequestResourceElement(&doc, "fdfdf-342rwe-23drftg-e999", "2323232455", "RequestResource", "Described here...", "0000-0000-0000-0000");
-	CreateResponseToRequestResourceElement(&doc2, "fdfdf-342rwe-23drftg-e999", "2323232455", "ResponseToRequestResource", "Described here...", "0000-0000-0000-0000", "0000-0000-0000-0000");
+	FD_ZERO(&ready_set); /* Clearing ready_set*/
+	FD_ZERO(&read_set); /* clearing read_set */
+	FD_SET(STDIN_FILENO, &read_set); /* Adding stdin to read_set */
+	FD_SET(clientfd, &read_set); /* setting client descriptors to read_set */
 
-	doc.print(cout);
-	doc2.print(cout);
-	
-
+	while (1) {
+		ready_set = read_set;
+		/* waiting for event */
+		select(clientfd + 1, &ready_set, NULL, NULL, NULL);
+		if (FD_ISSET(STDIN_FILENO, &ready_set)) {
+			memset(&data, 0, sizeof(data));
+			
+			/*getting the inputs from stdin */
+			Fgets(buf, MAXLINE, stdin);
+			if (buf[0] == '\\') {
+				if (buf[1] == 'q') {
+					printf("\\q innitiated, are you sure you want to quit session");
+					printf("(enter c to continue, type any other keys to quit)?\n");
+					Fgets(buf, MAXLINE, stdin);
+					printf("%c\n", buf[0]);
+					if (buf[0] == 'c') {
+						printf("<<<---Continuing Session--->>>\n");
+						continue;
+					}
+					else {
+						printf("<<<---Session Terminating--->>>\n");
+						// TODO: send log out message
+						exit(0);
+					}
+				}
+			}
+			buf[strlen(buf) - 1] = '\0';
+			
+			std::string send_this = node_to_string(&doc);
+			send_this += "\n";
+			char char_star[send_this.length()];
+			strcpy(char_star, send_this.c_str());
+			Rio_writen(clientfd, char_star, strlen(char_star));
+			memset(&data, 0, sizeof(data));
+		}
+		if (FD_ISSET(clientfd, &ready_set)) {
+			Rio_readlineb(&rio, data, MAXLINE);
+			Fputs(data, stdout);
+			memset(&data, 0, sizeof(data));
+		}
+	}
+	Close(clientfd);
+	exit(0);
 }
-
