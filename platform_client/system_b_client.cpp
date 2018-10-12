@@ -1,9 +1,14 @@
 
 #include <iostream>
-
+#include "./csapp/csapp.h"
+#include "../logger/logger.cpp"
 #include "./dependencies/pugixml/pugixml.hpp"
+#include <sstream>
+#include <string>
+
 
 using namespace std;
+
 typedef pugi::xml_node Node;
 typedef pugi::xml_document Document;
 
@@ -54,10 +59,10 @@ struct xml_memory_writer : pugi::xml_writer
 };
 
 
-std::string node_to_string(pugi::xml_node node)
+string node_to_string(pugi::xml_node *node)
 {
 	xml_string_writer writer;
-	node.print(writer);
+	node->print(writer);
 
 	return writer.result;
 }
@@ -154,7 +159,7 @@ void CreateResponseToRequestResourceElement(Document *doc, string MessageID, str
 
 
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv){
 
 	int clientfd;
 	char *host, *port, data[MAXLINE], buf[MAXLINE];
@@ -209,7 +214,8 @@ int main(int argc, char **argv) {
 			}
 			buf[strlen(buf) - 1] = '\0';
 			
-			std::string send_this = node_to_string(&doc);
+			Node rootNode = doc.first_child();
+			std::string send_this = node_to_string(&rootNode);
 			send_this += "\n";
 			char char_star[send_this.length()];
 			strcpy(char_star, send_this.c_str());
