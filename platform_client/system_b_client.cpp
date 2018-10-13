@@ -216,6 +216,10 @@ int main(int argc, char **argv){
 			
 			Node rootNode = doc.first_child();
 			std::string send_this = node_to_string(&rootNode);
+			//Remove newline characters
+			send_this.erase(
+				std::remove(send_this.begin(), send_this.end(), '\n'), 
+				send_this.end());
 			send_this += "\n";
 			char char_star[send_this.length()];
 			strcpy(char_star, send_this.c_str());
