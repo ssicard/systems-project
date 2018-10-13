@@ -67,6 +67,12 @@ string node_to_string(pugi::xml_node *node)
 	return writer.result;
 }
 
+void remove_newlines(string* str){
+	str->erase(
+				std::remove(str->begin(), str->end(), '\n'), 
+				str->end());
+}
+
 //End Source
 
 void append_data_to_node(Node *node, string title, string data) {
@@ -181,19 +187,26 @@ int main(int argc, char **argv){
 	clientfd = Open_clientfd(host, port); /* Open client for connection */
 	Rio_readinitb(&rio, clientfd); /* initialize rio */
 
-	FD_ZERO(&ready_set); /* Clearing ready_set*/
-	FD_ZERO(&read_set); /* clearing read_set */
-	FD_SET(STDIN_FILENO, &read_set); /* Adding stdin to read_set */
-	FD_SET(clientfd, &read_set); /* setting client descriptors to read_set */
+	// Create an empty ready set
+	FD_ZERO(&ready_set); 
+	//Create an empty read set
+	FD_ZERO(&read_set); 
+	//Add Standard input to read set
+	FD_SET(STDIN_FILENO, &read_set); 
+	//Add socket input to read set
+	FD_SET(clientfd, &read_set); 
+
+
 
 	while (1) {
-		ready_set = read_set;
-		/* waiting for event */
-		select(clientfd + 1, &ready_set, NULL, NULL, NULL);
+		//Get ready connections
+        ready_set = read_set;
+        Select(clientfd+1, &ready_set, NULL, NULL, NULL);
+		//Check if standard input has anything ready from the user
 		if (FD_ISSET(STDIN_FILENO, &ready_set)) {
 			memset(&data, 0, sizeof(data));
 			
-			/*getting the inputs from stdin */
+			// Getting the inputs from stdin 
 			Fgets(buf, MAXLINE, stdin);
 			if (buf[0] == '\\') {
 				if (buf[1] == 'q') {
@@ -216,10 +229,7 @@ int main(int argc, char **argv){
 			
 			Node rootNode = doc.first_child();
 			std::string send_this = node_to_string(&rootNode);
-			//Remove newline characters
-			send_this.erase(
-				std::remove(send_this.begin(), send_this.end(), '\n'), 
-				send_this.end());
+			remove_newlines(&send_this);
 			send_this += "\n";
 			char char_star[send_this.length()];
 			strcpy(char_star, send_this.c_str());
