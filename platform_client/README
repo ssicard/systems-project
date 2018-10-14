@@ -1,53 +1,5 @@
-[Mon Sep 24, Nam Vu]
+[Sat Oct 13, Joe B]
 
-I've switched the old gcc compiler to the g++ with c++17 standard. 
-Just type 'make' to compile, we shouldn't mess with the csapp directory, as the 'csapp.o' file needs to be compiles with the old gcc compiler.
+The client B can currently send an XML message that sort of matches the standard. I'll need to figure out how to generate actual messages (and how to figure out what to put into them)
 
-To setup server: 
-
-./system_server <port>
-
-
-To connect to server with the client:
-
-./system_a_client <localhost> <port> <identification> 
-
-Note, these are all suggestions: 
-
-(0) We're keeping everything as localhost right now to keep it simple, we can change that later when we have aws
-
-(1) As most of you guys already know, multiple clients can connect to the same server, so I think we should keep the <identification> field as it allows us to know who send what. (I added functionality for the server code to check whether if 2 clients have the same identification, the server will log it, but haven't handle kicking them out yet.)
- 
-(2) What we probably have to do: modifies 'system_a_client.cpp' @line:39 to make the char *buf a json for xml. So we probably just need to make a system_a with json and system_b with xml
-
-(3) If you look at the log folder, there'll be a Loginfo.txt and a Logerror.txt, the logerror one will keeps track of when > 1 clients with same identification is communicating with the server. The loginfo will have literally every message that was sent to the server.  
-
-(4) If you want use my logger class, just make a new one logger object with:
-
-	Logger name(Logger::INFO, Logger::NORMAL);
-
-it has 2 functionality, to log info and to log error, here is an example;
-
-	name.log(LOG::INFO, <some string you wanna log>);
-
-will log to LogInfo.txt like this: 
-[INFO]: Mon Sep 24 13:53:38 2018
-<some string you wanna log>
-
-	name.log(LOG::ERROR, <some error you wanna log>);
-
-will log to the LogError.txt:
-[ERROR]: Mon Sep 24 13:53:38 2018
-<some error you wanna log>
-
-These are all suggestions, you guys can delete or add what ever is needed to keep the project going!
-
-[Thur Sep 27, Nam Vu]
-
-I just added json library for client_a it is now sending json strings to the server.
-As of now, the server's behavior is weird because I did not handle the new changes, however, client_a's implementation is pretty much done. Same guideline can be used to continuing client_B, with xml format.
-
-[Wed Oct 3, Nam Vu]
-
-Really should be studying rt now for the exam lol, but anyways server is now able to communicate and parse json client without being stupid. 
-
+The client B can also recieve and parse XML messages. Currently it just goes through the message and prints out a few items. It also uses an XML sample file since the server doesn't yet send back XML. 
