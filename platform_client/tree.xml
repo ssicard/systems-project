@@ -1,0 +1,44 @@
+<!---A sample XML file for testing purposes -->
+<RequestResource>
+  <MessageID>fdfdf-342rwe-23drftg-e999</MessageID>
+  <SentDateTime>2323232455</SentDateTime>
+  <MessageContentType>RequestResource</MessageContentType>
+  <MessageDescription>joe</MessageDescription>
+  <OriginatingMessageID>0000-0000-0000-0000</OriginatingMessageID>
+  <IncidentInformation>
+    <IncidentID>001</IncidentID>
+    <IncidentDescription>Man some bad stuff happened</IncidentDescription>
+  </IncidentInformation>
+  <MessageRecall>
+    <RecalledMessageID>43r-f34-9j9-23e</RecalledMessageID>
+    <RecallType>URGENT</RecallType>
+  </MessageRecall>
+  <Funding>
+    <FundCode>FF998</FundCode>
+    <FundingInfo>Funded by government</FundingInfo>
+  </Funding>
+  <ResourceInformation>
+    <ResourceInformationID>1122-ff32d-f4f34f-g439j</ResourceInformationID>
+    <Resource>
+      <ResourceID>hello</ResourceID>
+      <Name>world</Name>
+      <TypeStructure>how</TypeStructure>
+      <TypeInfo>are</TypeInfo>
+      <Keyword>you</Keyword>
+      <Description>doing</Description>
+      <Credentials>today</Credentials>
+      <Certifications>?</Certifications>
+      <SpecialRequirements>ok</SpecialRequirements>
+    </Resource>
+    <AssignmentInfo>
+      <Quantity>3</Quantity>
+      <Restrictions>None</Restrictions>
+      <AnticipatedFunction>Relief Efforts</AnticipatedFunction>
+    </AssignmentInfo>
+    <ScheduleInformation>
+      <ScheduleType>EstimatedArrival</ScheduleType>
+      <DateTime>00/00/0000 0:00:0000</DateTime>
+      <Location>Here and there</Location>
+    </ScheduleInformation>
+  </ResourceInformation>
+</RequestResource>

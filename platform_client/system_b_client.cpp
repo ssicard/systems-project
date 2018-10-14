@@ -5,6 +5,8 @@
 #include "./dependencies/pugixml/pugixml.hpp"
 #include <sstream>
 #include <string>
+#include <unistd.h>
+
 
 
 using namespace std;
@@ -71,6 +73,10 @@ void remove_newlines(string* str){
 	str->erase(
 				std::remove(str->begin(), str->end(), '\n'), 
 				str->end());
+}
+
+void append_newline(string* str){
+	str->append("\n");
 }
 
 //End Source
@@ -162,6 +168,34 @@ void CreateResponseToRequestResourceElement(Document *doc, string MessageID, str
 	AppendResourceInformationElement(&node, "0001");
 }
 
+void parse_data(string *rawXml){
+	Document document;
+	pugi::xml_parse_result result =  document.load_string(rawXml->c_str());
+	cout << "XML Parse Result: " <<  result.description() << endl;
+	Node rootNode = document.first_child();
+	string nodeName = rootNode.name();
+	if (nodeName.compare("RequestResource") == 0){
+		cout << "Resource Requested.\n";
+		cout  << "MessageID: " << rootNode.child_value("MessageID") << endl;
+		cout  << "MessageDescription: " << rootNode.child_value("MessageDescription") << endl;
+		cout  << "OriginatingMessageID: " << rootNode.child_value("OriginatingMessageID") << endl;
+		cout  << "Incident" << endl;
+		Node incidentNode = rootNode.child("IncidentInformation");
+		cout << "IncidentID: " <<  incidentNode.child_value("IncidentID") << endl;
+		cout << "Description of Incident: " <<  incidentNode.child_value("IncidentDescription") << endl;
+		cout << "Resource Information" << endl;
+		Node resourceInfoNode = rootNode.child("ResourceInformation");
+		cout << "Resource Information ID: " << resourceInfoNode.child_value("ResourceInformationID") << endl;
+		Node resourceNode = resourceInfoNode.child("Resource");
+		cout << "ResourceID: " << resourceNode.child_value("ResourceID") << endl;
+		cout << "Resource Name: " << resourceNode.child_value("Name") << endl;
+		cout << "Resource Description: " << resourceNode.child_value("Description") << endl;
+
+	} else if (nodeName.compare("ResponseToRequestResource") == 0){
+		cout << "Response to Request Recieved.\n";
+	}
+}
+
 
 
 
@@ -180,9 +214,14 @@ int main(int argc, char **argv){
 	port = argv[2];
 	std::string name_string(argv[3]);
 
+	//Create an xml string
+	std::string send_this;
 	pugi::xml_document doc;
-	//Set the description to the third argument for now..
 	CreateRequestResourceElement(&doc, "fdfdf-342rwe-23drftg-e999", "2323232455", "RequestResource", argv[3], "0000-0000-0000-0000");
+	Node rootNode = doc.first_child();
+	send_this = node_to_string(&rootNode);
+	remove_newlines(&send_this);
+	append_newline(&send_this);
 
 	clientfd = Open_clientfd(host, port); /* Open client for connection */
 	Rio_readinitb(&rio, clientfd); /* initialize rio */
@@ -202,43 +241,37 @@ int main(int argc, char **argv){
 		//Get ready connections
         ready_set = read_set;
         Select(clientfd+1, &ready_set, NULL, NULL, NULL);
-		//Check if standard input has anything ready from the user
+		//Send xml string if enter is pressed
 		if (FD_ISSET(STDIN_FILENO, &ready_set)) {
+			//User input will be ignored for now
 			memset(&data, 0, sizeof(data));
-			
-			// Getting the inputs from stdin 
 			Fgets(buf, MAXLINE, stdin);
-			if (buf[0] == '\\') {
-				if (buf[1] == 'q') {
-					printf("\\q innitiated, are you sure you want to quit session");
-					printf("(enter c to continue, type any other keys to quit)?\n");
-					Fgets(buf, MAXLINE, stdin);
-					printf("%c\n", buf[0]);
-					if (buf[0] == 'c') {
-						printf("<<<---Continuing Session--->>>\n");
-						continue;
-					}
-					else {
-						printf("<<<---Session Terminating--->>>\n");
-						// TODO: send log out message
-						exit(0);
-					}
-				}
-			}
-			buf[strlen(buf) - 1] = '\0';
 			
-			Node rootNode = doc.first_child();
-			std::string send_this = node_to_string(&rootNode);
-			remove_newlines(&send_this);
-			send_this += "\n";
-			char char_star[send_this.length()];
-			strcpy(char_star, send_this.c_str());
-			Rio_writen(clientfd, char_star, strlen(char_star));
+			char message_cstyle[send_this.length()];
+			strcpy(message_cstyle, send_this.c_str());
+			Rio_writen(clientfd, message_cstyle, strlen(message_cstyle));
 			memset(&data, 0, sizeof(data));
 		}
+		//Check for message recieved
 		if (FD_ISSET(clientfd, &ready_set)) {
+			//Read message recieved into data buffer
 			Rio_readlineb(&rio, data, MAXLINE);
+			//Write message to output
 			Fputs(data, stdout);
+			std::string dataString(data);
+			//Temporarily read an xml file to simulate reading an XML message
+			ifstream xmlStream("tree.xml");
+			string content;
+			content.assign( (std::istreambuf_iterator<char>(xmlStream) ),
+                (istreambuf_iterator<char>()    ) );
+			
+			pid_t pid;
+			if (fork() == 0){
+				cout << "Handling request in child process\n";
+				parse_data(&content);
+			}
+			
+			//Clear data buffer
 			memset(&data, 0, sizeof(data));
 		}
 	}
