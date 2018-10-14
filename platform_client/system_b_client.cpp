@@ -258,15 +258,15 @@ int main(int argc, char **argv){
 			Rio_readlineb(&rio, data, MAXLINE);
 			//Write message to output
 			Fputs(data, stdout);
-			std::string dataString(data);
+			string dataString(data);
 			//Temporarily read an xml file to simulate reading an XML message
 			ifstream xmlStream("tree.xml");
 			string content;
-			content.assign( (std::istreambuf_iterator<char>(xmlStream) ),
-                (istreambuf_iterator<char>()    ) );
+			content.assign((istreambuf_iterator<char>(xmlStream) ),
+                			(istreambuf_iterator<char>()));
 			
-			pid_t pid;
-			if (fork() == 0){
+			pid_t pid = fork();
+			if (pid == 0){
 				cout << "Handling request in child process\n";
 				parse_data(&content);
 			}
