@@ -1,5 +1,6 @@
 
 #include <iostream>
+#include <algorithm>
 #include "./csapp/csapp.h"
 #include "../logger/logger.cpp"
 #include "./dependencies/pugixml/pugixml.hpp"
