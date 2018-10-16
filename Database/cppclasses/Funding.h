@@ -1,12 +1,14 @@
 #include <string>
-#pragma once
-using namespace std;
-class Funding
-{
+
+#ifndef FUNDING_H
+#define FUNDING_H
+
+class Funding {
 public:
-	Funding(string fundCode);
-	~Funding();
+	Funding(std::string FundCode, std::string FundingInfo="") : FundCode(FundCode), FundingInfo(FundingInfo) {}
+	~Funding() {}
 	string FundCode;
 	string FundingInfo;
 };
 
+#endif /* FUNDING_H */
