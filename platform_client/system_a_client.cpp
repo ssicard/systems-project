@@ -56,8 +56,11 @@ int main(int argc, char **argv){
       }
       buf[strlen(buf)-1] = '\0';
 
+      std::string filename = "./sample_messages/";
+      filename += buf;
+
       //read the json file
-      std::ifstream i("required.json");
+      std::ifstream i(filename);
       i >> j;
       std::string send_this = j.dump();
       send_this += "\n";

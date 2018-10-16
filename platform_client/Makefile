@@ -10,7 +10,7 @@ CSAPP = $(CSAPP_SRC)/csapp.o
 # compiler flag
 CFLAGS = -Wall -I $(CSAPP_INC) 
 #C++ Compiler flags
-CXXFLAGS=-g -std=c++11 -Wall -pedantic 
+CXXFLAGS=-g -std=c++11 -Wall
 LDLIBS = -lpthread
 
 LOG = ../logger/logger.cpp

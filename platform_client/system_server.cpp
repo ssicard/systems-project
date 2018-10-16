@@ -150,13 +150,13 @@ void communication(pool *p) {
 void handle_json_client(char* tmp, int connfd){
   nlohmann::json j = nlohmann::json::parse(tmp); // parse tmp
   std::cout << j.dump(2) << std::endl; // print whole json for debugging purposes
-  std::string identity = j["identity"]; // name is here
-  if (json_name_to_fd.find(identity) == json_name_to_fd.end()){
+  //std::string identity = j["identity"]; // name is here
+  //if (json_name_to_fd.find(identity) == json_name_to_fd.end()){
     //never seen this name before, adding to map
-    printf("[This is a new json client, adding %s with fd %d to map]\n",identity.c_str(),connfd);
-    json_name_to_fd[j["identity"]] = connfd; // addding this connection fd to map
+    //printf("[This is a new json client, adding %s with fd %d to map]\n",identity.c_str(),connfd);
+    //json_name_to_fd[j["identity"]] = connfd; // addding this connection fd to map
     //show_current_map(json_name_to_fd); //for debugging purposes  
-  } 
+  //} 
 }
 
 // if you need to look at any maps
