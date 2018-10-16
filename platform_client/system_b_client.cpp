@@ -270,6 +270,7 @@ int main(int argc, char **argv){
 			if (pid == 0){
 				cout << "Handling request in child process\n";
 				parse_data(&content);
+				exit(0);
 			}
 			
 			//Clear data buffer
