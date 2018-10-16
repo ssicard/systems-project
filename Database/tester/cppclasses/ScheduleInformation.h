@@ -10,5 +10,8 @@ public:
 	string ScheduleType;
 	int DateTime;
 	int LocationTypeID;
+
+	LocationType Location;
+
 };
 

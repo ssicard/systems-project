@@ -12,6 +12,13 @@ public:
 	string MessageDescription;
 	string OriginatingMessageID;
 	string PrecedingMessageID;
+
+	IncidentInformation IncidentInformation;
+	MessageRecall MessageRecall;
+	Funding Funding;
+	ContactInformation ContactInformation;
+	ResourceInformation ResourceInformation;
+
 	string IncidentID;
 	string RecalledMessageID;
 	string FundCode;

@@ -18,5 +18,15 @@ public:
 	int ResponsiblePartyID;
 	int OwnershipInformationID;
 	int ResourceStatusID;
+
+	ValueListType TypeStructure;
+	TypeInfoType TypeInfo;
+	ValueListType Keyword;
+	ContactInformationType ResponsibleParty;
+	OwnershipInformation OwnershipInformation;
+	ResourceStatus ResourceStatus;
+
+
+
 };
 

@@ -10,5 +10,7 @@ public:
 	int ResponseTypeID;
 	int ReasonCodeID;
 	string ResponseReason;
+
+	ValueListType ReasonCode;
 };
 

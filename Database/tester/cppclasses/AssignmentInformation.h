@@ -13,5 +13,8 @@ public:
 	string PriceQuote;
 	string OrderID;
 	string AssignmentInstructionsID;
+
+	AssignmentInstructions AssignmentInstructions;
+
 };
 

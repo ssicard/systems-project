@@ -6,7 +6,6 @@
 
 #include "mysql_connection.h"
 #include "mysql_driver.h"
-
 #include "driver.h"
 #include "exception.h"
 #include "resultset.h"
@@ -31,16 +30,25 @@ int main() {
         sql::mysql::MySQL_Driver *driver;
         sql::Connection *con;
         sql::Statement *stmt;
-
+        sql::ResultSet *res;
         driver = sql::mysql::get_mysql_driver_instance();
         con = driver->connect("tcp://127.0.0.1:3306", EXAMPLE_USER, EXAMPLE_PASS);
 
         stmt = con->createStatement();
         stmt->execute("USE " EXAMPLE_DB);
         stmt->execute("SELECT * FROM Funding");
-
-        delete stmt;
-        delete con;
+        res = stmt->executeQuery("SELECT 'Hello World!' AS _message");
+          while (res->next()) {
+            cout << "\t... MySQL replies: ";
+            /* Access column data by alias or column name */
+            cout << res->getString("_message") << endl;
+            cout << "\t... MySQL says it again: ";
+            /* Access column data by numeric offset, 1 is the first column */
+            cout << res->getString(1) << endl;
+          }
+          delete res;
+          delete stmt;
+          delete con;
 
     } catch (sql::SQLException &e) {
         /*

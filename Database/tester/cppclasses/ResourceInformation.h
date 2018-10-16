@@ -11,5 +11,11 @@ public:
 	string Resource;
 	int AssignmentInformationID;
 	int ScheduleInformationID;
+
+	ResponseInformation ResponseInformation;
+	Resource Resource;
+	AssignmentInformation AssignmentInformation;
+	ScheduleInformation ScheduleInformation;
+
 };
 

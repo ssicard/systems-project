@@ -11,5 +11,9 @@ public:
 	int DeploymentStatus;
 	string Availability;
 	string HomeUnit;
+
+    ValueListType DeploymentStatus;
+
+
 };
 
