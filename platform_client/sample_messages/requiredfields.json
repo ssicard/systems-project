@@ -1,0 +1,12 @@
+{
+    "ResourceMessage":{
+        "ContactInformationID":"1"
+    },
+    "Resource":{
+        "Name":"firetruck"
+    },
+    "MessageProperties":{
+        "MessageContentType":"json",
+        "MessageDescription":"request for resources"
+    }
+}

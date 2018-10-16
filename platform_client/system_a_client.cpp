@@ -3,6 +3,7 @@
 #include "./dependencies/json.hpp"
 #include <sstream>
 #include <string>
+#include "../Database/cppclasses/Message.h"
 
 int main(int argc, char **argv){
   
@@ -34,8 +35,7 @@ int main(int argc, char **argv){
     if(FD_ISSET(STDIN_FILENO, &ready_set)){
       memset(&data, 0, sizeof(data));
       nlohmann::json j;
-      j["identity"] = name_string; // setting identity to name_string
-      j["Client"] = "A"; // client = A? idk mang
+
       /*getting the inputs from stdin */
       Fgets(buf, MAXLINE, stdin);
       if(buf[0] == '\\'){
@@ -55,7 +55,10 @@ int main(int argc, char **argv){
         }
       }
       buf[strlen(buf)-1] = '\0';
-      j["message"] = buf;
+
+      //read the json file
+      std::ifstream i("required.json");
+      i >> j;
       std::string send_this = j.dump();
       send_this += "\n";
       char char_star[send_this.length()];
