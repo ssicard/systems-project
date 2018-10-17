@@ -1,12 +1,14 @@
 #include <string>
-#pragma once
-using namespace std;
+#ifndef INCIDENTINFORMATION_H
+#define INCIDENTINFORMATION_H
+
 class IncidentInformation
 {
 public:
-	IncidentInformation(string incidentID);
-	~IncidentInformation();
-	string IncidentID;
-	string IncidentDescription;
+	IncidentInformation(std::string IncidentID, std::string IncidentDescription="") :
+                            IncidentID(IncidentID), IncidentDescription(IncidentDescription) {}
+	~IncidentInformation() {}
+	std::string IncidentID;
+	std::string IncidentDescription;
 };
-
+#endif /* INCIDENTINFORMATION_H */
