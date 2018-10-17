@@ -1,8 +1,10 @@
+#ifndef FUNDING_H
+#define FUNDING_H
+
 #include <string>
-#include "SqlBase.cpp"
-#pragma once
+#include "SqlBase.h"
 using namespace std;
-class Funding: public SqlBase
+class Funding : public SqlBase
 {
 public:
 	Funding(string fundCode);
@@ -15,4 +17,4 @@ public:
 };
 
 
-
+#endif

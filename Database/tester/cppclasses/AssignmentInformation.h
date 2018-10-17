@@ -1,7 +1,8 @@
 #include <string>
+#include "SqlBase.cpp"
 #pragma once
 using namespace std;
-class AssignmentInformation
+class AssignmentInformation : public SqlBase
 {
 public:
 	AssignmentInformation(int assignmentInstructionsID);
