@@ -16,6 +16,8 @@
 // #include "cppclasses/ResourceStatus.cpp"
 // #include "cppclasses/AssignmentInstructions.cpp"
 #include "cppclasses/AssignmentInformation.cpp"
+#include "cppclasses/MessageProperties.cpp"
+#include "cppclasses/MessagePropertiesLookup.cpp"
 
 
 using namespace std;
@@ -59,23 +61,54 @@ int main() {
     // a->getFromDatabase();
     // std::cout << "Mode of transportation: " << a->ModeOfTransportation << std::endl;
 
-    AssignmentInformation* a = new AssignmentInformation(1);
-    a->Quantity = "1";
-    a->Restrictions = "restrictions string";
-    a->AnticipatedFunction = "anticipated function string";
-    a->PriceQuote = "price quote string";
-    a->OrderID = "aaaa11111zzzzzz";
-    a->AssignmentInstructionsID = 1;
+    // AssignmentInformation* a = new AssignmentInformation(1);
+    // a->Quantity = "1";
+    // a->Restrictions = "restrictions string";
+    // a->AnticipatedFunction = "anticipated function string";
+    // a->PriceQuote = "price quote string";
+    // a->OrderID = "aaaa11111zzzzzz";
+    // a->AssignmentInstructionsID = 1;
 
-    a->insertIntoDatabase();
+    // a->insertIntoDatabase();
    
-    a->OrderID = "";
-    a->Quantity = "";
+    // a->OrderID = "";
+    // a->Quantity = "";
 
-    a->getFromDatabase();
-    std::cout << "OrderID: " << a->OrderID << std::endl;
-    std::cout << "Quantity: " << a->Quantity << std::endl;
-    std::cout << "Assignment Instructions ModeOfTransportation: " << a->assignmentInstructions.ModeOfTransportation << std::endl;
+    // a->getFromDatabase();
+    // std::cout << "OrderID: " << a->OrderID << std::endl;
+    // std::cout << "Quantity: " << a->Quantity << std::endl;
+    // std::cout << "Assignment Instructions ModeOfTransportation: " << a->assignmentInstructions.ModeOfTransportation << std::endl;
+
+    // MessagePropertiesLookup* mpl = new MessagePropertiesLookup(4);
+    // mpl->RequirementDesc = "Description test";
+
+    // mpl->insertIntoDatabase();
+
+    // mpl->RequirementDesc = "";
+
+    // mpl->getFromDatabase();
+
+    // std::cout << "RequirementDesc: " << mpl->RequirementDesc << std::endl;
+
+    MessageProperties* mp = new MessageProperties(17, "Request Resource (Test)");
+    mp->Location = 2;
+    mp->DateTime = 2;
+    mp->MessagePropertyLookupID = 4;
+
+    mp->insertIntoDatabase();
+
+    mp->MessageTypeName = "none";
+    mp->Location = 3;
+    mp->DateTime = 6;
+    mp->MessagePropertyLookupID = 0;
+
+    mp->getFromDatabase();
+
+    std::cout << "Message Type Name: " << mp->MessageTypeName << std::endl;
+    std::cout << "Location: " << mp->Location << std::endl;
+    std::cout << "DateTime: " << mp->DateTime << std::endl;
+
+    std::cout << "RequirementDesc: " << mp->messagePropertiesLookup.RequirementDesc << std::endl;
 
     return EXIT_SUCCESS;
 }
