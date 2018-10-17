@@ -16,3 +16,15 @@ ResourceStatus::ResourceStatus()
 ResourceStatus::~ResourceStatus()
 {
 }
+
+void ResourceStatus::getFromDatabase() {
+
+}
+
+void ResourceStatus::insertIntoDatabase() {
+
+}
+
+bool ResourceStatus::areFieldsValid() {
+	return false;
+}

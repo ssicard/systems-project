@@ -1,11 +1,19 @@
+#ifndef MESSAGEPROPERTIES_H
+#define MESSAGEPROPERTIES_H
+
+#include "SqlBase.h"
+#include "MessagePropertiesLookup.h"
 #include <string>
-#pragma once
+// #pragma once
 using namespace std;
-class MessageProperties
+class MessageProperties : public SqlBase
 {
 public:
 	MessageProperties(int id, string messageTypeName);
 	~MessageProperties();
+	void getFromDatabase();
+    void insertIntoDatabase();
+    bool areFieldsValid();
 	int id;
 	string MessageTypeName;
 	int MessageID=0;
@@ -45,12 +53,18 @@ public:
 	int SpecialRequirements = 0;
 	int ResponsibleParty = 0;
 	int OwnershipInformation = 0;
+
+	// added these fields that were not in here but are in database schema
+	int ResourceStatus = 0;
+	int Owner = 0;
+	int OwningJurisdiction = 0;
+
 	int HomeDispatch = 0;
 	int HomeUnit = 0;
 	int InventoryRefreshDateTime = 0;
 	int DeploymentStatus = 0;
 	int Availability = 0;
-	int Quanitity = 0;
+	int Quantity = 0;
 	int Restrictions = 0;
 	int AnticipatedFunction = 0;
 	int PriceQuote = 0;
@@ -63,5 +77,8 @@ public:
 	int DateTime = 0;
 	int Location = 0;
 	int MessagePropertyLookupID = 0;
+
+	MessagePropertiesLookup messagePropertiesLookup{0};
 };
 
+#endif

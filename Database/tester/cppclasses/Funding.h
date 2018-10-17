@@ -1,8 +1,13 @@
-#include <string>
+#ifndef FUNDING_H
+#define FUNDING_H
 
+#include <string>
+<<<<<<< HEAD
+
+=======
+>>>>>>> database2
 #include "SqlBase.h"
 using namespace std;
-class Funding: public SqlBase
 {
 public:
     Funding(string fundCode);
@@ -13,3 +18,9 @@ public:
     string FundCode;
     string FundingInfo;
 };
+<<<<<<< HEAD
+=======
+
+
+#endif
+>>>>>>> database2

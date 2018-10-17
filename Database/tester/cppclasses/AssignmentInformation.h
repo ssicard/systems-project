@@ -1,5 +1,6 @@
 #include <string>
-#pragma once
+#include "SqlBase.h"
+#include "AssignmentInstructions.cpp"
 using namespace std;
 #include "AssignmentInstructions.cpp"
 class AssignmentInformation: public SqlBase
@@ -7,16 +8,27 @@ class AssignmentInformation: public SqlBase
 public:
 	AssignmentInformation(int assignmentInformationID);
 	AssignmentInformation();
+class AssignmentInformation : public SqlBase
+{
+public:
+	AssignmentInformation(int assignmentInformationID);
 	~AssignmentInformation();
+	void getFromDatabase();
+    void insertIntoDatabase();
+    bool areFieldsValid();
 	int AssignmentInformationID;
 	string Quantity;
 	string Restrctions;
+	string Restrictions;
 	string AnticipatedFunction;
 	string PriceQuote;
 	string OrderID;
-	string AssignmentInstructionsID;
+	int AssignmentInstructionsID;
 
 	AssignmentInstructions _AssignmentInstructions;
+	// should change this.
+	// add default constructor to AssignmentInstructions
+	AssignmentInstructions assignmentInstructions{AssignmentInstructionsID};
 
 };
 
