@@ -11,12 +11,10 @@
 #include "resultset.h"
 #include "statement.h"
 #include "prepared_statement.h"
+#include "cppclasses/Funding.cpp"
 
 
-#define EXAMPLE_HOST "localhost"
-#define EXAMPLE_USER "root"
-#define EXAMPLE_PASS "password"
-#define EXAMPLE_DB "progDB"
+
 using namespace std;
 
 int main() {
@@ -24,8 +22,10 @@ int main() {
 
     cout << "Connector/C++ tutorial framework..." << endl;
     cout << endl;
-
+  Funding* f = new Funding("this is another test");
+        f->getFromDatabase("test");
     try {
+      
 
         sql::mysql::MySQL_Driver *driver;
         sql::Connection *con;
