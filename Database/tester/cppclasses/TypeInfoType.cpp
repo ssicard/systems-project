@@ -26,14 +26,14 @@ void TypeInfoType::getFromDatabase(){
 
 		prep_stmt = con->prepareStatement("SELECT `TypeInfoID`, `ChildInfo` FROM `TypeInfoType` WHERE `TypeInfoID` = ?");
 
-		prep_stmt->setString(1, this->TypeInfoID);
+		prep_stmt->setInt(1, this->TypeInfoID);
 
 		
 		res = prep_stmt->executeQuery();
 
 		while (res->next()) {
-			this->FundCode = res->getInt("TypeInfoID");
-			this->FundingInfo = res->getString("ChildInfo");
+			this->TypeInfoID = res->getInt("TypeInfoID");
+			this->ChildInfo = res->getString("ChildInfo");
 		}
 		delete res;
 		delete stmt;

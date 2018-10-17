@@ -33,9 +33,9 @@ void ValueListType::getFromDatabase(){
 		res = prep_stmt->executeQuery();
 
 		while (res->next()) {
-			this->FundCode = res->getInt("ValueListID");
-			this->FundingInfo = res->getString("ValueListURN");
-			this->FundingInfo = res->getString("ValueType");
+			this->ValueListID = res->getInt("ValueListID");
+			this->ValueListURN = res->getString("ValueListURN");
+			this->ValueType = res->getString("ValueType");
 
 		}
 		delete res;
@@ -54,7 +54,7 @@ void ValueListType::getFromDatabase(){
 	}
 }
 
-void ValueListType::updateToDatabase(){
+void ValueListType::insertIntoDatabase(){
 
 
 	try {

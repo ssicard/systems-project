@@ -28,7 +28,7 @@ void ScheduleInformation::getFromDatabase(){
 
 		prep_stmt = con->prepareStatement("SELECT `ScheduleInformationID`, `ScheduleType`, `DateTime`, `LocationTypeID` FROM `ScheduleInformation` WHERE `ScheduleInformationID` = ?");
 
-		prep_stmt->setString(1, this->ScheduleInformationID);
+		prep_stmt->setInt(1, this->ScheduleInformationID);
 
 		
 		res = prep_stmt->executeQuery();
@@ -56,7 +56,7 @@ void ScheduleInformation::getFromDatabase(){
 	}
 }
 
-void ScheduleInformation::updateToDatabase(){
+void ScheduleInformation::insertIntoDatabase(){
 
 
 	try {
@@ -76,7 +76,7 @@ void ScheduleInformation::updateToDatabase(){
 
 		prep_stmt->setInt(1, this->ScheduleInformationID);
 		prep_stmt->setString(2, this->ScheduleType);
-		prep_stmt->setString(3, this->DateTime);
+		prep_stmt->setDateTime(3, this->DateTime);
 		prep_stmt->setInt(4, this->LocationTypeID);
 
 		prep_stmt->execute();

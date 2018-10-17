@@ -5,6 +5,7 @@ using namespace std;
 class LocationType: public SqlBase
 {
 public:
+	LocationType();
 	LocationType(int locationTypeID);
 	~LocationType();
 	void getFromDatabase();

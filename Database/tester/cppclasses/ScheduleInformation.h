@@ -1,8 +1,9 @@
+#pragma once
 #include <string>
 #include "SqlBase.h"
-#pragma once
+
 using namespace std;
-#include "LocationType.h"
+#include "LocationType.cpp"
 class ScheduleInformation: public SqlBase
 {
 public:
@@ -13,7 +14,7 @@ public:
     bool areFieldsValid();
 	int ScheduleInformationID;
 	string ScheduleType;
-	int DateTime;
+	string DateTime;
 	int LocationTypeID;
 
 	LocationType _Location;

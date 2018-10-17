@@ -26,7 +26,7 @@ void RadioElement::getFromDatabase(){
 
 		prep_stmt = con->prepareStatement("SELECT `RadioElementID`, `RadioType`, `RadioChannel` FROM `RadioElement` WHERE `RadioElementID` = ?");
 
-		prep_stmt->setString(1, this->RadioElementID);
+		prep_stmt->setInt(1, this->RadioElementID);
 
 		
 		res = prep_stmt->executeQuery();
@@ -66,7 +66,7 @@ void RadioElement::insertIntoDatabase(){
 		stmt->execute("USE " EXAMPLE_DB);
 
 		prep_stmt = con->prepareStatement("INSERT INTO `RadioElement`(`RadioElementID`, `RadioType`, `RadioChannel`) VALUES (?,?,?)");
-		prep_stmt->setString(1, this->RadioElementID);
+		prep_stmt->setInt(1, this->RadioElementID);
 		prep_stmt->setString(2, this->RadioType);
 		prep_stmt->setString(3, this->RadioChannel);
 

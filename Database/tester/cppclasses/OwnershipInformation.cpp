@@ -26,7 +26,7 @@ void OwnershipInformation::getFromDatabase(){
 
 		prep_stmt = con->prepareStatement("SELECT `OwnershipInformationID`, `Owner`, `OwningJurisdiction`, `HomeDispatch`, `HomeUnit` FROM `OwnershipInformation` WHERE `OwnershipInformationID`=?");
 
-		prep_stmt->setString(1, this->OwnershipInformationID);
+		prep_stmt->setInt(1, this->OwnershipInformationID);
 
 		
 		res = prep_stmt->executeQuery();
@@ -90,6 +90,6 @@ void OwnershipInformation::insertIntoDatabase(){
 		return;
 	}
 }
-bool Funding::areFieldsValid(){
+bool OwnershipInformation::areFieldsValid(){
 	return false;
 }

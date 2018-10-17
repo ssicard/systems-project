@@ -14,8 +14,14 @@
 //#include "MessageObjectBase.cpp"
 
  #include "cppclasses/Funding.cpp"
-  #include "cppclasses/IncidentInformation.cpp"
- #include "cppclasses/LocationType.h"
+ #include "cppclasses/IncidentInformation.cpp"
+ #include "cppclasses/LocationType.cpp"
+ #include "cppclasses/MessageRecall.cpp"
+ #include "cppclasses/OwnershipInformation.cpp"
+ #include "cppclasses/RadioElement.cpp"
+ #include "cppclasses/ScheduleInformation.cpp"
+ #include "cppclasses/TypeInfoType.cpp"
+#include "cppclasses/ValueListType.cpp"
 
 
 using namespace std;
