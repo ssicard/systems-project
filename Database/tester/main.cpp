@@ -14,7 +14,8 @@
 #include "cppclasses/Funding.cpp"
 #include "cppclasses/ContactRoleLookup.cpp"
 // #include "cppclasses/ResourceStatus.cpp"
-#include "cppclasses/AssignmentInstructions.cpp"
+// #include "cppclasses/AssignmentInstructions.cpp"
+#include "cppclasses/AssignmentInformation.cpp"
 
 
 using namespace std;
@@ -46,18 +47,35 @@ int main() {
     // std::cout << "int is " << c->ContactRoleID << std::endl;
     // std::cout << "description is " << c->Description << std::endl;
 
-    AssignmentInstructions* a = new AssignmentInstructions(1);
-    a->ModeOfTransportation = "ambulance";
-    a->NavigationInstructions = "left right left right";
-    a->ReportingInstructions = "report report";
+    // AssignmentInstructions* a = new AssignmentInstructions(1);
+    // a->ModeOfTransportation = "ambulance";
+    // a->NavigationInstructions = "left right left right";
+    // a->ReportingInstructions = "report report";
+
+    // a->insertIntoDatabase();
+
+    // a->ModeOfTransportation = "";
+
+    // a->getFromDatabase();
+    // std::cout << "Mode of transportation: " << a->ModeOfTransportation << std::endl;
+
+    AssignmentInformation* a = new AssignmentInformation(1);
+    a->Quantity = "1";
+    a->Restrictions = "restrictions string";
+    a->AnticipatedFunction = "anticipated function string";
+    a->PriceQuote = "price quote string";
+    a->OrderID = "aaaa11111zzzzzz";
+    a->AssignmentInstructionsID = 1;
 
     a->insertIntoDatabase();
-
-    a->ModeOfTransportation = "";
+   
+    a->OrderID = "";
+    a->Quantity = "";
 
     a->getFromDatabase();
-    std::cout << "Mode of transportation: " << a->ModeOfTransportation << std::endl;
-   
+    std::cout << "OrderID: " << a->OrderID << std::endl;
+    std::cout << "Quantity: " << a->Quantity << std::endl;
+    std::cout << "Assignment Instructions ModeOfTransportation: " << a->assignmentInstructions.ModeOfTransportation << std::endl;
 
     return EXIT_SUCCESS;
 }

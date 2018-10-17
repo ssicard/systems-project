@@ -1,21 +1,31 @@
+#ifndef ASSIGNMENT_INFORMATION_H
+#define ASSIGNMENT_INFORMATION_H
+
 #include <string>
-#include "SqlBase.cpp"
-#pragma once
+#include "SqlBase.h"
+#include "AssignmentInstructions.cpp"
+// #pragma once
 using namespace std;
 class AssignmentInformation : public SqlBase
 {
 public:
-	AssignmentInformation(int assignmentInstructionsID);
+	AssignmentInformation(int assignmentInformationID);
 	~AssignmentInformation();
+	void getFromDatabase();
+    void insertIntoDatabase();
+    bool areFieldsValid();
 	int AssignmentInformationID;
 	string Quantity;
-	string Restrctions;
+	string Restrictions;
 	string AnticipatedFunction;
 	string PriceQuote;
 	string OrderID;
-	string AssignmentInstructionsID;
+	int AssignmentInstructionsID;
 
-	AssignmentInstructions AssignmentInstructions;
+	// should change this.
+	// add default constructor to AssignmentInstructions
+	AssignmentInstructions assignmentInstructions{AssignmentInstructionsID};
 
 };
 
+#endif
