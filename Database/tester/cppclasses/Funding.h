@@ -7,8 +7,8 @@ class Funding: public SqlBase
 public:
 	Funding(string fundCode);
 	~Funding();
-	void getFromDatabase(string fundCode);
-    void updateToDatabase();
+	void getFromDatabase();
+    void insertIntoDatabase();
     bool areFieldsValid();
 	string FundCode;
 	string FundingInfo;

@@ -30,7 +30,7 @@ class MessageObjectBase: public SqlBase
 		MessageProperties MessageProperties;
 		ResourceMessage ResourceMessage;
         void getFromDatabase();
-        void updateToDatabase();
+        void insertIntoDatabase();
         bool areFieldsValid();
         bool getResourceMessage(string MessageObjectName);
 

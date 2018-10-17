@@ -21,53 +21,16 @@ int main() {
 
 
     cout << "Connector/C++ tutorial framework..." << endl;
-    cout << endl;
-  Funding* f = new Funding("this is another test");
-        f->getFromDatabase("test");
-    try {
-      
+   // cout << endl;
+     Funding* f;
+    f = new Funding("this is another test");
+  // f->FundingInfo = "this is a fund info test"; 
+  // f->insertIntoDatabase();
 
-        sql::mysql::MySQL_Driver *driver;
-        sql::Connection *con;
-        sql::Statement *stmt;
-        sql::ResultSet *res;
-        driver = sql::mysql::get_mysql_driver_instance();
-        con = driver->connect("tcp://127.0.0.1:3306", EXAMPLE_USER, EXAMPLE_PASS);
+  f->getFromDatabase();
+  // printf("%s\n", f->FundingInfo);
+   
 
-        stmt = con->createStatement();
-        stmt->execute("USE " EXAMPLE_DB);
-        stmt->execute("SELECT * FROM Funding");
-        res = stmt->executeQuery("SELECT 'Hello World!' AS _message");
-          while (res->next()) {
-            cout << "\t... MySQL replies: ";
-            /* Access column data by alias or column name */
-            cout << res->getString("_message") << endl;
-            cout << "\t... MySQL says it again: ";
-            /* Access column data by numeric offset, 1 is the first column */
-            cout << res->getString(1) << endl;
-          }
-          delete res;
-          delete stmt;
-          delete con;
-
-    } catch (sql::SQLException &e) {
-        /*
-          MySQL Connector/C++ throws three different exceptions:
-
-          - sql::MethodNotImplementedException (derived from sql::SQLException)
-          - sql::InvalidArgumentException (derived from sql::SQLException)
-          - sql::SQLException (derived from std::runtime_error)
-        */
-        cout << "# ERR: SQLException in " << __FILE__;
-        cout << "(" << __FUNCTION__ << ") on line " << __LINE__ << endl;
-        /* what() (derived from std::runtime_error) fetches error message */
-        cout << "# ERR: " << e.what();
-        cout << " (MySQL error code: " << e.getErrorCode();
-        cout << ", SQLState: " << e.getSQLState() << " )" << endl;
-
-        return EXIT_FAILURE;
-    }
-
-    cout << "Done." << endl;
+    cout << f->FundingInfo << endl;
     return EXIT_SUCCESS;
 }

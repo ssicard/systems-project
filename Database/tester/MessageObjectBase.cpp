@@ -29,7 +29,7 @@ void MessageObjectBase::getFromDatabase() {
 
 }
 
-void MessageObjectBase::updateToDatabase() {
+void MessageObjectBase::insertIntoDatabase() {
 
 }
 
@@ -47,6 +47,7 @@ bool MessageObjectBase::areFieldsValid() {
         }
 
     }
+    //etc
 }
 
 bool MessageObjectBase::getResourceMessage(string MessageObjectName) {
