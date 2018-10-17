@@ -1,11 +1,18 @@
+#ifndef RESOURCE_STATUS_H
+#define RESOURCE_STATUS_H
+
 #include <string>
-#pragma once
+#include "SqlBase.h"
+// #pragma once
 using namespace std;
-class ResourceStatus
+class ResourceStatus : public SqlBase
 {
 public:
 	ResourceStatus(int resourceStatusID);
 	~ResourceStatus();
+	void getFromDatabase();
+    void insertIntoDatabase();
+    bool areFieldsValid();
 	int ResourceStatusID;
 	int InventoryRefreshDateTime;
 	int DeploymentStatus;
@@ -17,3 +24,4 @@ public:
 
 };
 
+#endif
