@@ -1,6 +1,11 @@
 #include <string>
 #pragma once
 using namespace std;
+#include "IncidentInformation.h"
+#include "MessageRecall.h"
+#include "Funding.h"
+#include "ContactInformationType.h"
+#include "ResourceInformation.h"
 class ResourceMessage
 {
 public:
@@ -13,11 +18,11 @@ public:
 	string OriginatingMessageID;
 	string PrecedingMessageID;
 
-	IncidentInformation IncidentInformation;
-	MessageRecall MessageRecall;
-	Funding Funding;
-	ContactInformation ContactInformation;
-	ResourceInformation ResourceInformation;
+	IncidentInformation _IncidentInformation;
+	MessageRecall _MessageRecall;
+	Funding _Funding;
+	ContactInformationType ContactInformationType;
+	ResourceInformation _ResourceInformation;
 
 	string IncidentID;
 	string RecalledMessageID;

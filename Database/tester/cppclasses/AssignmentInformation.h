@@ -1,6 +1,7 @@
 #include <string>
 #pragma once
 using namespace std;
+#include "AssignmentInstructions.h"
 class AssignmentInformation
 {
 public:
@@ -14,7 +15,7 @@ public:
 	string OrderID;
 	string AssignmentInstructionsID;
 
-	AssignmentInstructions AssignmentInstructions;
+	AssignmentInstructions _AssignmentInstructions;
 
 };
 

@@ -11,8 +11,11 @@
 #include "resultset.h"
 #include "statement.h"
 #include "prepared_statement.h"
-#include "cppclasses/Funding.cpp"
+//#include "MessageObjectBase.cpp"
 
+ #include "cppclasses/Funding.cpp"
+  #include "cppclasses/IncidentInformation.cpp"
+ #include "cppclasses/LocationType.h"
 
 
 using namespace std;
@@ -20,17 +23,17 @@ using namespace std;
 int main() {
 
 
-    cout << "Connector/C++ tutorial framework..." << endl;
-   // cout << endl;
-     Funding* f;
-    f = new Funding("this is another test");
-  // f->FundingInfo = "this is a fund info test"; 
-  // f->insertIntoDatabase();
+  //   cout << "Connector/C++ tutorial framework..." << endl;
+  //  // cout << endl;
+  //    Funding* f;
+  //   f = new Funding("this is another test");
+  // // f->FundingInfo = "this is a fund info test"; 
+  // // f->insertIntoDatabase();
 
-  f->getFromDatabase();
-  // printf("%s\n", f->FundingInfo);
+  // f->getFromDatabase();
+  // // printf("%s\n", f->FundingInfo);
    
 
-    cout << f->FundingInfo << endl;
-    return EXIT_SUCCESS;
+  //   cout << f->FundingInfo << endl;
+  //   return EXIT_SUCCESS;
 }

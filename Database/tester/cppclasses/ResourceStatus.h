@@ -1,6 +1,9 @@
 #include <string>
 #pragma once
 using namespace std;
+
+#include "ValueListType.h"
+
 class ResourceStatus
 {
 public:
@@ -12,7 +15,7 @@ public:
 	string Availability;
 	string HomeUnit;
 
-    ValueListType DeploymentStatus;
+    ValueListType _DeploymentStatus;
 
 
 };

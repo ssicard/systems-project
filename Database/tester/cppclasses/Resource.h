@@ -1,6 +1,12 @@
 #include <string>
 #pragma once
 using namespace std;
+#include "ValueListType.h"
+#include "TypeInfoType.h"
+#include "ValueListType.h"
+#include "ContactInformationType.h"
+#include "OwnershipInformation.h"
+#include "ResourceStatus.h"
 class Resource
 {
 public:
@@ -19,12 +25,12 @@ public:
 	int OwnershipInformationID;
 	int ResourceStatusID;
 
-	ValueListType TypeStructure;
-	TypeInfoType TypeInfo;
-	ValueListType Keyword;
-	ContactInformationType ResponsibleParty;
-	OwnershipInformation OwnershipInformation;
-	ResourceStatus ResourceStatus;
+	ValueListType _TypeStructure;
+	TypeInfoType _TypeInfo;
+	ValueListType _Keyword;
+	ContactInformationType _ResponsibleParty;
+	OwnershipInformation _OwnershipInformation;
+	ResourceStatus _ResourceStatus;
 
 
 

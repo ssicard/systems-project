@@ -12,6 +12,8 @@ Funding::~Funding()
 }
 
 void Funding::getFromDatabase(){
+
+
 	try {
 		sql::Connection *con;
 		sql::PreparedStatement *prep_stmt;
@@ -51,8 +53,12 @@ void Funding::getFromDatabase(){
 	}
 }
 
-void Funding::insertIntoDatabase(){
+void Funding::updateToDatabase(){
+
+
 	try {
+		
+		// ...
 		sql::Connection *con;
 		sql::PreparedStatement *prep_stmt;
 		sql::mysql::MySQL_Driver *driver;
@@ -64,9 +70,9 @@ void Funding::insertIntoDatabase(){
 		stmt->execute("USE " EXAMPLE_DB);
 
 		prep_stmt = con->prepareStatement("INSERT INTO `Funding`(`FundCode`, `FundingInfo`) VALUES (?,?)");
+
 		prep_stmt->setString(1, this->FundCode);
 		prep_stmt->setString(2, this->FundingInfo);
-
 		prep_stmt->execute();
 
 		delete stmt;
@@ -76,6 +82,7 @@ void Funding::insertIntoDatabase(){
 	} catch (sql::SQLException &e) {
 		cout << "# ERR: SQLException in " << __FILE__;
 		cout << "(" << __FUNCTION__ << ") on line " << __LINE__ << endl;
+        /* what() (derived from std::runtime_error) fetches error message */
 		cout << "# ERR: " << e.what();
 		cout << " (MySQL error code: " << e.getErrorCode();
 		cout << ", SQLState: " << e.getSQLState() << " )" << endl;
@@ -86,3 +93,5 @@ void Funding::insertIntoDatabase(){
 bool Funding::areFieldsValid(){
 	return false;
 }
+
+//SELECT `FundCode`, `FundingInfo` FROM `Funding` WHERE 1 

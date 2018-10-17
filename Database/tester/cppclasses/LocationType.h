@@ -1,11 +1,15 @@
 #include <string>
 #pragma once
+#include "SqlBase.h"
 using namespace std;
-class LocationType
+class LocationType: public SqlBase
 {
 public:
 	LocationType(int locationTypeID);
 	~LocationType();
+	void getFromDatabase();
+    void insertIntoDatabase();
+    bool areFieldsValid();
 	int LocationTypeID;
 	string LocationDescription;
 	string Address;

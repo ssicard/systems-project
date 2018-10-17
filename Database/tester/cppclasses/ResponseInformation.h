@@ -1,6 +1,7 @@
 #include <string>
 #pragma once
 using namespace std;
+#include "ValueListType.h"
 class ResponseInformation
 {
 public:
@@ -11,6 +12,6 @@ public:
 	int ReasonCodeID;
 	string ResponseReason;
 
-	ValueListType ReasonCode;
+	ValueListType _ReasonCode;
 };
 

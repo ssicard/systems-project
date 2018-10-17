@@ -12,12 +12,6 @@
 #include "statement.h"
 #include "prepared_statement.h"
 
-
-#define EXAMPLE_HOST "localhost"
-#define EXAMPLE_USER "root"
-#define EXAMPLE_PASS "password"
-#define EXAMPLE_DB "progDB"
-
 #include "MessageObjectBase.h"
 
 

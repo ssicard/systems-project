@@ -1,11 +1,15 @@
 #include <string>
+#include "SqlBase.h"
 #pragma once
 using namespace std;
-class OwnershipInformation
+class OwnershipInformation: public SqlBase
 {
 public:
 	OwnershipInformation(int ownershipInformationID);
 	~OwnershipInformation();
+    void getFromDatabase();
+    void insertIntoDatabase();
+    bool areFieldsValid();
 	int OwnershipInformationID;
 	string Owner;
 	string OwningJurisdiction;

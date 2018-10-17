@@ -1,6 +1,10 @@
 #include <string>
 #pragma once
 using namespace std;
+#include "ResponseInformation.h"
+#include "Resource.h"
+#include "AssignmentInformation.h"
+#include "ScheduleInformation.h"
 class ResourceInformation
 {
 public:
@@ -12,10 +16,10 @@ public:
 	int AssignmentInformationID;
 	int ScheduleInformationID;
 
-	ResponseInformation ResponseInformation;
-	Resource Resource;
-	AssignmentInformation AssignmentInformation;
-	ScheduleInformation ScheduleInformation;
+	ResponseInformation _ResponseInformation;
+	Resource _Resource;
+	AssignmentInformation _AssignmentInformation;
+	ScheduleInformation _ScheduleInformation;
 
 };
 
