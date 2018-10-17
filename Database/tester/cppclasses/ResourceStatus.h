@@ -8,6 +8,7 @@ class ResourceStatus
 {
 public:
 	ResourceStatus(int resourceStatusID);
+	ResourceStatus();
 	~ResourceStatus();
 	int ResourceStatusID;
 	int InventoryRefreshDateTime;

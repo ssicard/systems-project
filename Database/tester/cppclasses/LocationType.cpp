@@ -7,7 +7,7 @@ LocationType::LocationType(int locationTypeID)
 	this->LocationTypeID = locationTypeID;
 }
 LocationType::LocationType(){
-	throw "I dont know why we need this but the compiler throws an error if not";
+	this->LocationTypeID = -1;
 }
 
 

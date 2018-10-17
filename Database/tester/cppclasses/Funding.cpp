@@ -1,3 +1,4 @@
+#pragma once
 #include "Funding.h"
 
 
@@ -53,7 +54,7 @@ void Funding::getFromDatabase(){
 	}
 }
 
-void Funding::updateToDatabase(){
+void Funding::insertIntoDatabase(){
 
 
 	try {

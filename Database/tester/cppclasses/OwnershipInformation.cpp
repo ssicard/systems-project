@@ -1,9 +1,15 @@
+#pragma once
 #include "OwnershipInformation.h"
 
 
 OwnershipInformation::OwnershipInformation(int ownershipInformationID)
 {
 	this->OwnershipInformationID = ownershipInformationID;
+}
+
+OwnershipInformation::OwnershipInformation()
+{
+	this->OwnershipInformationID = -1;
 }
 
 

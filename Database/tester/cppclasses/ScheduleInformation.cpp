@@ -1,9 +1,14 @@
+#pragma once
 #include "ScheduleInformation.h"
 
 
 ScheduleInformation::ScheduleInformation(int scheduleInformationID)
 {
 	this->ScheduleInformationID = scheduleInformationID;
+}
+ScheduleInformation::ScheduleInformation()
+{
+	this->ScheduleInformationID = -1;
 }
 
 
@@ -12,7 +17,6 @@ ScheduleInformation::~ScheduleInformation()
 }
 
 void ScheduleInformation::getFromDatabase(){
-
 
 	try {
 		sql::Connection *con;
@@ -44,6 +48,11 @@ void ScheduleInformation::getFromDatabase(){
 		delete stmt;
 		delete prep_stmt;
 		delete con;
+		if(this->LocationTypeID != -1){
+			this->_Location = *(new LocationType(this->LocationTypeID));
+			this->_Location.getFromDatabase();
+			
+		}
 
 	} catch (sql::SQLException &e) {
 		cout << "# ERR: SQLException in " << __FILE__;
@@ -57,7 +66,9 @@ void ScheduleInformation::getFromDatabase(){
 }
 
 void ScheduleInformation::insertIntoDatabase(){
-
+	if(this->LocationTypeID != -1){
+		_Location.insertIntoDatabase();
+	}
 
 	try {
 		

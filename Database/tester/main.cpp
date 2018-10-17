@@ -22,7 +22,8 @@
  #include "cppclasses/ScheduleInformation.cpp"
  #include "cppclasses/TypeInfoType.cpp"
 #include "cppclasses/ValueListType.cpp"
-
+#include "cppclasses/ResponseTypeLookup.cpp"
+#include "cppclasses/ResourceInformation.cpp"
 
 using namespace std;
 

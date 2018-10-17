@@ -1,11 +1,12 @@
 #include <string>
 #pragma once
 using namespace std;
-#include "AssignmentInstructions.h"
-class AssignmentInformation
+#include "AssignmentInstructions.cpp"
+class AssignmentInformation: public SqlBase
 {
 public:
-	AssignmentInformation(int assignmentInstructionsID);
+	AssignmentInformation(int assignmentInformationID);
+	AssignmentInformation();
 	~AssignmentInformation();
 	int AssignmentInformationID;
 	string Quantity;

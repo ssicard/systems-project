@@ -6,6 +6,7 @@ class TypeInfoType: public SqlBase
 {
 public:
 	TypeInfoType(int typeInfoID);
+	TypeInfoType();
 	~TypeInfoType();
 	void getFromDatabase();
     void insertIntoDatabase();

@@ -8,7 +8,7 @@ public:
     Funding(string fundCode);
     ~Funding();
     void getFromDatabase();
-    void updateToDatabase();
+    void insertIntoDatabase();
     bool areFieldsValid();
     string FundCode;
     string FundingInfo;

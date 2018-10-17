@@ -6,6 +6,7 @@ class OwnershipInformation: public SqlBase
 {
 public:
 	OwnershipInformation(int ownershipInformationID);
+	OwnershipInformation();
 	~OwnershipInformation();
     void getFromDatabase();
     void insertIntoDatabase();

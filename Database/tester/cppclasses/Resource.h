@@ -1,16 +1,17 @@
 #include <string>
 #pragma once
 using namespace std;
-#include "ValueListType.h"
-#include "TypeInfoType.h"
-#include "ValueListType.h"
-#include "ContactInformationType.h"
-#include "OwnershipInformation.h"
-#include "ResourceStatus.h"
-class Resource
+#include "ValueListType.cpp"
+#include "TypeInfoType.cpp"
+#include "ValueListType.cpp"
+#include "ContactInformationType.cpp"
+#include "OwnershipInformation.cpp"
+#include "ResourceStatus.cpp"
+class Resource: public SqlBase
 {
 public:
 	Resource(string resourceID);
+	Resource();
 	~Resource();
 	string ResourceID;
 	string NAME;

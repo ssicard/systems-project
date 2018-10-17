@@ -1,9 +1,15 @@
+#pragma once
 #include "TypeInfoType.h"
 
 
 TypeInfoType::TypeInfoType(int typeInfoID)
 {
 	this->TypeInfoID = typeInfoID;
+}
+
+TypeInfoType::TypeInfoType()
+{
+	this->TypeInfoID = -1;
 }
 
 

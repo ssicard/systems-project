@@ -6,6 +6,7 @@ class ValueListType: public SqlBase
 {
 public:
 	ValueListType(int valueListID);
+	ValueListType();
 	~ValueListType();
     void getFromDatabase();
     void insertIntoDatabase();

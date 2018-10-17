@@ -5,6 +5,7 @@ class AssignmentInstructions
 {
 public:
 	AssignmentInstructions(int assignmentInstructionsID);
+	AssignmentInstructions();
 	~AssignmentInstructions();
 	int AssignmentInstructionsID;
 	string ModeOfTransportation;

@@ -5,6 +5,7 @@ class ContactInformationType
 {
 public:
 	ContactInformationType(int contactInformationID);
+	ContactInformationType();
 	~ContactInformationType();
 	int ContactInformationID;
 	string ContactDescription;

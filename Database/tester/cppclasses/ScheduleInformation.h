@@ -8,6 +8,7 @@ class ScheduleInformation: public SqlBase
 {
 public:
 	ScheduleInformation(int scheduleInformationID);
+	ScheduleInformation();
 	~ScheduleInformation();
     void getFromDatabase();
     void insertIntoDatabase();

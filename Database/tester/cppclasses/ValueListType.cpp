@@ -1,9 +1,15 @@
+#pragma once
 #include "ValueListType.h"
 
 
 ValueListType::ValueListType(int valueListID)
 {
 	this->ValueListID = valueListID;
+}
+
+ValueListType::ValueListType()
+{
+	this->ValueListID = -1;
 }
 
 
