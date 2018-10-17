@@ -1,8 +1,9 @@
 #include <string>
 #pragma once
 using namespace std;
+#include "SqlBase.h"
 #include "ValueListType.cpp"
-class ResponseInformation
+class ResponseInformation:public SqlBase
 {
 public:
 	ResponseInformation(string precedingResourceInfoElementID);
