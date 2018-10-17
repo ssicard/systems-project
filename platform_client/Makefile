@@ -5,7 +5,7 @@ CC 	=	gcc
 #include
 CSAPP_INC= 	./csapp
 CSAPP_SRC= 	./csapp
-CSAPP 	= 	$(CSAPP_SRC)/csapp.o
+CSAPP    =	./csapp/csapp.o
 
 # compiler flag
 CFLAGS 	= 	-Wall -I $(CSAPP_INC)
@@ -24,13 +24,13 @@ PROGS 	=	system_a_client\
 		system_b_client\
 		system_server\
 
-all:
-	$(CSAPP_SRC)/csapp.o $(LOG) $(PROGS)
+all:	        $(CSAPP_O) $(LOG) $(PROGS)
 
-$(PROGS): $(CSAPP) $(PUGI)
-$(PUGI): $(PUGIXML)
-$(CSAPP): $(CSAPP_SRC)/csapp.c $(CSAPP_INC)/csapp.h
+$(CSAPP_O):     $(shell g++ -c $(CSAPP))
+$(PROGS): 	$(CSAPP) $(PUGI)
+$(PUGI): 	$(PUGIXML)
+$(CSAPP): 	$(CSAPP_SRC)/csapp.c $(CSAPP_INC)/csapp.h
 
 clean:
-	rm -rf $(PROGS) *.o $(PUGI) *.dSYM
+		rm -rf $(PROGS) *.o $(PUGI) *.dSYM
 
