@@ -28,22 +28,5 @@ void MessageObjectBase::insertIntoDatabase() {
 }
 
 bool MessageObjectBase::areFieldsValid() {
-    if(this->MessageProperties.MessageID == 3){
-        //required
-        if(this->ResourceMessage.MessageID == null){
-            throw "Resource Message Not implimented";
-            return false;
-        }
-    }else if(this->MessageProperties.MessageID > 0){
-        //optional
-        if(this->ResourceMessage.MessageID != null){
-            //if a forign key ref, call check
-        }
-
-    }
-    //etc
-}
-
-bool MessageObjectBase::getResourceMessage(string MessageObjectName) {
-
+    return false;
 }

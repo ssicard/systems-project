@@ -8,6 +8,11 @@ MessageProperties::MessageProperties(int id, string messageTypeName)
 	this->MessageTypeName = messageTypeName;
 }
 
+MessageProperties::MessageProperties()
+{
+	this->id = -1;
+}
+
 
 MessageProperties::~MessageProperties()
 {

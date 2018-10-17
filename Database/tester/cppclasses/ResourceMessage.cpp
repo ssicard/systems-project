@@ -7,6 +7,11 @@ ResourceMessage::ResourceMessage(string messageID)
 	this->MessageID = messageID;
 }
 
+ResourceMessage::ResourceMessage()
+{
+	this->MessageID = "";
+}
+
 
 ResourceMessage::~ResourceMessage()
 {

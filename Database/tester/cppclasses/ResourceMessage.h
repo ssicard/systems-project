@@ -10,6 +10,7 @@ class ResourceMessage: public SqlBase
 {
 public:
 	ResourceMessage(string messageID);
+	ResourceMessage();
 	~ResourceMessage();
 	string MessageID;
 	int SentDateTime;

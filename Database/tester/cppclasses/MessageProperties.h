@@ -10,6 +10,7 @@ class MessageProperties : public SqlBase
 {
 public:
 	MessageProperties(int id, string messageTypeName);
+	MessageProperties();
 	~MessageProperties();
 	void getFromDatabase();
     void insertIntoDatabase();

@@ -33,7 +33,7 @@
 #include "cppclasses/ResponseTypeLookup.cpp"
 #include "cppclasses/ScheduleInformation.cpp"
 #include "cppclasses/TypeInfoType.cpp"
-#include "cppclasses/ValueListType.cpp"
+#include "MessageObjectBase.cpp"
 
 
 using namespace std;
