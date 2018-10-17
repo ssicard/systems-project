@@ -1,7 +1,7 @@
 #include <string>
 #pragma once
 using namespace std;
-class ContactInformationType
+class ContactInformationType: public SqlBase
 {
 public:
 	ContactInformationType(int contactInformationID);

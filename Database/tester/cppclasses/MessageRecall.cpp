@@ -7,6 +7,12 @@ MessageRecall::MessageRecall(string recalledMessageID)
 	this->RecalledMessageID = recalledMessageID;
 }
 
+MessageRecall::MessageRecall()
+{
+	this->RecalledMessageID = "";
+}
+
+
 
 MessageRecall::~MessageRecall()
 {

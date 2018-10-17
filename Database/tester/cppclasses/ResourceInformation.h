@@ -9,6 +9,7 @@ class ResourceInformation: public SqlBase
 {
 public:
 	ResourceInformation(string resourceInfoElementID);
+	ResourceInformation();
 	~ResourceInformation();
 	string ResourceInfoElementID;
 	string ResponseInformationID;

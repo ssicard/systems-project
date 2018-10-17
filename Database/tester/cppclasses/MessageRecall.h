@@ -6,6 +6,7 @@ class MessageRecall: public SqlBase
 {
 public:
 	MessageRecall(string recalledMessageID);
+	MessageRecall();
 	~MessageRecall();
 	void getFromDatabase();
     void insertIntoDatabase();

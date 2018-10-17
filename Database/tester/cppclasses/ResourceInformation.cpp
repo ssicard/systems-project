@@ -8,6 +8,11 @@ ResourceInformation::ResourceInformation(string resourceInfoElementID)
 
 }
 
+ResourceInformation::ResourceInformation()
+{
+	this->ResourceInfoElementID = "";
+
+}
 
 ResourceInformation::~ResourceInformation()
 {

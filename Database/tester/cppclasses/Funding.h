@@ -7,6 +7,7 @@ class Funding: public SqlBase
 {
 public:
     Funding(string fundCode);
+    Funding();
     ~Funding();
     void getFromDatabase();
     void insertIntoDatabase();

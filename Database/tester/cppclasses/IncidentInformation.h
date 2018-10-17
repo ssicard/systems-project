@@ -6,6 +6,7 @@ class IncidentInformation: public SqlBase
 {
 public:
 	IncidentInformation(string incidentID);
+	IncidentInformation();
 	~IncidentInformation();
 	void getFromDatabase();
     void insertIntoDatabase();

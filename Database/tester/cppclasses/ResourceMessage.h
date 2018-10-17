@@ -6,7 +6,7 @@ using namespace std;
 #include "Funding.h"
 #include "ContactInformationType.h"
 #include "ResourceInformation.h"
-class ResourceMessage
+class ResourceMessage: public SqlBase
 {
 public:
 	ResourceMessage(string messageID);
@@ -21,7 +21,7 @@ public:
 	IncidentInformation _IncidentInformation;
 	MessageRecall _MessageRecall;
 	Funding _Funding;
-	ContactInformationType ContactInformationType;
+	ContactInformationType _ContactInformationType;
 	ResourceInformation _ResourceInformation;
 
 	string IncidentID;

@@ -7,6 +7,11 @@ IncidentInformation::IncidentInformation(string incidentID)
 	this->IncidentID = incidentID;
 }
 
+IncidentInformation::IncidentInformation()
+{
+	this->IncidentID = "";
+}
+
 
 IncidentInformation::~IncidentInformation()
 {
