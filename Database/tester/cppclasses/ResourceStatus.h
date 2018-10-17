@@ -4,7 +4,6 @@ using namespace std;
 
 #include "ValueListType.h"
 
-class ResourceStatus
 class ResourceStatus : public SqlBase
 {
 public:

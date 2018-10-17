@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 class SqlBase {
    public:
       void getFromDatabase() {
@@ -12,7 +12,7 @@ class SqlBase {
       }
 
 };
-=======
+
 // #ifndef SQLBASE_H
 // #define SQLBASE_H
 // class SqlBase {
@@ -65,4 +65,4 @@ class SqlBase {
 
    //    return;
    // }
->>>>>>> database2
+

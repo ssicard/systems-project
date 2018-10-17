@@ -3,15 +3,11 @@
 #include "AssignmentInstructions.cpp"
 using namespace std;
 #include "AssignmentInstructions.cpp"
-class AssignmentInformation: public SqlBase
-{
-public:
-	AssignmentInformation(int assignmentInformationID);
-	AssignmentInformation();
 class AssignmentInformation : public SqlBase
 {
 public:
 	AssignmentInformation(int assignmentInformationID);
+	AssignmentInformation();
 	~AssignmentInformation();
 	void getFromDatabase();
     void insertIntoDatabase();

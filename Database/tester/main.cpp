@@ -11,7 +11,6 @@
 #include "resultset.h"
 #include "statement.h"
 #include "prepared_statement.h"
-<<<<<<< HEAD
 //#include "MessageObjectBase.cpp"
 
  #include "cppclasses/Funding.cpp"
@@ -25,7 +24,6 @@
 #include "cppclasses/ValueListType.cpp"
 #include "cppclasses/ResponseTypeLookup.cpp"
 #include "cppclasses/ResourceInformation.cpp"
-=======
 #include "cppclasses/Funding.cpp"
 #include "cppclasses/ContactRoleLookup.cpp"
 // #include "cppclasses/ResourceStatus.cpp"
@@ -34,14 +32,13 @@
 #include "cppclasses/MessageProperties.cpp"
 #include "cppclasses/MessagePropertiesLookup.cpp"
 
->>>>>>> database2
 
 using namespace std;
 
 int main() {
 
 
-<<<<<<< HEAD
+
   //   cout << "Connector/C++ tutorial framework..." << endl;
   //  // cout << endl;
   //    Funding* f;
@@ -51,7 +48,6 @@ int main() {
 
   // f->getFromDatabase();
   // // printf("%s\n", f->FundingInfo);
-=======
     cout << "Connector/C++ tutorial framework..." << endl;
    // cout << endl;
   //    Funding* f;
@@ -97,7 +93,6 @@ int main() {
     // a->AssignmentInstructionsID = 1;
 
     // a->insertIntoDatabase();
->>>>>>> database2
    
     // a->OrderID = "";
     // a->Quantity = "";
@@ -138,10 +133,9 @@ int main() {
 
     std::cout << "RequirementDesc: " << mp->messagePropertiesLookup.RequirementDesc << std::endl;
 
-<<<<<<< HEAD
+
   //   cout << f->FundingInfo << endl;
   //   return EXIT_SUCCESS;
-=======
+
     return EXIT_SUCCESS;
->>>>>>> database2
 }
