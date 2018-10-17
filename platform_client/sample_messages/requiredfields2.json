@@ -1,0 +1,12 @@
+{
+    "ResourceMessage":{
+        "ContactInformationID":"2"
+    },
+    "Resource":{
+        "Name":"water bottles"
+    },
+    "MessageProperties":{
+        "MessageContentType":"json",
+        "MessageDescription":"request for resources cuz I'm thirsty"
+    }
+}

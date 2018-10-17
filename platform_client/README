@@ -1,0 +1,5 @@
+[Sat Oct 13, Joe B]
+
+The client B can currently send an XML message that sort of matches the standard. I'll need to figure out how to generate actual messages (and how to figure out what to put into them)
+
+The client B can also recieve and parse XML messages. Currently it just goes through the message and prints out a few items. It also uses an XML sample file since the server doesn't yet send back XML. 
