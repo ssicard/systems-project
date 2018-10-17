@@ -3,7 +3,7 @@
 #include "./dependencies/json.hpp"
 #include <sstream>
 #include <string>
-#include "../Database/cppclasses/Message.h"
+#include "./message_elements/Message.h"
 
 int main(int argc, char **argv){
   

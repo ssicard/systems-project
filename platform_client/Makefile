@@ -11,7 +11,6 @@ CSAPP 	= 	$(CSAPP_SRC)/csapp.o
 CFLAGS 	= 	-Wall -I $(CSAPP_INC)
 
 #C++ Compiler flags
-<<<<<<< HEAD
 CXXFLAGS=	-g -std=c++11 -Wall -pedantic
 LDLIBS 	= 	-lpthread
 
