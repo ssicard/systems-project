@@ -1,7 +1,10 @@
+#ifndef RESPONSE_TYPE_LOOKUP_H
+#define RESPONSE_TYPE_LOOKUP_H
+
 #include <string>
-#pragma once
-using namespace std;
-class ResponseTypeLookup
+#include "SqlBase.h"
+
+class ResponseTypeLookup : public SqlBase
 {
 public:
 	ResponseTypeLookup(int responseTypeID);
@@ -10,6 +13,7 @@ public:
     void insertIntoDatabase();
     bool areFieldsValid();
 	int ResponseTypeID;
-	string Description;
+	std::string Description;
 };
 
+#endif

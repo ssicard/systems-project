@@ -1,7 +1,9 @@
+#ifndef RADIO_ELEMENT_H
+#define RADIO_ELEMENT_H
+
 #include <string>
 #include "SqlBase.h"
-#pragma once
-using namespace std;
+
 class RadioElement: public SqlBase
 {
 public:
@@ -11,7 +13,8 @@ public:
     void insertIntoDatabase();
     bool areFieldsValid();
 	int RadioElementID;
-	string RadioType;
-	string RadioChannel;
+	std::string RadioType;
+	std::string RadioChannel;
 };
 
+#endif

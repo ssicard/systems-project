@@ -1,23 +1,30 @@
+#ifndef RESOURCE_MESSAGE_H
+#define RESOURCE_MESSAGE_H
+
 #include <string>
-#pragma once
-using namespace std;
+#include "SqlBase.h"
 #include "IncidentInformation.h"
 #include "MessageRecall.h"
 #include "Funding.h"
 #include "ContactInformationType.h"
 #include "ResourceInformation.h"
+
 class ResourceMessage: public SqlBase
 {
 public:
-	ResourceMessage(string messageID);
+	ResourceMessage(std::string messageID);
 	ResourceMessage();
 	~ResourceMessage();
-	string MessageID;
-	int SentDateTime;
-	string MessageContentType;
-	string MessageDescription;
-	string OriginatingMessageID;
-	string PrecedingMessageID;
+	void getFromDatabase();
+	void insertIntoDatabase();
+	bool areFieldsValid();
+
+	std::string MessageID;
+	std::string SentDateTime;
+	std::string MessageContentType;
+	std::string MessageDescription;
+	std::string OriginatingMessageID;
+	std::string PrecedingMessageID;
 
 	IncidentInformation _IncidentInformation;
 	MessageRecall _MessageRecall;
@@ -25,10 +32,11 @@ public:
 	ContactInformationType _ContactInformationType;
 	ResourceInformation _ResourceInformation;
 
-	string IncidentID;
-	string RecalledMessageID;
-	string FundCode;
-	string ContactInformationID;
-	string ResourceInfoElementID;
+	std::string IncidentID;
+	std::string RecalledMessageID;
+	std::string FundCode;
+	int ContactInformationID;
+	std::string ResourceInfoElementID;
 };
 
+#endif

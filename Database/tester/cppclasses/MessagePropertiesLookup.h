@@ -3,8 +3,7 @@
 
 #include "SqlBase.h"
 #include <string>
-// #pragma once
-using namespace std;
+
 class MessagePropertiesLookup : public SqlBase
 {
 public:
@@ -14,7 +13,7 @@ public:
     void insertIntoDatabase();
     bool areFieldsValid();
 	int RequirementType;
-	string RequirementDesc;
+	std::string RequirementDesc;
 };
 
 #endif

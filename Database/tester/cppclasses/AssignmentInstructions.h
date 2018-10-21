@@ -3,8 +3,7 @@
 
 #include "SqlBase.h"
 #include <string>
-// #pragma once
-using namespace std;
+
 class AssignmentInstructions : public SqlBase
 {
 public:
@@ -15,9 +14,9 @@ public:
     void insertIntoDatabase();
     bool areFieldsValid();
 	int AssignmentInstructionsID;
-	string ModeOfTransportation;
-	string NavigationInstructions;
-	string ReportingInstructions;
+	std::string ModeOfTransportation;
+	std::string NavigationInstructions;
+	std::string ReportingInstructions;
 };
 
 #endif

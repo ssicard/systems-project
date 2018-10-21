@@ -1,17 +1,19 @@
+#include "SqlBase.h"
 
-class SqlBase {
-   public:
-      void getFromDatabase() {
-         throw "Unimplimented";
-      }
-      void insertIntoDatabase() {
-         throw "Unimplimented";
-      }
-      bool areFieldsValid(){
-         throw "Unimplimented";
-      }
+SqlBase::SqlBase() {}
 
-};
+void SqlBase::getFromDatabase() {
+ throw "Unimplimented";
+}
+
+void SqlBase::insertIntoDatabase() {
+ throw "Unimplimented";
+}
+
+bool SqlBase::areFieldsValid(){
+ throw "Unimplimented";
+}
+
 
 // #ifndef SQLBASE_H
 // #define SQLBASE_H

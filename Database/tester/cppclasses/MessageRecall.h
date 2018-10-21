@@ -1,17 +1,20 @@
+#ifndef MESSAGE_RECALL_H
+#define MESSAGE_RECALL_H
+
 #include <string>
 #include "SqlBase.h"
-#pragma once
-using namespace std;
+
 class MessageRecall: public SqlBase
 {
 public:
-	MessageRecall(string recalledMessageID);
+	MessageRecall(std::string recalledMessageID);
 	MessageRecall();
 	~MessageRecall();
 	void getFromDatabase();
     void insertIntoDatabase();
     bool areFieldsValid();
-	string RecalledMessageID;
-	string RecallType;
+	std::string RecalledMessageID;
+	std::string RecallType;
 };
 
+#endif

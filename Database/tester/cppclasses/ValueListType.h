@@ -1,7 +1,9 @@
+#ifndef VALUE_LIST_TYPE_H
+#define VALUE_LIST_TYPE_H
+
 #include <string>
 #include "SqlBase.h"
-#pragma once
-using namespace std;
+
 class ValueListType: public SqlBase
 {
 public:
@@ -12,7 +14,8 @@ public:
     void insertIntoDatabase();
     bool areFieldsValid();
 	int ValueListID;
-	string ValueListURN;
-	string ValueType;
+	std::string ValueListURN;
+	std::string ValueType;
 };
 
+#endif

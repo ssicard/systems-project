@@ -1,7 +1,9 @@
+#ifndef OWNERSHIP_INFORMATION_H
+#define OWNERSHIP_INFORMATION_H
+
 #include <string>
 #include "SqlBase.h"
-#pragma once
-using namespace std;
+
 class OwnershipInformation: public SqlBase
 {
 public:
@@ -12,9 +14,10 @@ public:
     void insertIntoDatabase();
     bool areFieldsValid();
 	int OwnershipInformationID;
-	string Owner;
-	string OwningJurisdiction;
-	string HomeDispatch;
-	string HomeUnit;
+	std::string Owner;
+	std::string OwningJurisdiction;
+	std::string HomeDispatch;
+	std::string HomeUnit;
 };
 
+#endif

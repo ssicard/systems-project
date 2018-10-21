@@ -1,17 +1,20 @@
+#ifndef INCIDENT_INFORMATION_H
+#define INCIDENT_INFORMATION_H
+
 #include <string>
-#pragma once
 #include "SqlBase.h"
-using namespace std;
+
 class IncidentInformation: public SqlBase
 {
 public:
-	IncidentInformation(string incidentID);
+	IncidentInformation(std::string incidentID);
 	IncidentInformation();
 	~IncidentInformation();
 	void getFromDatabase();
     void insertIntoDatabase();
     bool areFieldsValid();
-	string IncidentID;
-	string IncidentDescription;
+	std::string IncidentID;
+	std::string IncidentDescription;
 };
 
+#endif

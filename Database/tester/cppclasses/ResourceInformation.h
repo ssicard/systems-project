@@ -1,19 +1,22 @@
+#ifndef RESOURCE_INFORMATION_H
+#define RESOURCE_INFORMATION_H
+
 #include <string>
-#pragma once
-using namespace std;
-#include "ResponseInformation.cpp"
-#include "Resource.cpp"
-#include "AssignmentInformation.cpp"
-#include "ScheduleInformation.cpp"
+#include "SqlBase.h"
+#include "ResponseInformation.h"
+#include "Resource.h"
+#include "AssignmentInformation.h"
+#include "ScheduleInformation.h"
+
 class ResourceInformation: public SqlBase
 {
 public:
-	ResourceInformation(string resourceInfoElementID);
+	ResourceInformation(std::string resourceInfoElementID);
 	ResourceInformation();
 	~ResourceInformation();
-	string ResourceInfoElementID;
-	string ResponseInformationID;
-	string ResourceID;
+	std::string ResourceInfoElementID;
+	std::string ResponseInformationID;
+	std::string ResourceID;
 	int AssignmentInformationID;
 	int ScheduleInformationID;
 
@@ -28,3 +31,4 @@ public:
 
 };
 
+#endif

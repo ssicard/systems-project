@@ -1,9 +1,10 @@
-#pragma once
+#ifndef ASSIGNMENT_INFORMATION_H
+#define ASSIGNMENT_INFORMATION_H
+
 #include <string>
 #include "SqlBase.h"
-#include "AssignmentInstructions.cpp"
-using namespace std;
-#include "AssignmentInstructions.cpp"
+#include "AssignmentInstructions.h"
+
 class AssignmentInformation : public SqlBase
 {
 public:
@@ -14,12 +15,12 @@ public:
     void insertIntoDatabase();
     bool areFieldsValid();
 	int AssignmentInformationID;
-	string Quantity;
-	string Restrctions;
-	string Restrictions;
-	string AnticipatedFunction;
-	string PriceQuote;
-	string OrderID;
+	std::string Quantity;
+	std::string Restrctions;
+	std::string Restrictions;
+	std::string AnticipatedFunction;
+	std::string PriceQuote;
+	std::string OrderID;
 	int AssignmentInstructionsID;
 
 	AssignmentInstructions _AssignmentInstructions;
@@ -29,3 +30,4 @@ public:
 
 };
 
+#endif

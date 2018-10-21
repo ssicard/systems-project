@@ -1,9 +1,10 @@
-#pragma once
+#ifndef SCHEDULE_INFORMATION_H
+#define SCHEDULE_INFORMATION_H
+
 #include <string>
 #include "SqlBase.h"
+#include "LocationType.h"
 
-using namespace std;
-#include "LocationType.cpp"
 class ScheduleInformation: public SqlBase
 {
 public:
@@ -14,11 +15,11 @@ public:
     void insertIntoDatabase();
     bool areFieldsValid();
 	int ScheduleInformationID;
-	string ScheduleType;
-	string DateTime;
+	std::string ScheduleType;
+	std::string DateTime;
 	int LocationTypeID;
 
 	LocationType _Location;
-
 };
 
+#endif

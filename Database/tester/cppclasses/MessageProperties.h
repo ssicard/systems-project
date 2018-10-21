@@ -1,22 +1,21 @@
 #ifndef MESSAGEPROPERTIES_H
 #define MESSAGEPROPERTIES_H
 
+#include <string>
 #include "SqlBase.h"
 #include "MessagePropertiesLookup.h"
-#include <string>
-// #pragma once
-using namespace std;
+
 class MessageProperties : public SqlBase
 {
 public:
-	MessageProperties(int id, string messageTypeName);
+	MessageProperties(int id, std::string messageTypeName);
 	MessageProperties();
 	~MessageProperties();
 	void getFromDatabase();
     void insertIntoDatabase();
     bool areFieldsValid();
 	int id;
-	string MessageTypeName;
+	std::string MessageTypeName;
 	int MessageID=0;
 	int SentDateTime=0;
 	int MessageContentType = 0;

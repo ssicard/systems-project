@@ -1,6 +1,11 @@
+#ifndef CONTACT_INFORMATION_TYPE_H
+#define CONTACT_INFORMATION_TYPE_H
+
 #include <string>
-#pragma once
-using namespace std;
+#include "SqlBase.h"
+#include "ContactRoleLookup.h"
+#include "LocationType.h"
+
 class ContactInformationType: public SqlBase
 {
 public:
@@ -8,9 +13,16 @@ public:
 	ContactInformationType();
 	~ContactInformationType();
 	int ContactInformationID;
-	string ContactDescription;
+	std::string ContactDescription;
 	int ContactRole;
 	int ContactLocationID;
-	string AdditionalContactInformation;
+	std::string AdditionalContactInformation;
+
+    void getFromDatabase();
+    void insertIntoDatabase();
+	bool areFieldsValid();  
+	ContactRoleLookup contactRoleLookup{ContactRole};
+	LocationType contactLocation{ContactLocationID};
 };
 
+#endif

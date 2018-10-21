@@ -1,7 +1,8 @@
-#include <string>
-#pragma once
-using namespace std;
+#ifndef RESOURCE_STATUS_H
+#define RESOURCE_STATUS_H
 
+#include <string>
+#include "SqlBase.h"
 #include "ValueListType.h"
 
 class ResourceStatus : public SqlBase
@@ -14,13 +15,12 @@ public:
     void insertIntoDatabase();
     bool areFieldsValid();
 	int ResourceStatusID;
-	int InventoryRefreshDateTime;
+	std::string InventoryRefreshDateTime;
 	int DeploymentStatus;
-	string Availability;
-	string HomeUnit;
+	std::string Availability;
+	std::string HomeUnit;
 
     ValueListType _DeploymentStatus;
-
-
 };
 
+#endif

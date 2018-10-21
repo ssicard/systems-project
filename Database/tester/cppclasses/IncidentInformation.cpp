@@ -1,8 +1,6 @@
-#pragma once
 #include "IncidentInformation.h"
 
-
-IncidentInformation::IncidentInformation(string incidentID)
+IncidentInformation::IncidentInformation(std::string incidentID)
 {
 	this->IncidentID = incidentID;
 }
@@ -47,11 +45,11 @@ void IncidentInformation::getFromDatabase(){
 		delete con;
 
 	} catch (sql::SQLException &e) {
-		cout << "# ERR: SQLException in " << __FILE__;
-		cout << "(" << __FUNCTION__ << ") on line " << __LINE__ << endl;
-		cout << "# ERR: " << e.what();
-		cout << " (MySQL error code: " << e.getErrorCode();
-		cout << ", SQLState: " << e.getSQLState() << " )" << endl;
+		std::cout << "# ERR: SQLException in " << __FILE__;
+		std::cout << "(" << __FUNCTION__ << ") on line " << __LINE__ << std::endl;
+		std::cout << "# ERR: " << e.what();
+		std::cout << " (MySQL error code: " << e.getErrorCode();
+		std::cout << ", SQLState: " << e.getSQLState() << " )" << std::endl;
 
 		return;
 	}
@@ -80,12 +78,16 @@ void IncidentInformation::insertIntoDatabase(){
 		delete con;
 
 	} catch (sql::SQLException &e) {
-		cout << "# ERR: SQLException in " << __FILE__;
-		cout << "(" << __FUNCTION__ << ") on line " << __LINE__ << endl;
-		cout << "# ERR: " << e.what();
-		cout << " (MySQL error code: " << e.getErrorCode();
-		cout << ", SQLState: " << e.getSQLState() << " )" << endl;
+		std::cout << "# ERR: SQLException in " << __FILE__;
+		std::cout << "(" << __FUNCTION__ << ") on line " << __LINE__ << std::endl;
+		std::cout << "# ERR: " << e.what();
+		std::cout << " (MySQL error code: " << e.getErrorCode();
+		std::cout << ", SQLState: " << e.getSQLState() << " )" << std::endl;
 
 		return;
 	}
+}
+
+bool IncidentInformation::areFieldsValid() {
+	return false;
 }

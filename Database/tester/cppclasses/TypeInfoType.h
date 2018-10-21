@@ -1,7 +1,9 @@
+#ifndef TYPE_INFO_TYPE_H
+#define TYPE_INFO_TYPE_H
+
 #include <string>
 #include "SqlBase.h"
-#pragma once
-using namespace std;
+
 class TypeInfoType: public SqlBase
 {
 public:
@@ -12,6 +14,7 @@ public:
     void insertIntoDatabase();
     bool areFieldsValid();
 	int TypeInfoID;
-	string ChildInfo;
+	std::string ChildInfo;
 };
 
+#endif

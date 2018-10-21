@@ -1,30 +1,37 @@
+#ifndef RESOURCE_H
+#define RESOURCE_H
+
 #include <string>
-#pragma once
-using namespace std;
-#include "ValueListType.cpp"
-#include "TypeInfoType.cpp"
-#include "ValueListType.cpp"
-#include "ContactInformationType.cpp"
-#include "OwnershipInformation.cpp"
-#include "ResourceStatus.cpp"
+#include "SqlBase.h"
+#include "ValueListType.h"
+#include "TypeInfoType.h"
+#include "ValueListType.h"
+#include "ContactInformationType.h"
+#include "OwnershipInformation.h"
+#include "ResourceStatus.h"
+
 class Resource: public SqlBase
 {
 public:
-	Resource(string resourceID);
+	Resource(std::string resourceID);
 	Resource();
 	~Resource();
-	string ResourceID;
-	string NAME;
+	std::string ResourceID;
+	std::string NAME;
 	int TypeStructureID;
 	int TypeInfoID;
 	int KeywordID;
-	string Description;
-	string Credentials;
-	string Certifications;
-	string SpecialRequirements;
+	std::string Description;
+	std::string Credentials;
+	std::string Certifications;
+	std::string SpecialRequirements;
 	int ResponsiblePartyID;
 	int OwnershipInformationID;
 	int ResourceStatusID;
+
+	void getFromDatabase();
+	void insertIntoDatabase();
+	bool areFieldsValid();
 
 	ValueListType _TypeStructure;
 	TypeInfoType _TypeInfo;
@@ -32,8 +39,7 @@ public:
 	ContactInformationType _ResponsibleParty;
 	OwnershipInformation _OwnershipInformation;
 	ResourceStatus _ResourceStatus;
-
-
-
 };
+
+#endif
 

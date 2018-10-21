@@ -3,7 +3,7 @@
 
 #include <string>
 #include "SqlBase.h"
-using namespace std;
+
 class ContactRoleLookup : public SqlBase
 {
 public:
@@ -13,7 +13,7 @@ public:
     void insertIntoDatabase();
     bool areFieldsValid();
 	int ContactRoleID;
-	string Description;
+	std::string Description;
 };
 
 #endif

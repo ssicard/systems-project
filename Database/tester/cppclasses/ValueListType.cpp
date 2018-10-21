@@ -1,6 +1,4 @@
-#pragma once
 #include "ValueListType.h"
-
 
 ValueListType::ValueListType(int valueListID)
 {
@@ -32,7 +30,7 @@ void ValueListType::getFromDatabase(){
 		stmt = con->createStatement();
 		stmt->execute("USE " EXAMPLE_DB);
 
-		prep_stmt = con->prepareStatement("SELECT `ValueListID`, `ValueListURN`, `ValueType` FROM `ValueListType` WHERE `ValueListID = ?");
+		prep_stmt = con->prepareStatement("SELECT `ValueListID`, `ValueListURN`, `ValueType` FROM `ValueListType` WHERE `ValueListID` = ?");
 
 		prep_stmt->setInt(1, this->ValueListID);
 		
@@ -50,11 +48,11 @@ void ValueListType::getFromDatabase(){
 		delete con;
 
 	} catch (sql::SQLException &e) {
-		cout << "# ERR: SQLException in " << __FILE__;
-		cout << "(" << __FUNCTION__ << ") on line " << __LINE__ << endl;
-		cout << "# ERR: " << e.what();
-		cout << " (MySQL error code: " << e.getErrorCode();
-		cout << ", SQLState: " << e.getSQLState() << " )" << endl;
+		std::cout << "# ERR: SQLException in " << __FILE__;
+		std::cout << "(" << __FUNCTION__ << ") on line " << __LINE__ << std::endl;
+		std::cout << "# ERR: " << e.what();
+		std::cout << " (MySQL error code: " << e.getErrorCode();
+		std::cout << ", SQLState: " << e.getSQLState() << " )" << std::endl;
 
 		return;
 	}
@@ -76,7 +74,7 @@ void ValueListType::insertIntoDatabase(){
 		stmt = con->createStatement();
 		stmt->execute("USE " EXAMPLE_DB);
 
-		prep_stmt = con->prepareStatement("INSERT INTO `ValueListType`(`ValueListID`, `ValueListURN`, `ValueType`) VALUES (?,?,?)");
+		prep_stmt = con->prepareStatement("INSERT INTO `ValueListType` (`ValueListID`, `ValueListURN`, `ValueType`) VALUES (?,?,?)");
 
 		prep_stmt->setInt(1, this->ValueListID);
 		prep_stmt->setString(2, this->ValueListURN);
@@ -88,12 +86,12 @@ void ValueListType::insertIntoDatabase(){
 		delete con;
 
 	} catch (sql::SQLException &e) {
-		cout << "# ERR: SQLException in " << __FILE__;
-		cout << "(" << __FUNCTION__ << ") on line " << __LINE__ << endl;
+		std::cout << "# ERR: SQLException in " << __FILE__;
+		std::cout << "(" << __FUNCTION__ << ") on line " << __LINE__ << std::endl;
         /* what() (derived from std::runtime_error) fetches error message */
-		cout << "# ERR: " << e.what();
-		cout << " (MySQL error code: " << e.getErrorCode();
-		cout << ", SQLState: " << e.getSQLState() << " )" << endl;
+		std::cout << "# ERR: " << e.what();
+		std::cout << " (MySQL error code: " << e.getErrorCode();
+		std::cout << ", SQLState: " << e.getSQLState() << " )" << std::endl;
 
 		return;
 	}

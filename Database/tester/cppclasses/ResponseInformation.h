@@ -1,12 +1,15 @@
+#ifndef RESPONSE_INFORMATION_H
+#define RESPONSE_INFORMATION_H
+
 #include <string>
-#pragma once
-using namespace std;
 #include "SqlBase.h"
-#include "ValueListType.cpp"
-class ResponseInformation:public SqlBase
+#include "ValueListType.h"
+#include "ResponseTypeLookup.h"
+
+class ResponseInformation: public SqlBase
 {
 public:
-	ResponseInformation(string precedingResourceInfoElementID);
+	ResponseInformation(std::string precedingResourceInfoElementID);
 	ResponseInformation();
 	~ResponseInformation();
 
@@ -14,11 +17,13 @@ public:
     void insertIntoDatabase();
     bool areFieldsValid();
 
-	string PrecedingResourceInfoElementID;
+	std::string PrecedingResourceInfoElementID;
 	int ResponseTypeID;
 	int ReasonCodeID;
-	string ResponseReason;
+	std::string ResponseReason;
 
 	ValueListType _ReasonCode;
+	ResponseTypeLookup _ResponseType{ResponseTypeID};
 };
 
+#endif

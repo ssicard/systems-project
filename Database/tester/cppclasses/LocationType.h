@@ -1,7 +1,9 @@
+#ifndef LOCATION_TYPE_H
+#define LOCATION_TYPE_H
+
 #include <string>
-#pragma once
 #include "SqlBase.h"
-using namespace std;
+
 class LocationType: public SqlBase
 {
 public:
@@ -12,8 +14,9 @@ public:
     void insertIntoDatabase();
     bool areFieldsValid();
 	int LocationTypeID;
-	string LocationDescription;
-	string Address;
-	string TargetArea;
+	std::string LocationDescription;
+	std::string Address;
+	std::string TargetArea;
 };
 
+#endif

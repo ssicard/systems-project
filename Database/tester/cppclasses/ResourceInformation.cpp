@@ -1,8 +1,6 @@
-#pragma once
 #include "ResourceInformation.h"
 
-
-ResourceInformation::ResourceInformation(string resourceInfoElementID)
+ResourceInformation::ResourceInformation(std::string resourceInfoElementID)
 {
 	this->ResourceInfoElementID = resourceInfoElementID;
 
@@ -41,8 +39,8 @@ void ResourceInformation::getFromDatabase(){
 
 		while (res->next()) {
 			this->ResourceInfoElementID = res->getString("ResourceInfoElementID");
-			this->ResponseInformationID = res->getString("ResponseInformationID");
-			this->ResourceID = res->getString("ResourceID");
+			this->ResponseInformationID = res->getString("ResponseInformation");
+			this->ResourceID = res->getString("Resource");
 			this->AssignmentInformationID = res->getInt("AssignmentInformationID");
 			this->ScheduleInformationID = res->getInt("ScheduleInformationID");
 
@@ -55,6 +53,7 @@ void ResourceInformation::getFromDatabase(){
 			this->_AssignmentInformation = *(new AssignmentInformation(this->AssignmentInformationID));
 			//todo link
 			//this->_AssignmentInformation.getFromDatabase();
+			this->_AssignmentInformation.getFromDatabase();
 			
 		}
 		if(this->ResponseInformationID != ""){
@@ -67,6 +66,7 @@ void ResourceInformation::getFromDatabase(){
 			this->_Resource = *(new Resource(this->ResourceID));
 			//todo link
 			//this->_Resource.getFromDatabase();
+			this->_Resource.getFromDatabase();
 			
 		}
 
@@ -77,17 +77,18 @@ void ResourceInformation::getFromDatabase(){
 		}
 
 	} catch (sql::SQLException &e) {
-		cout << "# ERR: SQLException in " << __FILE__;
-		cout << "(" << __FUNCTION__ << ") on line " << __LINE__ << endl;
-		cout << "# ERR: " << e.what();
-		cout << " (MySQL error code: " << e.getErrorCode();
-		cout << ", SQLState: " << e.getSQLState() << " )" << endl;
+		std::cout << "# ERR: SQLException in " << __FILE__;
+		std::cout << "(" << __FUNCTION__ << ") on line " << __LINE__ << std::endl;
+		std::cout << "# ERR: " << e.what();
+		std::cout << " (MySQL error code: " << e.getErrorCode();
+		std::cout << ", SQLState: " << e.getSQLState() << " )" << std::endl;
 
 		return;
 	}
 }
 
 void ResourceInformation::insertIntoDatabase(){
+	/*
 	if(this->AssignmentInformationID != -1){
 		//todo link
 		//this->_AssignmentInformation.insertIntoDatabase();
@@ -102,7 +103,7 @@ void ResourceInformation::insertIntoDatabase(){
 			//todo link
 		//this->_Resource.insertIntoDatabase();
 	}
-
+	*/
 
 	try {
 		
@@ -132,12 +133,12 @@ void ResourceInformation::insertIntoDatabase(){
 		delete con;
 
 	} catch (sql::SQLException &e) {
-		cout << "# ERR: SQLException in " << __FILE__;
-		cout << "(" << __FUNCTION__ << ") on line " << __LINE__ << endl;
+		std::cout << "# ERR: SQLException in " << __FILE__;
+		std::cout << "(" << __FUNCTION__ << ") on line " << __LINE__ << std::endl;
         /* what() (derived from std::runtime_error) fetches error message */
-		cout << "# ERR: " << e.what();
-		cout << " (MySQL error code: " << e.getErrorCode();
-		cout << ", SQLState: " << e.getSQLState() << " )" << endl;
+		std::cout << "# ERR: " << e.what();
+		std::cout << " (MySQL error code: " << e.getErrorCode();
+		std::cout << ", SQLState: " << e.getSQLState() << " )" << std::endl;
 
 		return;
 	}

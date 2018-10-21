@@ -1,8 +1,6 @@
-#pragma once
 #include "ResponseInformation.h"
 
-
-ResponseInformation::ResponseInformation(string precedingResourceInfoElementID)
+ResponseInformation::ResponseInformation(std::string precedingResourceInfoElementID)
 {
 	this->PrecedingResourceInfoElementID = precedingResourceInfoElementID;
 }
@@ -58,12 +56,17 @@ void ResponseInformation::getFromDatabase(){
 			
 		}
 
+		if (this->ResponseTypeID != -1) {
+			this->_ResponseType.ResponseTypeID = this->ResponseTypeID;
+			this->_ResponseType.getFromDatabase();
+		}
+
 	} catch (sql::SQLException &e) {
-		cout << "# ERR: SQLException in " << __FILE__;
-		cout << "(" << __FUNCTION__ << ") on line " << __LINE__ << endl;
-		cout << "# ERR: " << e.what();
-		cout << " (MySQL error code: " << e.getErrorCode();
-		cout << ", SQLState: " << e.getSQLState() << " )" << endl;
+		std::cout << "# ERR: SQLException in " << __FILE__;
+		std::cout << "(" << __FUNCTION__ << ") on line " << __LINE__ << std::endl;
+		std::cout << "# ERR: " << e.what();
+		std::cout << " (MySQL error code: " << e.getErrorCode();
+		std::cout << ", SQLState: " << e.getSQLState() << " )" << std::endl;
 
 		return;
 	}
@@ -102,12 +105,12 @@ void ResponseInformation::insertIntoDatabase(){
 		delete con;
 
 	} catch (sql::SQLException &e) {
-		cout << "# ERR: SQLException in " << __FILE__;
-		cout << "(" << __FUNCTION__ << ") on line " << __LINE__ << endl;
+		std::cout << "# ERR: SQLException in " << __FILE__;
+		std::cout << "(" << __FUNCTION__ << ") on line " << __LINE__ << std::endl;
         /* what() (derived from std::runtime_error) fetches error message */
-		cout << "# ERR: " << e.what();
-		cout << " (MySQL error code: " << e.getErrorCode();
-		cout << ", SQLState: " << e.getSQLState() << " )" << endl;
+		std::cout << "# ERR: " << e.what();
+		std::cout << " (MySQL error code: " << e.getErrorCode();
+		std::cout << ", SQLState: " << e.getSQLState() << " )" << std::endl;
 
 		return;
 	}

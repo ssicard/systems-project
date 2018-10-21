@@ -1,23 +1,21 @@
-#pragma once
 #include "ScheduleInformation.h"
-
 
 ScheduleInformation::ScheduleInformation(int scheduleInformationID)
 {
 	this->ScheduleInformationID = scheduleInformationID;
 }
+
 ScheduleInformation::ScheduleInformation()
 {
 	this->ScheduleInformationID = -1;
 }
 
-
 ScheduleInformation::~ScheduleInformation()
 {
+	
 }
 
 void ScheduleInformation::getFromDatabase(){
-
 	try {
 		sql::Connection *con;
 		sql::PreparedStatement *prep_stmt;
@@ -33,7 +31,6 @@ void ScheduleInformation::getFromDatabase(){
 		prep_stmt = con->prepareStatement("SELECT `ScheduleInformationID`, `ScheduleType`, `DateTime`, `LocationTypeID` FROM `ScheduleInformation` WHERE `ScheduleInformationID` = ?");
 
 		prep_stmt->setInt(1, this->ScheduleInformationID);
-
 		
 		res = prep_stmt->executeQuery();
 
@@ -55,11 +52,11 @@ void ScheduleInformation::getFromDatabase(){
 		}
 
 	} catch (sql::SQLException &e) {
-		cout << "# ERR: SQLException in " << __FILE__;
-		cout << "(" << __FUNCTION__ << ") on line " << __LINE__ << endl;
-		cout << "# ERR: " << e.what();
-		cout << " (MySQL error code: " << e.getErrorCode();
-		cout << ", SQLState: " << e.getSQLState() << " )" << endl;
+		std::cout << "# ERR: SQLException in " << __FILE__;
+		std::cout << "(" << __FUNCTION__ << ") on line " << __LINE__ << std::endl;
+		std::cout << "# ERR: " << e.what();
+		std::cout << " (MySQL error code: " << e.getErrorCode();
+		std::cout << ", SQLState: " << e.getSQLState() << " )" << std::endl;
 
 		return;
 	}
@@ -97,12 +94,12 @@ void ScheduleInformation::insertIntoDatabase(){
 		delete con;
 
 	} catch (sql::SQLException &e) {
-		cout << "# ERR: SQLException in " << __FILE__;
-		cout << "(" << __FUNCTION__ << ") on line " << __LINE__ << endl;
+		std::cout << "# ERR: SQLException in " << __FILE__;
+		std::cout << "(" << __FUNCTION__ << ") on line " << __LINE__ << std::endl;
         /* what() (derived from std::runtime_error) fetches error message */
-		cout << "# ERR: " << e.what();
-		cout << " (MySQL error code: " << e.getErrorCode();
-		cout << ", SQLState: " << e.getSQLState() << " )" << endl;
+		std::cout << "# ERR: " << e.what();
+		std::cout << " (MySQL error code: " << e.getErrorCode();
+		std::cout << ", SQLState: " << e.getSQLState() << " )" << std::endl;
 
 		return;
 	}
