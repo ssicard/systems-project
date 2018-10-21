@@ -5,7 +5,7 @@
 class IncidentInformation
 {
 public:
-	IncidentInformation(std::string IncidentID, std::string IncidentDescription="") :
+	IncidentInformation(std::string IncidentID = "" , std::string IncidentDescription="") :
                             IncidentID(IncidentID), IncidentDescription(IncidentDescription) {}
 	~IncidentInformation() {}
 	std::string IncidentID;

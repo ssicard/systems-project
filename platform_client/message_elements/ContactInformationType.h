@@ -4,8 +4,8 @@ using namespace std;
 class ContactInformationType
 {
 public:
-	ContactInformationType(int contactInformationID);
-	~ContactInformationType();
+	ContactInformationType(int ContactInformationID = 0) : ContactInformationID(ContactInformationID) {}
+	~ContactInformationType() {}
 	int ContactInformationID;
 	string ContactDescription;
 	int ContactRole;

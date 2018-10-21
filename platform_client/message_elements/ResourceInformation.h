@@ -5,10 +5,10 @@
 class ResourceInformation
 {
 public:
-	ResourceInformation(std::string ResourceInfoElementID, std::string ResourceInformation,
-                            std::string Resource, int AssignmentInformationID, int ScheduleInformationID) :
-                            ResourceInfoElementID(ResourceInfoElementID), ResponseInformation(ResponseInformation),
-                            Resource(Resource), AssignmentInformationID(AssignmentInformationID), ScheduleInformationID(ScheduleInformationID) {}
+	ResourceInformation(std::string ResourceInfoElementID = "", std::string ResourceInformation = "",
+                            std::string Resource = "", int AssignmentInformationID = 0, int ScheduleInformationID = 0) :
+                            ResourceInfoElementID(std::move(ResourceInfoElementID)), ResponseInformation(std::move(ResponseInformation)),
+                            Resource(std::move(Resource)), AssignmentInformationID(std::move(AssignmentInformationID)), ScheduleInformationID(std::move(ScheduleInformationID)) {}
 	~ResourceInformation() {}
 
 	std::string ResourceInfoElementID;

@@ -1,12 +1,11 @@
-
+#include <iostream>
 
 RequestResource TranslationEngine::xml_to_request_response_msg(std::string xml_str) {
   pugi::xml_document doc;
   pugi::xml_parse_result result = doc.load_string(xml_str);
 
-
-
-  RequestResource msg;
+  RequestResource msg();
+  msg.MessageID
 }
 
 /*
