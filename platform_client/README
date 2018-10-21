@@ -2,4 +2,18 @@
 
 The client B can currently send an XML message that sort of matches the standard. I'll need to figure out how to generate actual messages (and how to figure out what to put into them)
 
-The client B can also recieve and parse XML messages. Currently it just goes through the message and prints out a few items. It also uses an XML sample file since the server doesn't yet send back XML. 
+The client B can also recieve and parse XML messages. Currently it just goes through the message and prints out a few items. It also uses an XML sample file since the server doesn't yet send back XML.
+
+[Sat Oct 19, Nam V] 
+
+Logger now has a log_message_to and a log_message_from methods. I included a commented out main fuction in the logger directory which shows how it is use to log from and to messages. 
+
+The message will now be put in a 
+
+./log/YYYY/MM/YYYYMMDD_Info.txt for Logger::Info
+
+./log/YYYY/MM/YYYYMMDD_Error for Logger::Error
+
+./log/YYYY/MM/YYYYMMDD_from_who for log_message_from
+
+./log/YYYY/MM/YYYYMMDD_to_who for log_message_to
