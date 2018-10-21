@@ -1,14 +1,16 @@
 #include <string>
-#pragma once
-using namespace std;
+
+#ifndef SCHEDULEINFORMATION_H
+#define SCHEDULEINFORMATION_H
+
 class ScheduleInformation
 {
 public:
-	ScheduleInformation(int scheduleInformationID);
-	~ScheduleInformation();
-	int ScheduleInformationID;
-	string ScheduleType;
-	int DateTime;
-	int LocationTypeID;
+	ScheduleInformation(std::string ScheduleType = "", std::string DateTime = "", std::string Location = "") :
+                            ScheduleType(ScheduleType), DateTime(DateTime), Location(Location) {}
+	~ScheduleInformation() {}
+	std::string ScheduleType;
+	std::string DateTime;
+        std::string Location;
 };
-
+#endif /* SCHEDULEINFORMATION_H */

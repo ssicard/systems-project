@@ -26,7 +26,7 @@ public:
   IncidentInformation inc_info;
   MessageRecall msg_rcl;
   Funding fund;
-  ResourceInformation rsrc_info;
+  ResourceInformation res_info;
   ContactInformationType contact_info;
 };
 #endif /* REQUESTRESOURCE_H */

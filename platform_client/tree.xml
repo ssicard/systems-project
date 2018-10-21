@@ -18,7 +18,7 @@
     <FundingInfo>Funded by government</FundingInfo>
   </Funding>
   <ResourceInformation>
-    <ResourceInformationID>1122-ff32d-f4f34f-g439j</ResourceInformationID>
+    <ResourceInfoElementID>1122-ff32d-f4f34f-g439j</ResourceInfoElementID>
     <Resource>
       <ResourceID>hello</ResourceID>
       <Name>world</Name>
@@ -30,11 +30,11 @@
       <Certifications>?</Certifications>
       <SpecialRequirements>ok</SpecialRequirements>
     </Resource>
-    <AssignmentInfo>
+    <AssignmentInformation>
       <Quantity>3</Quantity>
       <Restrictions>None</Restrictions>
       <AnticipatedFunction>Relief Efforts</AnticipatedFunction>
-    </AssignmentInfo>
+    </AssignmentInformation>
     <ScheduleInformation>
       <ScheduleType>EstimatedArrival</ScheduleType>
       <DateTime>00/00/0000 0:00:0000</DateTime>

@@ -1,20 +1,22 @@
 #include <string>
+#include "./Resource.h"
+#include "./AssignmentInformation.h"
+#include "./ScheduleInformation.h"
+
 
 #ifndef RESOURCEINFORMATION_H
 #define RESOURCEINFORMATION_H
 class ResourceInformation
 {
 public:
-	ResourceInformation(std::string ResourceInfoElementID = "", std::string ResourceInformation = "",
-                            std::string Resource = "", int AssignmentInformationID = 0, int ScheduleInformationID = 0) :
-                            ResourceInfoElementID(std::move(ResourceInfoElementID)), ResponseInformation(std::move(ResponseInformation)),
-                            Resource(std::move(Resource)), AssignmentInformationID(std::move(AssignmentInformationID)), ScheduleInformationID(std::move(ScheduleInformationID)) {}
+	ResourceInformation(std::string ResourceInfoElementID = "", std::string ResponseInformation = "") :
+                            ResourceInfoElementID(std::move(ResourceInfoElementID)), ResponseInformation(std::move(ResponseInformation)) {}
 	~ResourceInformation() {}
 
 	std::string ResourceInfoElementID;
 	std::string ResponseInformation;
-	std::string Resource;
-	int AssignmentInformationID;
-	int ScheduleInformationID;
+	Resource res;
+	AssignmentInformation assign_info;
+	ScheduleInformation sched_info;
 };
 #endif /* RESOURCEINFORMATION_H */

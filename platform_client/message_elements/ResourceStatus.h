@@ -4,8 +4,8 @@ using namespace std;
 class ResourceStatus
 {
 public:
-	ResourceStatus(int resourceStatusID);
-	~ResourceStatus();
+	ResourceStatus(int resourceStatusID=0) {}
+	~ResourceStatus() {}
 	int ResourceStatusID;
 	int InventoryRefreshDateTime;
 	int DeploymentStatus;
