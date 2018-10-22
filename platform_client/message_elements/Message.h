@@ -12,6 +12,7 @@
 #include "RadioElement.h"
 #include "Resource.h"
 #include "ResourceInformation.h"
+#include "ResourceMessage.h"
 #include "ResourceStatus.h"
 #include "ResponseInformation.h"
 #include "ResponseTypeLookup.h"

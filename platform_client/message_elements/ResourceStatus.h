@@ -1,15 +1,20 @@
 #include <string>
-#pragma once
-using namespace std;
-class ResourceStatus
-{
+
+#ifndef RESOURCESTATUS_H
+#define RESOURCESTATUS_H
+
+class ResourceStatus {
 public:
-	ResourceStatus(int resourceStatusID=0) {}
+	ResourceStatus(int ResourceStatusID, int InventoryRefreshDateTime, int DeploymentStatus,
+					std::string Availability, std::string HomeUnit) : ResourceStatusID(ResourceStatusID),
+					InventoryRefreshDateTime(InventoryRefreshDateTime), DeploymentStatus(DeploymentStatus),
+					Availability(Availability), HomeUnit(HomeUnit) {}
 	~ResourceStatus() {}
+
 	int ResourceStatusID;
 	int InventoryRefreshDateTime;
 	int DeploymentStatus;
-	string Availability;
-	string HomeUnit;
+	std::string Availability;
+	std::string HomeUnit;
 };
-
+#endif /* RESOURCESTATUS_H */

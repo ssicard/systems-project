@@ -3,13 +3,13 @@
 #ifndef MESSAGERECALL_H
 #define MESSAGERECALL_H
 
-using namespace std;
-class MessageRecall
-{
+class MessageRecall {
 public:
-	MessageRecall(string RecalledMessageID = "") : RecalledMessageID(RecalledMessageID) {}
+	MessageRecall(std::string RecalledMessageID, std::string RecallType) :
+	 				RecalledMessageID(RecalledMessageID), RecallType(RecallType) {}
 	~MessageRecall() {}
-	string RecalledMessageID;
-	string RecallType;
+
+	std::string RecalledMessageID;
+	std::string RecallType;
 };
 #endif /* MESSAGERECALL_H */

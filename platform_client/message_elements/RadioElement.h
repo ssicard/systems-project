@@ -1,13 +1,17 @@
 #include <string>
-#pragma once
-using namespace std;
-class RadioElement
-{
+
+#ifndef RADIOELEMENT_H
+#define RADIOELEMENT_H
+
+class RadioElement {
 public:
-	RadioElement(int radioElementID);
-	~RadioElement();
-	std::string RadioElementID;
+	RadioElement(int RadioElementID, std::string RadioType, std::string RadioChannel) :
+	 				RadioElementID(RadioElementID), RadioType(RadioType),
+					RadioChannel(RadioChannel) {}
+	~RadioElement() {}
+
+	int RadioElementID;
 	std::string RadioType;
 	std::string RadioChannel;
 };
-
+#endif /* RADIOELEMENT_H */
