@@ -5,11 +5,11 @@
 
 class ContactRoleLookup {
 public:
-	ContactRoleLookup(int ContactRoleID, std::string Description) : ContactRoleID(ContactRoleID),
-						Description(Description) {}
+	ContactRoleLookup(std::string ContactRoleID = "", std::string Description = "") :
+										ContactRoleID(ContactRoleID), Description(Description) {}
 	~ContactRoleLookup() {}
 
-	int ContactRoleID;
+	std::string ContactRoleID;
 	std::string Description;
 };
 #endif /* CONTACTROLELOOKUP_H */

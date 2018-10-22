@@ -5,11 +5,11 @@
 
 class ValueListType {
 public:
-	ValueListType(int ValueListID, std::string ValueListURN, std::string ValueType) :
+	ValueListType(std::string ValueListID = "", std::string ValueListURN = "", std::string ValueType = "") :
 	 				ValueListID(ValueListID), ValueListURN(ValueListURN), ValueType(ValueType) {}
 	~ValueListType() {}
 
-	int ValueListID;
+	std::string ValueListID;
 	std::string ValueListURN;
 	std::string ValueType;
 };

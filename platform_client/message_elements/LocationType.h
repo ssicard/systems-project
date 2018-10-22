@@ -5,12 +5,12 @@
 
 class LocationType {
 public:
-	LocationType(int LocationTypeID, std::string LocationDescription, std::string Address,
-					std::string TargetArea) : LocationTypeID(LocationTypeID), LocationDescription(LocationDescription),
-					Address(Address), TargetArea(TargetArea) {}
+	LocationType(std::string LocationTypeID = "", std::string LocationDescription = "",
+								std::string Address = "", std::string TargetArea = "") : LocationTypeID(LocationTypeID),
+								LocationDescription(LocationDescription),	Address(Address), TargetArea(TargetArea) {}
 	~LocationType() {}
 
-	int LocationTypeID;
+	std::string LocationTypeID;
 	std::string LocationDescription;
 	std::string Address;
 	std::string TargetArea;

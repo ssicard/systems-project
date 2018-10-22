@@ -5,12 +5,11 @@
 
 class RadioElement {
 public:
-	RadioElement(int RadioElementID, std::string RadioType, std::string RadioChannel) :
-	 				RadioElementID(RadioElementID), RadioType(RadioType),
-					RadioChannel(RadioChannel) {}
+	RadioElement(std::string RadioElementID = "", std::string RadioType = "", std::string RadioChannel = "") :
+	 							RadioElementID(RadioElementID), RadioType(RadioType), RadioChannel(RadioChannel) {}
 	~RadioElement() {}
 
-	int RadioElementID;
+	std::string RadioElementID;
 	std::string RadioType;
 	std::string RadioChannel;
 };
