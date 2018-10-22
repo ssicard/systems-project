@@ -221,7 +221,7 @@ std::string TranslationEngine::request_resource_msg_to_xml(RequestResource msg) 
   out.append("<Certifications>" + msg.res_info.res.Certifications + "</Certifications>");
   out.append("<SpecialRequirements>" + msg.res_info.res.SpecialRequirements + "</SpecialRequirements>");
   out.append("</Resource>");
-  out.append("<AssignementInformation>");
+  out.append("<AssignmentInformation>");
   out.append("<Quantity>" + msg.res_info.assign_info.Quantity + "</Quantity>");
   out.append("<Restrictions>" + msg.res_info.assign_info.Restrictions + "</Restrictions>");
   out.append("<AnticipatedFunction>" + msg.res_info.assign_info.AnticipatedFunction + "</AnticipatedFunction>");
@@ -361,7 +361,7 @@ std::string TranslationEngine::response_to_request_resource_msg_to_json(Response
 }
 
 
-int main() {
+int test() {
   const char * msg = "<RequestResource>\n\
   <MessageID>fdfdf-342rwe-23drftg-e999</MessageID>\n\
   <SentDateTime>2323232455</SentDateTime>\n\
@@ -414,3 +414,4 @@ int main() {
   std::cout << te.request_resource_msg_to_json(test) << std::endl;
 
 }
+

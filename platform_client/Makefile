@@ -14,21 +14,31 @@ CFLAGS 	= 	-Wall -I $(CSAPP_INC)
 CXXFLAGS=	-g -std=c++11 -Wall -pedantic
 LDLIBS 	= 	-lpthread
 
+TRANS_INC=	./translation
+TRANS_SRC=	./translation
+TRANS	=	./translation/translation-engine.o
+
 LOG	= 	../logger/logger.cpp
 PUGI	= 	./dependencies/pugixml/pugixml.o
 PUGIXML	= 	./dependencies/pugixml/pugixml.cpp \
 		./dependencies/pugixml/pugixml.hpp \
 		./dependencies/pugixml/pugiconfig.hpp
 
+MSG	=	./message_elements/*
+
+JSON	=	./dependencies/json.hpp
+
 PROGS 	=	system_a_client\
 		system_b_client\
 		system_server\
 
-all:	        $(CSAPP_O) $(LOG) $(PROGS)
+all:	        $(CSAPP_O) $(TRAN_O) $(LOG) $(PROGS)
 
 $(CSAPP_O):     $(shell g++ -c $(CSAPP))
-$(PROGS): 	$(CSAPP) $(PUGI)
+$(TRAN_O):	$(shell g++ -c $(TRANS))
+$(PROGS): 	$(CSAPP) $(PUGI) $(JSON) $(TRANS) $(MSG)
 $(PUGI): 	$(PUGIXML)
+$(TRANS):	$(TRANS_SRC)/translation-engine.cpp $(TRANS_INC)/translation-engine.h
 $(CSAPP): 	$(CSAPP_SRC)/csapp.c $(CSAPP_INC)/csapp.h
 
 clean:
