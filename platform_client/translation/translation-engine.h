@@ -1,7 +1,7 @@
-#include "./dependencies/json.hpp"
-#include "./dependencies/pugixml/pugixml.hpp"
-#include "./message_elements/RequestResource.h"
-#include "./message_elements/ResponseToRequestResource.h"
+#include "../dependencies/json.hpp"
+#include "../dependencies/pugixml/pugixml.hpp"
+#include "../message_elements/RequestResource.h"
+#include "../message_elements/ResponseToRequestResource.h"
 #include <string>
 
 class TranslationEngine {
