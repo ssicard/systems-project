@@ -1,14 +1,18 @@
 #include <string>
-#pragma once
-using namespace std;
+
+#ifndef RESPONSEINFORMATION_H
+#define RESPONSEINFORMATION_H
 class ResponseInformation
 {
 public:
-	ResponseInformation(string precedingResourceInfoElementID);
-	~ResponseInformation();
-	string PrecedingResourceInfoElementID;
-	int ResponseTypeID;
-	int ReasonCodeID;
-	string ResponseReason;
+	ResponseInformation(std::string PrecedingResourceInfoElementID = "", std::string ResponseType = "",
+                            std::string ReasonCode = "", std::string ResponseReason = "") :
+                            PrecedingResourceInfoElementID(PrecedingResourceInfoElementID), ResponseType(ResponseType),
+                            ReasonCode(ReasonCode), ResponseReason(ResponseReason) {}
+	~ResponseInformation() {}
+	std::string PrecedingResourceInfoElementID;
+	std::string ResponseType;
+	std::string ReasonCode;
+	std::string ResponseReason;
 };
-
+#endif /* REPONSEINFORMATION_H */

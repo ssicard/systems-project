@@ -22,6 +22,7 @@ public:
   std::string MessageContentType;
   std::string MessageDescription;
   std::string OriginatingMessageID;
+  std::string PrecedingMessageID;
 
   IncidentInformation inc_info;
   MessageRecall msg_rcl;
@@ -30,3 +31,4 @@ public:
   ContactInformationType contact_info;
 };
 #endif /* REQUESTRESOURCE_H */
+

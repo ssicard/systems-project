@@ -6,8 +6,8 @@ class RadioElement
 public:
 	RadioElement(int radioElementID);
 	~RadioElement();
-	int RadioElementID;
-	string RadioType;
-	string RadioChannel;
+	std::string RadioElementID;
+	std::string RadioType;
+	std::string RadioChannel;
 };
 
