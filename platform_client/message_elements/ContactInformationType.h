@@ -1,21 +1,15 @@
 #include <string>
-
-#ifndef CONTACTINFORMATIONTYPE_H
-#define CONTACTINFORMATIONTYPE_H
-
-class ContactInformationType {
+#pragma once
+using namespace std;
+class ContactInformationType
+{
 public:
-	ContactInformationType(std::string ContactInformationID = "", std::string ContactDescription = "",
-													std::string ContactRole = "", std::string ContactLocationID = "", std::string AdditionalContactInformation = "") :
-													ContactInformationID(ContactInformationID),	ContactDescription(ContactDescription),
-													ContactRole(ContactRole), ContactLocationID(ContactLocationID),
-													AdditionalContactInformation(AdditionalContactInformation) {}
+	ContactInformationType(int ContactInformationID = 0) : ContactInformationID(ContactInformationID) {}
 	~ContactInformationType() {}
-
-	std::string ContactInformationID;
-	std::string ContactDescription;
-	std::string ContactRole;
-	std::string ContactLocationID;
-	std::string AdditionalContactInformation;
+	int ContactInformationID;
+	string ContactDescription;
+	int ContactRole;
+	int ContactLocationID;
+	string AdditionalContactInformation;
 };
-#endif /* CONTACTINFORMATIONTYPE_H */
+

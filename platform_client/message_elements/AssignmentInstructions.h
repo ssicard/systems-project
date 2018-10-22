@@ -5,13 +5,13 @@
 
 class AssignmentInstructions {
 public:
-	AssignmentInstructions(std::string AssignmentInstructionsID = "", std::string ModeOfTransportation = "",
-													std::string NavigationInstructions = "", std::string ReportingInstructions = "") :
-													AssignmentInstructionsID(AssignmentInstructionsID), ModeOfTransportation(ModeOfTransportation),
-													NavigationInstructions(NavigationInstructions), ReportingInstructions(ReportingInstructions) {}
+	AssignmentInstructions(int AssignmentInstructionsID, std::string ModeOfTransportation,
+							std::string NavigationInstructions, std::string ReportingInstructions) :
+							AssignmentInstructionsID(AssignmentInstructionsID), ModeOfTransportation(ModeOfTransportation),
+							NavigationInstructions(NavigationInstructions), ReportingInstructions(ReportingInstructions) {}
 	~AssignmentInstructions() {}
 
-	std::string AssignmentInstructionsID;
+	int AssignmentInstructionsID;
 	std::string ModeOfTransportation;
 	std::string NavigationInstructions;
 	std::string ReportingInstructions;

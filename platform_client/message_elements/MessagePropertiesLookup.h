@@ -5,11 +5,11 @@
 
 class MessagePropertiesLookup {
 public:
-	MessagePropertiesLookup(std::string RequirementType = "", std::string RequirementDesc = "") :
-													RequirementType(RequirementType), RequirementDesc(RequirementDesc) {}
+	MessagePropertiesLookup(int RequirementType, std::string RequirementDesc) :
+							RequirementType(RequirementType), RequirementDesc(RequirementDesc) {}
 	~MessagePropertiesLookup() {}
 
-	std::string RequirementType;
+	int RequirementType;
 	std::string RequirementDesc;
 };
 #endif /* MESSAGEPROPERTIESLOOKUP_H */

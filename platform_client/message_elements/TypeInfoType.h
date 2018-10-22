@@ -5,11 +5,11 @@
 
 class TypeInfoType {
 public:
-	TypeInfoType(std::string TypeInfoID = "", std::string ChildInfo = "") : TypeInfoID(TypeInfoID),
+	TypeInfoType(int TypeInfoID, std::string ChildInfo) : TypeInfoID(TypeInfoID),
 					ChildInfo(ChildInfo) {}
 	~TypeInfoType() {}
 
-	std::string TypeInfoID;
+	int TypeInfoID;
 	std::string ChildInfo;
 };
 #endif /* TYPEINFOTYPE_H */

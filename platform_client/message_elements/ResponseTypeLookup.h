@@ -5,11 +5,11 @@
 
 class ResponseTypeLookup {
 public:
-	ResponseTypeLookup(std::string ResponseTypeID = "", std::string Description = "") :
-											ResponseTypeID(ResponseTypeID), Description(Description) {}
+	ResponseTypeLookup(int ResponseTypeID, std::string Description) : ResponseTypeID(ResponseTypeID),
+						Description(Description) {}
 	~ResponseTypeLookup() {}
 
-	std::string ResponseTypeID;
+	int ResponseTypeID;
 	std::string Description;
 };
 #endif /* RESPONSETYPELOOKUP_H */
