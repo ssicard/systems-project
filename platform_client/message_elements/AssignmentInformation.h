@@ -5,11 +5,11 @@
 class AssignmentInformation
 {
 public:
-	AssignmentInformation(int AssignmentInstructionsID = 0, std::string Quantity = "",
+	AssignmentInformation(int AssignmentInformationID = 0, std::string Quantity = "",
                               std::string Restrictions = "", std::string AnticipatedFunction = "",
                               std::string PriceQuote = "", std::string OrderID = "",
                               std::string AssignmentInstructionID = "") :
-                              AssignmentInstructionsID(AssignmentInstructionsID), Quantity(Quantity),
+                              AssignmentInformationID(AssignmentInformationID), Quantity(Quantity),
                               Restrictions(Restrictions), AnticipatedFunction(AnticipatedFunction),
                               PriceQuote(PriceQuote), OrderID(OrderID),
                               AssignmentInstructionID(AssignmentInstructionID) {}
