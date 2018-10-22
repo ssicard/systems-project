@@ -9,11 +9,11 @@
 #define REQUESTRESOURCE_H
 
 class RequestResource {
-  RequestResource(IncidentInformation inc_info, MessageRecall msg_rcl,
-                  Funding fund, ResourceInformation rsrc_info, ContactInformationType contact_info,
-                  std::string MessageID, std::string SentDateTime = "", std::string MessageContentType = "",
+public:
+  RequestResource(std::string MessageID = "", std::string SentDateTime = "", std::string MessageContentType = "",
                   std::string MessageDescription = "", std::string OriginatingMessageID = ""):
-                  inc_info(inc_info), msg_rcl(msg_rcl), fund(fund), rsrc_info(rsrc_info), contact_info(contact_info) {}
+                  MessageID(std::move(MessageID)), SentDateTime(std::move(SentDateTime)), MessageContentType(std::move(MessageContentType)),
+                  MessageDescription(std::move(MessageDescription)), OriginatingMessageID(std::move(OriginatingMessageID)) {}
 
   ~RequestResource() {}
 
@@ -22,11 +22,13 @@ class RequestResource {
   std::string MessageContentType;
   std::string MessageDescription;
   std::string OriginatingMessageID;
+  std::string PrecedingMessageID;
 
   IncidentInformation inc_info;
   MessageRecall msg_rcl;
   Funding fund;
-  ResourceInformation rsrc_info;
+  ResourceInformation res_info;
   ContactInformationType contact_info;
 };
 #endif /* REQUESTRESOURCE_H */
+

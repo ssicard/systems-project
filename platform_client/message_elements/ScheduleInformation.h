@@ -3,16 +3,14 @@
 #ifndef SCHEDULEINFORMATION_H
 #define SCHEDULEINFORMATION_H
 
-class ScheduleInformation {
+class ScheduleInformation
+{
 public:
-	ScheduleInformation(int ScheduleInformationID, std::string ScheduleType, int DateTime,
-						int LocationTypeID) : ScheduleInformationID(ScheduleInformationID),
-						ScheduleType(ScheduleType), DateTime(DateTime), LocationTypeID(LocationTypeID) {}
+	ScheduleInformation(std::string ScheduleType = "", std::string DateTime = "", std::string Location = "") :
+                            ScheduleType(ScheduleType), DateTime(DateTime), Location(Location) {}
 	~ScheduleInformation() {}
-
-	int ScheduleInformationID;
 	std::string ScheduleType;
-	int DateTime;
-	int LocationTypeID;
+	std::string DateTime;
+        std::string Location;
 };
 #endif /* SCHEDULEINFORMATION_H */

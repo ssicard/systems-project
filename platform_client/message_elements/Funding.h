@@ -5,10 +5,10 @@
 
 class Funding {
 public:
-	Funding(std::string FundCode, std::string FundingInfo="") : FundCode(FundCode), FundingInfo(FundingInfo) {}
+	Funding(std::string FundCode = "", std::string FundingInfo="") : FundCode(FundCode), FundingInfo(FundingInfo) {}
 	~Funding() {}
-
 	std::string FundCode;
 	std::string FundingInfo;
 };
+
 #endif /* FUNDING_H */

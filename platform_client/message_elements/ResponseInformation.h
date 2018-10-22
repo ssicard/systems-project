@@ -2,19 +2,17 @@
 
 #ifndef RESPONSEINFORMATION_H
 #define RESPONSEINFORMATION_H
-
-class ResponseInformation {
+class ResponseInformation
+{
 public:
-	ResponseInformation(std::string PrecedingResourceInfoElementID, int ResponseTypeID,
-						int ReasonCodeID, std::string ResponseReason) :
-						PrecedingResourceInfoElementID(PrecedingResourceInfoElementID),
-						ResponseTypeID(ResponseTypeID), ReasonCodeID(ReasonCodeID),
-						ResponseReason(ResponseReason) {}
+	ResponseInformation(std::string PrecedingResourceInfoElementID = "", std::string ResponseType = "",
+                            std::string ReasonCode = "", std::string ResponseReason = "") :
+                            PrecedingResourceInfoElementID(PrecedingResourceInfoElementID), ResponseType(ResponseType),
+                            ReasonCode(ReasonCode), ResponseReason(ResponseReason) {}
 	~ResponseInformation() {}
-
 	std::string PrecedingResourceInfoElementID;
-	int ResponseTypeID;
-	int ReasonCodeID;
+	std::string ResponseType;
+	std::string ReasonCode;
 	std::string ResponseReason;
 };
-#endif /* RESPONSEINFORMATION_H */
+#endif /* REPONSEINFORMATION_H */
