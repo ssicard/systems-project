@@ -49,31 +49,25 @@ void ResourceInformation::getFromDatabase(){
 		delete stmt;
 		delete prep_stmt;
 		delete con;
+
 		if(this->AssignmentInformationID != -1){
-			this->_AssignmentInformation = *(new AssignmentInformation(this->AssignmentInformationID));
-			//todo link
-			//this->_AssignmentInformation.getFromDatabase();
+			this->_AssignmentInformation = this->AssignmentInformationID;
 			this->_AssignmentInformation.getFromDatabase();
-			
 		}
+
 		if(this->ResponseInformationID != ""){
-			this->_ResponseInformation = *(new ResponseInformation(this->ResponseInformationID));
+			this->_ResponseInformation = this->ResponseInformationID;
 			this->_ResponseInformation.getFromDatabase();
-			
 		}
 
 		if(this->ResourceID != ""){
-			this->_Resource = *(new Resource(this->ResourceID));
-			//todo link
-			//this->_Resource.getFromDatabase();
+			this->_Resource = this->ResourceID;
 			this->_Resource.getFromDatabase();
-			
 		}
 
 		if(this->ScheduleInformationID != -1){
-			this->_ScheduleInformation = *(new ScheduleInformation(this->ScheduleInformationID));
-			this->_ScheduleInformation.getFromDatabase();
-			
+			this->_ScheduleInformation = this->ScheduleInformationID;
+			this->_ScheduleInformation.getFromDatabase();			
 		}
 
 	} catch (sql::SQLException &e) {
@@ -88,22 +82,27 @@ void ResourceInformation::getFromDatabase(){
 }
 
 void ResourceInformation::insertIntoDatabase(){
-	/*
+	
 	if(this->AssignmentInformationID != -1){
-		//todo link
-		//this->_AssignmentInformation.insertIntoDatabase();
+		this->_AssignmentInformation.AssignmentInformationID = this->AssignmentInformationID;
+		this->_AssignmentInformation.insertIntoDatabase();
 	}
-		if(this->ResponseInformationID != ""){
+	
+	if(this->ResponseInformationID != ""){
+		this->_ResponseInformation.PrecedingResourceInfoElementID = this->ResponseInformationID;
 		this->_ResponseInformation.insertIntoDatabase();
 	}
-		if(this->ScheduleInformationID != -1){
+	
+	if(this->ScheduleInformationID != -1){
+		this->_ScheduleInformation.ScheduleInformationID = this->ScheduleInformationID;
 		this->_ScheduleInformation.insertIntoDatabase();
 	}
-		if(this->ResourceID != ""){
-			//todo link
-		//this->_Resource.insertIntoDatabase();
+		
+	if(this->ResourceID != ""){
+		this->_Resource.ResourceID = this->ResourceID;
+		this->_Resource.insertIntoDatabase();
 	}
-	*/
+	
 
 	try {
 		

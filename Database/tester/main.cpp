@@ -331,7 +331,7 @@ int main() {
 	r.Description = "";
 	r.Credentials = "";
 	r.Certifications = "";
-	r.SpecialRequirements;
+	r.SpecialRequirements = "";
 	r.ResponsiblePartyID = 0;
 	r.OwnershipInformationID = 0;
 	r.ResourceStatusID = 0;
@@ -386,7 +386,7 @@ int main() {
 	std::cout << "Reaponse Type Description: " << resi._ResponseType.Description << std::endl;
 	*/	
 
-	/*
+	
 	ResourceInformation ri{"Resource information test"};
 	ri.ResponseInformationID = "Resource information test";
 	ri.ResourceID = "Resource test id";
@@ -410,7 +410,7 @@ int main() {
 	std::cout << "Assignment Order ID: " << ri._AssignmentInformation.OrderID << std::endl;
 	std::cout << "Schedule informatioe Type: " << ri._ScheduleInformation.ScheduleType << std::endl;
 	std::cout << "Schedule location: " << ri._ScheduleInformation._Location.Address << std::endl;	
-	*/
+	
 
 	/*
 	ResourceMessage rm{"messageID"};
