@@ -285,7 +285,7 @@ int main() {
 	std::cout << "ValueType: " << vlt.ValueType << std::endl;
 	*/
 
-	/*
+	
 	ResourceStatus rs{1};
 	rs.InventoryRefreshDateTime = "2018/10/20 12:00:00";
 	rs.DeploymentStatus = 1;
@@ -295,7 +295,7 @@ int main() {
 	rs.insertIntoDatabase();
 
 	rs.InventoryRefreshDateTime = "";
-	rs.DeploymentStatus = 0;
+	rs.DeploymentStatus = 1;
 	rs.Availability = "";
 	rs.HomeUnit = "";
 
@@ -305,7 +305,8 @@ int main() {
 	std::cout << "DeploymentStatus: " << rs.DeploymentStatus << std::endl;
 	std::cout << "Availability: " << rs.Availability << std::endl;
 	std::cout << "HomeUnit: " << rs.HomeUnit << std::endl;
-	*/
+
+	std::cout << "Deployment status value list URN: " << rs._DeploymentStatus.ValueListURN << std::endl;
 
 	/*
 	Resource r{"Resource test id"};
@@ -366,7 +367,7 @@ int main() {
 	std::cout << "Description: " << rtl.Description << std::endl;
 	*/
 
-	
+	/*	
 	ResponseInformation resi{"Resource information test"};
 	resi.ResponseTypeID = 1;
 	resi.ReasonCodeID = 1;
@@ -383,7 +384,7 @@ int main() {
 	std::cout << "Reaponse reason: " << resi.ResponseReason << std::endl;
 	std::cout << "Reason Code valueListURN: " << resi._ReasonCode.ValueListURN << std::endl;
 	std::cout << "Reaponse Type Description: " << resi._ResponseType.Description << std::endl;
-	
+	*/	
 
 	/*
 	ResourceInformation ri{"Resource information test"};

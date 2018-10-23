@@ -65,6 +65,10 @@ void ResourceStatus::getFromDatabase() {
 }
 
 void ResourceStatus::insertIntoDatabase() {
+	if (this->DeploymentStatus != -1) {
+		this->_DeploymentStatus.ValueListID = this->DeploymentStatus;
+		this->_DeploymentStatus.insertIntoDatabase();
+	}
 
 	try {
 		sql::Connection *con;
