@@ -7,6 +7,7 @@
 class ResponseTypeLookup : public SqlBase
 {
 public:
+	ResponseTypeLookup();
 	ResponseTypeLookup(int responseTypeID);
 	~ResponseTypeLookup();
 	void getFromDatabase();

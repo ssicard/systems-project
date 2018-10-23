@@ -1,5 +1,9 @@
 #include "ResponseTypeLookup.h"
 
+ResponseTypeLookup::ResponseTypeLookup() {
+	this->ResponseTypeID = -1;
+}
+
 ResponseTypeLookup::ResponseTypeLookup(int responseTypeID)
 {
 	this->ResponseTypeID = responseTypeID;
