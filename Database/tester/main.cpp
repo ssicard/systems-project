@@ -285,7 +285,7 @@ int main() {
 	std::cout << "ValueType: " << vlt.ValueType << std::endl;
 	*/
 
-	
+	/*	
 	ResourceStatus rs{1};
 	rs.InventoryRefreshDateTime = "2018/10/20 12:00:00";
 	rs.DeploymentStatus = 1;
@@ -305,10 +305,10 @@ int main() {
 	std::cout << "DeploymentStatus: " << rs.DeploymentStatus << std::endl;
 	std::cout << "Availability: " << rs.Availability << std::endl;
 	std::cout << "HomeUnit: " << rs.HomeUnit << std::endl;
-
 	std::cout << "Deployment status value list URN: " << rs._DeploymentStatus.ValueListURN << std::endl;
+	*/
 
-	/*
+	
 	Resource r{"Resource test id"};
 	r.NAME = "Test name";
 	r.TypeStructureID = 1;
@@ -347,12 +347,12 @@ int main() {
 	std::cout << "TypeInfo ChildInfo: " << r._TypeInfo.ChildInfo << std::endl;
 	std::cout << "Keyword valueListURN: " << r._Keyword.ValueListURN << std::endl;
 	std::cout << "Responsible Party Contact Description: " << r._ResponsibleParty.ContactDescription << std::endl;
-	std::cout << "ResponsibleParty.ContactRole.Description: " << r._ResponsibleParty.contactRoleLookup.Description << std::endl;
-	std::cout << "ResponsibleParty.ContactLocation.Address: " << r._ResponsibleParty.contactLocation.Address << std::endl;
+	std::cout << "ResponsibleParty.ContactRole.Description: " << r._ResponsibleParty._ContactRoleLookup.Description << std::endl;
+	std::cout << "ResponsibleParty.ContactLocation.Address: " << r._ResponsibleParty._ContactLocation.Address << std::endl;
 	std::cout << "OwnershipInformation.Owner: " << r._OwnershipInformation.Owner << std::endl;
 	std::cout << "ResourceStatus.Availability: " << r._ResourceStatus.Availability << std::endl;
 	std::cout << "ResourceStatus._DeploymentStatys.ValueListURN: " << r._ResourceStatus._DeploymentStatus.ValueListURN << std::endl;
-	*/
+	
 
 	/*
 	ResponseTypeLookup rtl{1};

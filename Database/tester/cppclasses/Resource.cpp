@@ -86,7 +86,37 @@ try {
 
 void Resource::insertIntoDatabase() {
 
-try {
+	if (this->TypeStructureID != -1) {
+		this->_TypeStructure.ValueListID = this->TypeStructureID;
+		this->_TypeStructure.insertIntoDatabase();
+	}
+
+	if (this->TypeInfoID != -1) {
+		this->_TypeInfo.TypeInfoID = this->TypeInfoID;
+		this->_TypeInfo.insertIntoDatabase();
+	}
+
+	if (this->KeywordID != -1) {
+		this->_Keyword.ValueListID = this->KeywordID;
+		this->_Keyword.insertIntoDatabase();
+	}
+
+	if (this->ResponsiblePartyID != -1) {
+		this->_ResponsibleParty.ContactInformationID = this->ResponsiblePartyID;
+		this->_ResponsibleParty.insertIntoDatabase();
+	}
+
+	if (this->OwnershipInformationID != -1) {
+		this->_OwnershipInformation.OwnershipInformationID = this->OwnershipInformationID;
+		this->_OwnershipInformation.insertIntoDatabase();
+	}
+
+	if (this->ResourceStatusID != -1) {
+		this->_ResourceStatus.ResourceStatusID = this->ResourceStatusID;
+		this->_ResourceStatus.insertIntoDatabase();
+	}
+
+	try {
 			sql::Connection *con;
 			sql::PreparedStatement *prep_stmt;
 			sql::mysql::MySQL_Driver *driver;
