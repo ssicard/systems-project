@@ -53,8 +53,8 @@ int main() {
 	*/
 
 	
-	/*
-	AssignmentInformation* a = new AssignmentInformation(1);
+
+	AssignmentInformation* a = new AssignmentInformation(2);
 	a->Quantity = "1";
 	a->Restrictions = "restrictions string";
 	a->AnticipatedFunction = "anticipated function string";
@@ -70,8 +70,8 @@ int main() {
 	a->getFromDatabase();
 	std::cout << "OrderID: " << a->OrderID << std::endl;
 	std::cout << "Quantity: " << a->Quantity << std::endl;
-	std::cout << "Assignment Instructions ModeOfTransportation: " << a->assignmentInstructions.ModeOfTransportation << std::endl;
-	*/
+	std::cout << "Assignment Instructions ModeOfTransportation: " << a->_AssignmentInstructions.ModeOfTransportation << std::endl;
+	
 
 	/*
 	

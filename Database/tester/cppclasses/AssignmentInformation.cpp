@@ -45,9 +45,9 @@ void AssignmentInformation::getFromDatabase() {
 			this->AssignmentInstructionsID = res->getInt("AssignmentInstructionsID");
 		}
 
-		this->assignmentInstructions.AssignmentInstructionsID = this->AssignmentInstructionsID;
+		this->_AssignmentInstructions.AssignmentInstructionsID = this->AssignmentInstructionsID;
 
-		this->assignmentInstructions.getFromDatabase();
+		this->_AssignmentInstructions.getFromDatabase();
 
 		delete res;
 		delete stmt;
@@ -86,6 +86,10 @@ void AssignmentInformation::insertIntoDatabase() {
 		prep_stmt->setString(6, this->OrderID);
 		prep_stmt->setInt(7, this->AssignmentInstructionsID);
 
+		if (this->AssignmentInstructionsID != -1) {
+			this->_AssignmentInstructions.AssignmentInstructionsID = this->AssignmentInstructionsID;
+			this->_AssignmentInstructions.insertIntoDatabase();
+		}
 
 		prep_stmt->execute();
 
