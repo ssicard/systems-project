@@ -53,7 +53,7 @@ int main() {
 	*/
 
 	
-
+	/*
 	AssignmentInformation* a = new AssignmentInformation(2);
 	a->Quantity = "1";
 	a->Restrictions = "restrictions string";
@@ -71,7 +71,7 @@ int main() {
 	std::cout << "OrderID: " << a->OrderID << std::endl;
 	std::cout << "Quantity: " << a->Quantity << std::endl;
 	std::cout << "Assignment Instructions ModeOfTransportation: " << a->_AssignmentInstructions.ModeOfTransportation << std::endl;
-	
+	*/
 
 	/*
 	
@@ -238,7 +238,7 @@ int main() {
 	std::cout << "RadioChannel: " << re.RadioChannel << std::endl;
 	*/
 
-	/*
+	
 	ScheduleInformation si{1};
 	si.ScheduleType = "Schedule type test";
 	si.DateTime = "2018/10/20 12:00:00";
@@ -255,7 +255,7 @@ int main() {
 	std::cout << "Schedule Type: " << si.ScheduleType << std::endl;
 	std::cout << "DateTime: " << si.DateTime << std::endl;
 	std::cout << "LocationDescription: " << si._Location.LocationDescription << std::endl;
-	*/
+	
 
 	/*
 	TypeInfoType tit{1};

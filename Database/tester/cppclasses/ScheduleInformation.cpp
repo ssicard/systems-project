@@ -39,14 +39,15 @@ void ScheduleInformation::getFromDatabase(){
 			this->ScheduleType = res->getString("ScheduleType");
 			this->DateTime = res->getString("DateTime");
 			this->LocationTypeID = res->getInt("LocationTypeID");
-
 		}
+
 		delete res;
 		delete stmt;
 		delete prep_stmt;
 		delete con;
+		
 		if(this->LocationTypeID != -1){
-			this->_Location = *(new LocationType(this->LocationTypeID));
+			this->_Location.LocationTypeID = this->LocationTypeID;
 			this->_Location.getFromDatabase();
 			
 		}
@@ -88,6 +89,11 @@ void ScheduleInformation::insertIntoDatabase(){
 		prep_stmt->setInt(4, this->LocationTypeID);
 
 		prep_stmt->execute();
+
+		if (this->LocationTypeID != -1) {
+			this->_Location.LocationTypeID = this->LocationTypeID;
+			this->_Location.insertIntoDatabase();
+		}
 
 		delete stmt;
 		delete prep_stmt;
