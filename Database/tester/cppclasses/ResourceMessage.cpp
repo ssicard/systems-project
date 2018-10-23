@@ -82,6 +82,30 @@ void ResourceMessage::getFromDatabase() {
 }
 
 void ResourceMessage::insertIntoDatabase() {
+		if (this->IncidentID != "") {
+			this->_IncidentInformation.IncidentID = this->IncidentID;
+			this->_IncidentInformation.insertIntoDatabase();
+		}
+
+		if (this->RecalledMessageID != "") {
+			this->_MessageRecall.RecalledMessageID = this->RecalledMessageID;
+			this->_MessageRecall.insertIntoDatabase();
+		}
+
+		if (this->FundCode != "") {
+			this->_Funding.FundCode = this->FundCode;
+			this->_Funding.insertIntoDatabase();
+		}
+
+		if (this->ContactInformationID != -1) {
+			this->_ContactInformationType.ContactInformationID = this->ContactInformationID;
+			this->_ContactInformationType.insertIntoDatabase();
+		}
+
+		if (this->ResourceInfoElementID != "") {
+			this->_ResourceInformation.ResourceInfoElementID = this->ResourceInfoElementID;
+			this->_ResourceInformation.insertIntoDatabase();
+		}
 
 	try {
 		

@@ -308,7 +308,7 @@ int main() {
 	std::cout << "Deployment status value list URN: " << rs._DeploymentStatus.ValueListURN << std::endl;
 	*/
 
-	
+	/*	
 	Resource r{"Resource test id"};
 	r.NAME = "Test name";
 	r.TypeStructureID = 1;
@@ -352,7 +352,7 @@ int main() {
 	std::cout << "OwnershipInformation.Owner: " << r._OwnershipInformation.Owner << std::endl;
 	std::cout << "ResourceStatus.Availability: " << r._ResourceStatus.Availability << std::endl;
 	std::cout << "ResourceStatus._DeploymentStatys.ValueListURN: " << r._ResourceStatus._DeploymentStatus.ValueListURN << std::endl;
-	
+	*/	
 
 	/*
 	ResponseTypeLookup rtl{1};
@@ -386,7 +386,7 @@ int main() {
 	std::cout << "Reaponse Type Description: " << resi._ResponseType.Description << std::endl;
 	*/	
 
-	
+	/*	
 	ResourceInformation ri{"Resource information test"};
 	ri.ResponseInformationID = "Resource information test";
 	ri.ResourceID = "Resource test id";
@@ -410,9 +410,9 @@ int main() {
 	std::cout << "Assignment Order ID: " << ri._AssignmentInformation.OrderID << std::endl;
 	std::cout << "Schedule informatioe Type: " << ri._ScheduleInformation.ScheduleType << std::endl;
 	std::cout << "Schedule location: " << ri._ScheduleInformation._Location.Address << std::endl;	
-	
+	*/	
 
-	/*
+	
 	ResourceMessage rm{"messageID"};
 	rm.SentDateTime = "2018/10/20 12:00:00";
 	rm.MessageContentType = "Test message content type";
@@ -448,7 +448,7 @@ int main() {
 	std::cout << "Funding Info: " << rm._Funding.FundingInfo << std::endl;
 	std::cout << "Contact Description: " << rm._ContactInformationType.ContactDescription << std::endl;
 	std::cout << "Resource name: " << rm._ResourceInformation._Resource.NAME << std::endl;
-	*/
+	
 
 	return EXIT_SUCCESS;
 }
