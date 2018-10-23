@@ -23,7 +23,7 @@ public:
 	std::string ResponseReason;
 
 	ValueListType _ReasonCode;
-	ResponseTypeLookup _ResponseType{ResponseTypeID};
+	ResponseTypeLookup _ResponseType;
 };
 
 #endif

@@ -129,7 +129,7 @@ int main() {
 	std::cout << "Target Area: " << l.TargetArea << std::endl;
 	*/
 
-	
+	/*	
 	ContactInformationType cit{2};
 	cit.ContactDescription = "This is a test description";
 	cit.ContactRole = 10;
@@ -151,7 +151,7 @@ int main() {
 	std::cout << "AdditionalContactInformation: " << cit.AdditionalContactInformation << std::endl;
 	std::cout << "CIT.ContactRole Description: " << cit._ContactRoleLookup.Description << std::endl;
 	std::cout << "CIT.Location Description: " << cit._ContactLocation.LocationDescription << std::endl;
-	
+	*/
 
 	/*	
 	MessagePropertiesLookup mpl{4};
@@ -366,7 +366,7 @@ int main() {
 	std::cout << "Description: " << rtl.Description << std::endl;
 	*/
 
-	/*
+	
 	ResponseInformation resi{"Resource information test"};
 	resi.ResponseTypeID = 1;
 	resi.ReasonCodeID = 1;
@@ -383,7 +383,7 @@ int main() {
 	std::cout << "Reaponse reason: " << resi.ResponseReason << std::endl;
 	std::cout << "Reason Code valueListURN: " << resi._ReasonCode.ValueListURN << std::endl;
 	std::cout << "Reaponse Type Description: " << resi._ResponseType.Description << std::endl;
-	*/
+	
 
 	/*
 	ResourceInformation ri{"Resource information test"};

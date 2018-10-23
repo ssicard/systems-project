@@ -8,7 +8,7 @@ ResponseInformation::ResponseInformation(std::string precedingResourceInfoElemen
 
 ResponseInformation::ResponseInformation()
 {
-	this->PrecedingResourceInfoElementID = -1;
+	this->PrecedingResourceInfoElementID = "";
 }
 
 
@@ -51,7 +51,7 @@ void ResponseInformation::getFromDatabase(){
 		delete prep_stmt;
 		delete con;
 		if(this->ReasonCodeID != -1){
-			this->_ReasonCode = *(new ValueListType(this->ReasonCodeID));
+			this->_ReasonCode = this->ReasonCodeID;
 			this->_ReasonCode.getFromDatabase();
 			
 		}
@@ -74,8 +74,14 @@ void ResponseInformation::getFromDatabase(){
 
 void ResponseInformation::insertIntoDatabase(){
 
-		if(this->ReasonCodeID != -1){
+	if(this->ReasonCodeID != -1){
+		this->_ReasonCode.ValueListID = this->ReasonCodeID;
 		this->_ReasonCode.insertIntoDatabase();
+	}
+
+	if(this->ResponseTypeID != -1) {
+		this->_ResponseType.ResponseTypeID = this->ResponseTypeID;
+		this->_ResponseType.insertIntoDatabase();
 	}
 
 	try {
