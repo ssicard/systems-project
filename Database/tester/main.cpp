@@ -166,7 +166,7 @@ int main() {
 	std::cout << "RequirementDesc: " << mpl.RequirementDesc << std::endl;
 	*/
 	
-	/*
+	
 	MessageProperties mp{17, "Request Resource (Test)"};
 	mp.Location = 2;
 	mp.DateTime = 2;
@@ -186,7 +186,7 @@ int main() {
 	std::cout << "DateTime: " << mp.DateTime << std::endl;
 
 	std::cout << "RequirementDesc: " << mp.messagePropertiesLookup.RequirementDesc << std::endl;
-	*/
+	
 
 	/*
 	MessageRecall mr{"Recalled ID test"};
@@ -412,7 +412,7 @@ int main() {
 	std::cout << "Schedule location: " << ri._ScheduleInformation._Location.Address << std::endl;	
 	*/	
 
-	
+	/*	
 	ResourceMessage rm{"messageID"};
 	rm.SentDateTime = "2018/10/20 12:00:00";
 	rm.MessageContentType = "Test message content type";
@@ -448,7 +448,7 @@ int main() {
 	std::cout << "Funding Info: " << rm._Funding.FundingInfo << std::endl;
 	std::cout << "Contact Description: " << rm._ContactInformationType.ContactDescription << std::endl;
 	std::cout << "Resource name: " << rm._ResourceInformation._Resource.NAME << std::endl;
-	
+	*/	
 
 	return EXIT_SUCCESS;
 }

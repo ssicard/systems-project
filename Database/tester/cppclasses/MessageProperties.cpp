@@ -122,6 +122,10 @@ try {
 }
 
 void MessageProperties::insertIntoDatabase() {
+	if (this->MessagePropertyLookupID != -1) {
+		this->messagePropertiesLookup.RequirementType = this->MessagePropertyLookupID;
+		this->messagePropertiesLookup.insertIntoDatabase();
+	}
 try {
 			sql::Connection *con;
 			sql::PreparedStatement *prep_stmt;
