@@ -45,11 +45,11 @@ void ContactInformationType::getFromDatabase() {
 				this->AdditionalContactInformation = res->getString("AdditionalContactInformation");
 			}
 
-			this->contactRoleLookup.ContactRoleID = this->ContactRole;
-			this->contactLocation.LocationTypeID = this->ContactLocationID;
+			this->_ContactRoleLookup.ContactRoleID = this->ContactRole;
+			this->_ContactLocation.LocationTypeID = this->ContactLocationID;
 
-			this->contactRoleLookup.getFromDatabase();
-			this->contactLocation.getFromDatabase();
+			this->_ContactRoleLookup.getFromDatabase();
+			this->_ContactLocation.getFromDatabase();
 
 			delete res;
 			delete stmt;
@@ -68,6 +68,16 @@ void ContactInformationType::getFromDatabase() {
 }
 
 void ContactInformationType::insertIntoDatabase() {
+	if (this->ContactRole != -1) {
+		this->_ContactRoleLookup.ContactRoleID = this->ContactRole;
+		this->_ContactRoleLookup.insertIntoDatabase();
+	}
+
+	if (this->ContactLocationID != -1) {
+		this->_ContactLocation.LocationTypeID = this->ContactLocationID;
+		this->_ContactLocation.insertIntoDatabase();
+	}
+
 
 	try {
 			sql::Connection *con;

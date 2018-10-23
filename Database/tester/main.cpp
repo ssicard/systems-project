@@ -129,8 +129,8 @@ int main() {
 	std::cout << "Target Area: " << l.TargetArea << std::endl;
 	*/
 
-	/*
-	ContactInformationType cit{1};
+	
+	ContactInformationType cit{2};
 	cit.ContactDescription = "This is a test description";
 	cit.ContactRole = 10;
 	cit.ContactLocationID = 1;
@@ -149,9 +149,9 @@ int main() {
 	std::cout << "Contact Role: " << cit.ContactRole << std::endl;
 	std::cout << "ContactLocationID: " << cit.ContactLocationID << std::endl;
 	std::cout << "AdditionalContactInformation: " << cit.AdditionalContactInformation << std::endl;
-	std::cout << "CIT.ContactRole Description: " << cit.contactRoleLookup.Description << std::endl;
-	std::cout << "CIT.Location Description: " << cit.contactLocation.LocationDescription << std::endl;
-	*/
+	std::cout << "CIT.ContactRole Description: " << cit._ContactRoleLookup.Description << std::endl;
+	std::cout << "CIT.Location Description: " << cit._ContactLocation.LocationDescription << std::endl;
+	
 
 	/*	
 	MessagePropertiesLookup mpl{4};
@@ -238,7 +238,7 @@ int main() {
 	std::cout << "RadioChannel: " << re.RadioChannel << std::endl;
 	*/
 
-	
+	/*	
 	ScheduleInformation si{1};
 	si.ScheduleType = "Schedule type test";
 	si.DateTime = "2018/10/20 12:00:00";
@@ -255,7 +255,7 @@ int main() {
 	std::cout << "Schedule Type: " << si.ScheduleType << std::endl;
 	std::cout << "DateTime: " << si.DateTime << std::endl;
 	std::cout << "LocationDescription: " << si._Location.LocationDescription << std::endl;
-	
+	*/
 
 	/*
 	TypeInfoType tit{1};

@@ -21,8 +21,8 @@ public:
     void getFromDatabase();
     void insertIntoDatabase();
 	bool areFieldsValid();  
-	ContactRoleLookup contactRoleLookup{ContactRole};
-	LocationType contactLocation{ContactLocationID};
+	ContactRoleLookup _ContactRoleLookup;
+	LocationType _ContactLocation;
 };
 
 #endif

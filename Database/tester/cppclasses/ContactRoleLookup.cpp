@@ -1,5 +1,8 @@
 #include "ContactRoleLookup.h"
 
+ContactRoleLookup::ContactRoleLookup() {
+	this->ContactRoleID = -1;
+}
 
 ContactRoleLookup::ContactRoleLookup(int contactRoleID)
 {

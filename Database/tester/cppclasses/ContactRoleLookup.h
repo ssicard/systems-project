@@ -7,6 +7,7 @@
 class ContactRoleLookup : public SqlBase
 {
 public:
+	ContactRoleLookup();
 	ContactRoleLookup(int contactRoleID);
 	~ContactRoleLookup();
 	void getFromDatabase();
