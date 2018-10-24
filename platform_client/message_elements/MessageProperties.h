@@ -1,5 +1,6 @@
 #include <string>
-#pragma once
+#ifndef MESSAGEPROPERTIES_H
+#define MESSAGEPROPERTIES_H
 using namespace std;
 class MessageProperties
 {
@@ -64,4 +65,4 @@ public:
 	int Location = 0;
 	int MessagePropertyLookupID = 0;
 };
-
+#endif
