@@ -1,13 +1,17 @@
 #include <string>
+#include "SqlBase.h"
 
 #ifndef MESSAGEPROPERTIESLOOKUP_H
 #define MESSAGEPROPERTIESLOOKUP_H
 
-class MessagePropertiesLookup {
+class MessagePropertiesLookup : public SqlBase {
 public:
-	MessagePropertiesLookup(int RequirementType, std::string RequirementDesc) :
+	MessagePropertiesLookup(int RequirementType = -1, std::string RequirementDesc = "") :
 							RequirementType(RequirementType), RequirementDesc(RequirementDesc) {}
 	~MessagePropertiesLookup() {}
+	void getFromDatabase();
+    void insertIntoDatabase();
+    bool areFieldsValid();
 
 	int RequirementType;
 	std::string RequirementDesc;

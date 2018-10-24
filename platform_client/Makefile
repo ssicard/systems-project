@@ -12,7 +12,7 @@ CFLAGS 	= 	-Wall -I $(CSAPP_INC)
 
 #C++ Compiler flags
 CXXFLAGS=	-g -std=c++11 -Wall -pedantic
-LDLIBS 	= 	-lpthread
+LDLIBS 	= 	-lpthread -lmysqlcppconn
 
 TRANS_INC=	./translation
 TRANS_SRC=	./translation

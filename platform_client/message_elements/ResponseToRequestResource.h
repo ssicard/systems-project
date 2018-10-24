@@ -29,7 +29,7 @@ public:
   MessageRecall msg_rcl;
   Funding fund;
   ResourceInformation res_info;
-  ResponseInformation response_info;
+  platform::ResponseInformation response_info;
   ContactInformationType contact_info;
 };
 

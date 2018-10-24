@@ -147,6 +147,24 @@ void communication(pool *p) {
             if(tmp_std_str.find("RequestResource") != std::string::npos) {
               RequestResource request = t_engine.json_to_request_resource_msg("", tmp);
               std::string out = t_engine.request_resource_msg_to_xml(request) + "\n";
+
+			  // save to datbase
+			  std::cout << request.MessageID << std::endl;
+			  std::cout << request.SentDateTime << std::endl;
+			  std::cout << request.inc_info.IncidentID << std::endl;
+
+			  request.res_info._AssignmentInformation = request.res_info.assign_info;
+			  request.res_info._ScheduleInformation = request.res_info.sched_info;
+			  request.res_info._ScheduleInformation.LocationTypeID = 1;
+			  request.res_info._ScheduleInformation._Location.LocationTypeID = 1;
+			  request.res_info._ScheduleInformation._Location.LocationDescription = request.res_info._ScheduleInformation.Location;
+
+			  request.inc_info.insertIntoDatabase();
+			  request.msg_rcl.insertIntoDatabase();
+			  request.fund.insertIntoDatabase();
+			  request.res_info.insertIntoDatabase();
+			  request.contact_info.insertIntoDatabase();
+
               //strcpy(tmp_xml, out.c_str());
               stringstream logMessageIn;
               logMessageIn << "[RequestResource Message]"<<tmp;
