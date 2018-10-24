@@ -15,7 +15,7 @@
 
 // TODO: Remove this
 // hacky way for multiple messages to save to db and not all use same location id
-//static int id_count = 1;
+static int id_count = 1;
 
 typedef struct { /* Represents a pool of connected descriptors */ 
   int maxfd;        /* Largest descriptor in read_set */   
@@ -143,7 +143,7 @@ void communication(pool *p) {
               stringstream logMessage;
 
               //log that a message was received by file descriptor connfd
-              logMessage << "Received " << n << "( " << json_byte_cnt << " total ) bytes by a json client with fd ["<<connfd<<"]";
+              logMessage << "Received " << n << "( " << json_byte_cnt << " total ) bytes by a json client with fd ["<<connfd<<"]\n";
               cout << logMessage.str();
               l.log(Logger::LogLevel::INFO, logMessage.str());
               handle_json_client(tmp, connfd);
@@ -158,14 +158,11 @@ void communication(pool *p) {
 				// when db needs them to be ints and vice versa. 
 				// Too lazy to do parsing so just added the fields to the classes
 				// with the right type and have the sql code just pulling from those
-			    std::cout << request.MessageID << std::endl;
-			    std::cout << request.SentDateTime << std::endl;
-			    std::cout << request.inc_info.IncidentID << std::endl;
-
 			    request.res_info._AssignmentInformation = request.res_info.assign_info;
 			    request.res_info._ScheduleInformation = request.res_info.sched_info;
-			    request.res_info._ScheduleInformation.LocationTypeID = 1;
-			    request.res_info._ScheduleInformation._Location.LocationTypeID = 1;
+				int id = id_count++;
+			    request.res_info._ScheduleInformation.LocationTypeID = id;
+			    request.res_info._ScheduleInformation._Location.LocationTypeID = id;
 			    request.res_info._ScheduleInformation._Location.LocationDescription = request.res_info._ScheduleInformation.Location;
 
 			    request.inc_info.insertIntoDatabase();
@@ -211,14 +208,11 @@ void communication(pool *p) {
 				// when db needs them to be ints and vice versa. 
 				// Too lazy to do parsing so just added the fields to the classes
 				// with the right type and have the sql code just pulling from those
-			    std::cout << request.MessageID << std::endl;
-			    std::cout << request.SentDateTime << std::endl;
-			    std::cout << request.inc_info.IncidentID << std::endl;
-
 			    request.res_info._AssignmentInformation = request.res_info.assign_info;
 			    request.res_info._ScheduleInformation = request.res_info.sched_info;
-			    request.res_info._ScheduleInformation.LocationTypeID = 1;
-			    request.res_info._ScheduleInformation._Location.LocationTypeID = 1;
+				int id = id_count++;
+			    request.res_info._ScheduleInformation.LocationTypeID = id;
+			    request.res_info._ScheduleInformation._Location.LocationTypeID = id;
 			    request.res_info._ScheduleInformation._Location.LocationDescription = request.res_info._ScheduleInformation.Location;
 
 			    request.inc_info.insertIntoDatabase();
