@@ -13,6 +13,10 @@
 #include <algorithm>
 #include <map>
 
+// TODO: Remove this
+// hacky way for multiple messages to save to db and not all use same location id
+//static int id_count = 1;
+
 typedef struct { /* Represents a pool of connected descriptors */ 
   int maxfd;        /* Largest descriptor in read_set */   
   fd_set read_set;  /* Set of all active descriptors */
@@ -127,104 +131,135 @@ void communication(pool *p) {
       if ((n = Rio_readlineb(&rio, buf, MAXLINE)) != 0) {
         int j = 0; // going through all j
         strcpy(tmp, buf); // we don't wanna mess with buf
-
+        json_byte_cnt = xml_byte_cnt = 0;
         while(p->clientfd[j] >= 0){
           std::string tmp_std_str(tmp);
+          if(p->clientfd[j] != connfd) {
+            //Rio_writen(p->clientfd[j], buf, n); // write buffer into fd
+            //l.log(Logger::INFO, buf); //
+            if (tmp[0] == '{' || tmp[0] == '['){ // json client
+              json_byte_cnt += n; // increment bytes received by json client
+              //print to stdout that a message was received by client connfd
+              stringstream logMessage;
 
-          // TODO: at this point we're just sending back the data to all p->client[j]
-          // but we need to convert this buf to both formats
-          // and iterate through both maps and send the right format to the right client
-          //Rio_writen(p->clientfd[j], buf, n); // write buffer into fd
-          //l.log(Logger::INFO, buf); //
-          if (tmp[0] == '{' || tmp[0] == '['){ // json client
-            json_byte_cnt += n; // increment bytes received by json client
-        
-            printf("Received %d (%d total) bytes by a json client with fd[%d]\n",n,json_byte_cnt,connfd);
-            stringstream logMessage;
-            logMessage << "Received "<<n<<"("<<json_byte_cnt<<" total) bytes by a json client with fd["<<connfd<<"]";
-            l.log(Logger::LogLevel::INFO, logMessage.str());
-            handle_json_client(tmp, connfd);
-            if(tmp_std_str.find("RequestResource") != std::string::npos) {
-              RequestResource request = t_engine.json_to_request_resource_msg("", tmp);
-              std::string out = t_engine.request_resource_msg_to_xml(request) + "\n";
+              //log that a message was received by file descriptor connfd
+              logMessage << "Received " << n << "( " << json_byte_cnt << " total ) bytes by a json client with fd ["<<connfd<<"]";
+              cout << logMessage.str();
+              l.log(Logger::LogLevel::INFO, logMessage.str());
+              handle_json_client(tmp, connfd);
+              if(tmp_std_str.find("RequestResource") != std::string::npos) {
+                RequestResource request = t_engine.json_to_request_resource_msg("", tmp);
 
-			  // save to datbase
-			  std::cout << request.MessageID << std::endl;
-			  std::cout << request.SentDateTime << std::endl;
-			  std::cout << request.inc_info.IncidentID << std::endl;
 
-			  request.res_info._AssignmentInformation = request.res_info.assign_info;
-			  request.res_info._ScheduleInformation = request.res_info.sched_info;
-			  request.res_info._ScheduleInformation.LocationTypeID = 1;
-			  request.res_info._ScheduleInformation._Location.LocationTypeID = 1;
-			  request.res_info._ScheduleInformation._Location.LocationDescription = request.res_info._ScheduleInformation.Location;
+			    // SAVE TO DATABASE
+				// TODO: CLEAN THIS HACKY CODE
+				// Still needs some refactoring between db code and translation unit
+				// code. Some keys are stored as strings for translation unit 
+				// when db needs them to be ints and vice versa. 
+				// Too lazy to do parsing so just added the fields to the classes
+				// with the right type and have the sql code just pulling from those
+			    std::cout << request.MessageID << std::endl;
+			    std::cout << request.SentDateTime << std::endl;
+			    std::cout << request.inc_info.IncidentID << std::endl;
 
-			  request.inc_info.insertIntoDatabase();
-			  request.msg_rcl.insertIntoDatabase();
-			  request.fund.insertIntoDatabase();
-			  request.res_info.insertIntoDatabase();
-			  request.contact_info.insertIntoDatabase();
+			    request.res_info._AssignmentInformation = request.res_info.assign_info;
+			    request.res_info._ScheduleInformation = request.res_info.sched_info;
+			    request.res_info._ScheduleInformation.LocationTypeID = 1;
+			    request.res_info._ScheduleInformation._Location.LocationTypeID = 1;
+			    request.res_info._ScheduleInformation._Location.LocationDescription = request.res_info._ScheduleInformation.Location;
 
-              //strcpy(tmp_xml, out.c_str());
-              stringstream logMessageIn;
-              logMessageIn << "[RequestResource Message]"<<tmp;
-              l.log(Logger::LogLevel::INFO, logMessageIn.str());
-              handle_xml_client(out, p->clientfd[j]);
-              stringstream logMessageOut;
-              logMessageOut << "[Sent Message to "<<p->clientfd[j]<<"]"<<out;
-              l.log(Logger::LogLevel::INFO, logMessageOut.str());
-            } else if(tmp_std_str.find("ResponseToRequestResource") != std::string::npos) {
-              ResponseToRequestResource response = t_engine.json_to_response_to_request_resource_msg("", tmp);
-              std::string out = t_engine.response_to_request_resource_msg_to_xml(response) + "\n";
-              //strcpy(tmp_xml, out.c_str());
-              stringstream logMessageIn;
-              logMessageIn << "[ResponseToRequestResource Message]"<<tmp;
-              l.log(Logger::LogLevel::INFO, logMessageIn.str());
-              handle_xml_client(out, p->clientfd[j]);
-              stringstream logMessageOut;
-              logMessageOut << "[Sent Message to "<<p->clientfd[j]<<"]"<<out;
-              l.log(Logger::LogLevel::INFO, logMessageOut.str());
+			    request.inc_info.insertIntoDatabase();
+			    request.msg_rcl.insertIntoDatabase();
+			    request.fund.insertIntoDatabase();
+			    request.res_info.insertIntoDatabase();
+			    request.contact_info.insertIntoDatabase();
+
+                std::string out = t_engine.request_resource_msg_to_xml(request) + "\n";
+                //strcpy(tmp_xml, out.c_str());
+                stringstream logMessageIn;
+                logMessageIn << "[RequestResource Message]"<<tmp;
+                l.log(Logger::LogLevel::INFO, logMessageIn.str());
+                handle_xml_client(out, p->clientfd[j]);
+                stringstream logMessageOut;
+                logMessageOut << "[Sent Message to "<<p->clientfd[j]<<"]"<<out;
+                l.log(Logger::LogLevel::INFO, logMessageOut.str());
+              } else if(tmp_std_str.find("ResponseToRequestResource") != std::string::npos) {
+                ResponseToRequestResource response = t_engine.json_to_response_to_request_resource_msg("", tmp);
+                std::string out = t_engine.response_to_request_resource_msg_to_xml(response) + "\n";
+                //strcpy(tmp_xml, out.c_str());
+                stringstream logMessageIn;
+                logMessageIn << "[ResponseToRequestResource Message]"<<tmp;
+                l.log(Logger::LogLevel::INFO, logMessageIn.str());
+                handle_xml_client(out, p->clientfd[j]);
+                stringstream logMessageOut;
+                logMessageOut << "[Sent Message to "<<p->clientfd[j]<<"]"<<out;
+                l.log(Logger::LogLevel::INFO, logMessageOut.str());
+              }
+            } else if (tmp[0] == '<') { // xml clients 
+              xml_byte_cnt+= n; // increment bytes received by xml client 
+              printf("Received %d (%d total) bytes by a xml_client with fd[%d]\n",n,xml_byte_cnt,connfd);
+              stringstream logMessage;
+              logMessage << "Received "<<n<<"("<<xml_byte_cnt<<" total) bytes by a xml client with fd["<<connfd<<"]";
+              l.log(Logger::LogLevel::INFO, logMessage.str());
+              if(tmp_std_str.find("RequestResource") != std::string::npos) {
+                RequestResource request = t_engine.xml_to_request_resource_msg("", tmp);
+			    
+				// SAVE TO DATABASE
+				// TODO: CLEAN THIS HACKY CODE
+				// Still needs some refactoring between db code and translation unit
+				// code. Some keys are stored as strings for translation unit 
+				// when db needs them to be ints and vice versa. 
+				// Too lazy to do parsing so just added the fields to the classes
+				// with the right type and have the sql code just pulling from those
+			    std::cout << request.MessageID << std::endl;
+			    std::cout << request.SentDateTime << std::endl;
+			    std::cout << request.inc_info.IncidentID << std::endl;
+
+			    request.res_info._AssignmentInformation = request.res_info.assign_info;
+			    request.res_info._ScheduleInformation = request.res_info.sched_info;
+			    request.res_info._ScheduleInformation.LocationTypeID = 1;
+			    request.res_info._ScheduleInformation._Location.LocationTypeID = 1;
+			    request.res_info._ScheduleInformation._Location.LocationDescription = request.res_info._ScheduleInformation.Location;
+
+			    request.inc_info.insertIntoDatabase();
+			    request.msg_rcl.insertIntoDatabase();
+			    request.fund.insertIntoDatabase();
+			    request.res_info.insertIntoDatabase();
+			    request.contact_info.insertIntoDatabase();
+                
+				std::string out = t_engine.request_resource_msg_to_json(request) + "\n";
+                //strcpy(tmp_json, out.c_str());
+                stringstream logMessageIn;
+                logMessageIn << "[RequestResource Message]"<<tmp;
+                l.log(Logger::LogLevel::INFO, logMessageIn.str());
+                handle_json_client(out, p->clientfd[j]);
+                stringstream logMessageOut;
+                logMessageOut << "[Sent Message to "<<p->clientfd[j]<<"]"<<out;
+                l.log(Logger::LogLevel::INFO, logMessageOut.str());
+              } else if(tmp_std_str.find("ResponseToRequestResource") != std::string::npos) {
+                ResponseToRequestResource response = t_engine.xml_to_response_to_request_resource_msg("", tmp);
+                std::string out = t_engine.response_to_request_resource_msg_to_json(response) + "\n";
+                //strcpy(tmp_json, out.c_str());
+                stringstream logMessageIn;
+                logMessageIn << "[ResponseToRequestResource Message]"<<tmp;
+                l.log(Logger::LogLevel::INFO, logMessageIn.str());
+                handle_json_client(out, p->clientfd[j]);
+                stringstream logMessageOut;
+                logMessageOut << "[Sent Message to "<<p->clientfd[j]<<"]"<<out;
+                l.log(Logger::LogLevel::INFO, logMessageOut.str());
+              }
+              //TODO: handle_xml_client(tmp, connfd);
+            } else { // we don't mess with this
+              printf("[error] unknown protocol\n");
+//>>>>>>> 5f6e923e4ddf97b190bb0f23911274b03993c498
             }
-          } else if (tmp[0] == '<') { // xml clients 
-            xml_byte_cnt+= n; // increment bytes received by xml client 
-            printf("Received %d (%d total) bytes by a xml_client with fd[%d]\n",n,xml_byte_cnt,connfd);
-            stringstream logMessage;
-            logMessage << "Received "<<n<<"("<<xml_byte_cnt<<" total) bytes by a xml client with fd["<<connfd<<"]";
-            l.log(Logger::LogLevel::INFO, logMessage.str());
-            if(tmp_std_str.find("RequestResource") != std::string::npos) {
-              RequestResource request = t_engine.xml_to_request_resource_msg("", tmp);
-              std::string out = t_engine.request_resource_msg_to_json(request) + "\n";
-              //strcpy(tmp_json, out.c_str());
-              stringstream logMessageIn;
-              logMessageIn << "[RequestResource Message]"<<tmp;
-              l.log(Logger::LogLevel::INFO, logMessageIn.str());
-              handle_json_client(out, p->clientfd[j]);
-              stringstream logMessageOut;
-              logMessageOut << "[Sent Message to "<<p->clientfd[j]<<"]"<<out;
-              l.log(Logger::LogLevel::INFO, logMessageOut.str());
-              
-            } else if(tmp_std_str.find("ResponseToRequestResource") != std::string::npos) {
-              ResponseToRequestResource response = t_engine.xml_to_response_to_request_resource_msg("", tmp);
-              std::string out = t_engine.response_to_request_resource_msg_to_json(response) + "\n";
-              //strcpy(tmp_json, out.c_str());
-              stringstream logMessageIn;
-              logMessageIn << "[ResponseToRequestResource Message]"<<tmp;
-              l.log(Logger::LogLevel::INFO, logMessageIn.str());
-              handle_json_client(out, p->clientfd[j]);
-              stringstream logMessageOut;
-              logMessageOut << "[Sent Message to "<<p->clientfd[j]<<"]"<<out;
-              l.log(Logger::LogLevel::INFO, logMessageOut.str());
-            }
-            //TODO: handle_xml_client(tmp, connfd);
-          } else { // we don't mess with this
-            printf("[error] unknown protocol\n");
           }
           j++;
         }
       } else {/* EOF detected, remove descriptor from pool */
-        Close(connfd); 
-	    FD_CLR(connfd, &p->read_set); 
-	    p->clientfd[i] = -1; /* marks as available */         
+        Close(connfd);
+	    FD_CLR(connfd, &p->read_set);
+	    p->clientfd[i] = -1; /* marks as available */
       }
     }
   }

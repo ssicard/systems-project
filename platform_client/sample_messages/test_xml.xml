@@ -37,7 +37,7 @@
     </AssignmentInformation>
     <ScheduleInformation>
       <ScheduleType>EstimatedArrival</ScheduleType>
-      <DateTime>00/00/0000 0:00:0000</DateTime>
+	  <DateTime>2018/10/24 13:30:00</DateTime>
       <Location>Here and there</Location>
     </ScheduleInformation>
   </ResourceInformation>
