@@ -2,10 +2,10 @@
 #ifndef MESSAGEPROPERTIES_H
 #define MESSAGEPROPERTIES_H
 #include <string>
-#include "SqlBase.h"
+//#include "SqlBase.h"
 #include "MessagePropertiesLookup.h"
 
-class MessageProperties : public SqlBase
+class MessageProperties
 {
 public:
 	MessageProperties(int id, std::string messageTypeName);
