@@ -81,7 +81,7 @@ void init_pool(int listenfd, pool *p) {
 
 void add_client(int connfd, pool *p) {
   int i;
-  char* logon = "<<<---Connected to server--->>>\n";
+  char logon[] = "<<<---Connected to server--->>>\n";
   p->nready--;
   for (i = 0; i < FD_SETSIZE; i++){  /* Find an available slot */
     if (p->clientfd[i] < 0) {
@@ -100,7 +100,8 @@ void add_client(int connfd, pool *p) {
       break;
     }
     if (i == FD_SETSIZE){ /* Couldn't find an empty slot */
-      app_error("add_client error: Too many clients\n");
+      char too_many_clients[] = "add_client error: Too many clients\n";
+      app_error(too_many_clients);
     }
   }
 }

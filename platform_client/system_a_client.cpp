@@ -26,11 +26,11 @@ int main(int argc, char **argv){
   FD_ZERO(&ready_set); /* Clearing ready_set*/
   FD_ZERO(&read_set); /* clearing read_set */
   FD_SET(STDIN_FILENO, &read_set); /* Adding stdin to read_set */
-  FD_SET(clientfd, &read_set); /* setting client descriptors to read_set */ 
-  
+  FD_SET(clientfd, &read_set); /* setting client descriptors to read_set */
+
   while (1){
     ready_set = read_set;
-    /* waiting for event */ 
+    /* waiting for event */
     select(clientfd+1, &ready_set, NULL, NULL, NULL);
     if(FD_ISSET(STDIN_FILENO, &ready_set)){
       memset(&data, 0, sizeof(data));
@@ -65,13 +65,14 @@ int main(int argc, char **argv){
       i >> j;
       std::string send_this = j.dump();
       send_this += "\n";
-      char char_star[send_this.length()];
-      strcpy(char_star,send_this.c_str());
-      Rio_writen(clientfd, char_star, strlen(char_star));
-      string dataString(char_star);
+      char *msg = new char[send_this.length()];
+      strcpy(msg,send_this.c_str());
+      Rio_writen(clientfd, msg, strlen(msg));
+      string dataString(msg);
       logger.log(Logger::LogLevel::INFO, "Sending message from "+name_string);
-      logger.log(Logger::LogLevel::INFO, dataString); 
+      logger.log(Logger::LogLevel::INFO, dataString);
       memset(&data, 0, sizeof(data));
+      delete[] msg;
     }
     if(FD_ISSET(clientfd, &ready_set)){
       Rio_readlineb(&rio, data, MAXLINE);

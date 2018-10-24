@@ -1,14 +1,14 @@
 
 #include <iostream>
 #include <algorithm>
+#include <sstream>
+#include <string>
+
+#include <unistd.h>
+
 #include "./csapp/csapp.h"
 #include "../logger/logger.cpp"
 #include "./dependencies/pugixml/pugixml.hpp"
-#include <sstream>
-#include <string>
-#include <unistd.h>
-
-
 
 using namespace std;
 
@@ -72,8 +72,7 @@ string node_to_string(pugi::xml_node *node)
 
 void remove_newlines(string* str){
 	str->erase(
-				std::remove(str->begin(), str->end(), '\n'), 
-				str->end());
+	std::remove(str->begin(), str->end(), '\n'), str->end());
 }
 
 void append_newline(string* str){
@@ -97,7 +96,6 @@ void AppendResourceElement(Node *docNode, string resourceID, string Name, string
 	append_data_to_node(&node, "Credentials", credentials);
 	append_data_to_node(&node, "Certifications", certifications);
 	append_data_to_node(&node, "SpecialRequirements", SpecialReqs);
-	
 }
 
 void AppendFundingElement(Node *docNode, string FundCode, string FundingInfo) {
@@ -150,9 +148,7 @@ void CreateRequestResourceElement(Document *doc, string MessageID, string SentDa
 	AppendIncidentElement(&node, "001", "Man some bad stuff happened");
 	AppendMessageRecall(&node, "43r-f34-9j9-23e", "URGENT");
 	AppendFundingElement(&node, "FF998", "Funded by government");
-	
 	AppendResourceInformationElement(&node, "1122-ff32d-f4f34f-g439j");
-	
 }
 
 void CreateResponseToRequestResourceElement(Document *doc, string MessageID, string SentDateTime, string MessageContentType, string MessageDescription, string OriginatingMessageID, string precedingMessageId) {
@@ -247,35 +243,38 @@ int main(int argc, char **argv){
 			//User input will be ignored for now
 			memset(&data, 0, sizeof(data));
 			Fgets(buf, MAXLINE, stdin);
-			
-			char message_cstyle[send_this.length()];
-			strcpy(message_cstyle, send_this.c_str());
+
+			char *msg = new char[send_this.length()];
+			strcpy(msg, send_this.c_str());
 			logger.log(Logger::LogLevel::INFO, "[MESSAGE SENT]"+(std::string(send_this.c_str())));
-			Rio_writen(clientfd, message_cstyle, strlen(message_cstyle));
+			Rio_writen(clientfd, msg, strlen(msg));
 			memset(&data, 0, sizeof(data));
+			delete[] msg;
 		}
 		//Check for message recieved
 		if (FD_ISSET(clientfd, &ready_set)) {
 			//Read message recieved into data buffer
 			Rio_readlineb(&rio, data, MAXLINE);
 			//Write message to output
-			Fputs(data, stdout);
-			string dataString(data);
-			logger.log(Logger::LogLevel::INFO, "[MESSAGE RECEIVED]"+dataString);
-			//Temporarily read an xml file to simulate reading an XML message
-			ifstream xmlStream("tree.xml");
-			string content;
-			content.assign((istreambuf_iterator<char>(xmlStream) ),
+                        if(data[0] == '<') {
+			  Fputs(data, stdout);
+			  string dataString(data);
+			  logger.log(Logger::LogLevel::INFO, "[MESSAGE RECEIVED]"+dataString);
+			  //Temporarily read an xml file to simulate reading an XML message
+			  stringstream xmlStream(dataString);
+			  string content;
+			  content.assign((istreambuf_iterator<char>(xmlStream) ),
                 			(istreambuf_iterator<char>()));
-			
-			pid_t pid = fork();
-			if (pid == 0){
+
+			  pid_t pid = fork();
+			  if (pid == 0){
 				cout << "Handling request in child process\n";
 				parse_data(&content);
-			}
-			
-			//Clear data buffer
-			memset(&data, 0, sizeof(data));
+			  }
+
+			  //Clear data buffer
+			  memset(&data, 0, sizeof(data));
+                        }
 		}
 	}
 	Close(clientfd);

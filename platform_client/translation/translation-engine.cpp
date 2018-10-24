@@ -14,7 +14,7 @@ RequestResource TranslationEngine::xml_to_request_resource_msg(std::string id, c
 
   pugi::xml_node req_res = doc.child("RequestResource");
 
-  if(id != "") {
+  if(id == "") {
     msg.MessageID = std::string(req_res.child_value("MessageID"));
   }
 
@@ -61,7 +61,7 @@ ResponseToRequestResource TranslationEngine::xml_to_response_to_request_resource
 
   pugi::xml_node req_res = doc.child("ResponseToRequestResource");
 
-  if(id != "") {
+  if(id == "") {
     msg.MessageID = std::string(req_res.child_value("MessageID"));
   }
 
@@ -106,8 +106,8 @@ RequestResource TranslationEngine::json_to_request_resource_msg(std::string id, 
 
   auto json_obj = nlohmann::json::parse(cpp_json_str);
   auto req_res = json_obj["RequestResource"];
-  if(id != "") {
-    msg.MessageID = req_res["MessageID"];
+  if(id == "") {
+    msg.MessageID = req_res["MessageID"] == nullptr ? "" : req_res["MessageID"];
   }
 
   msg.SentDateTime = req_res["SentDateTime"] == nullptr ? "" : req_res["SentDateTime"];
@@ -147,8 +147,8 @@ ResponseToRequestResource TranslationEngine::json_to_response_to_request_resourc
 
   auto json_obj = nlohmann::json::parse(cpp_json_str);
   auto req_res = json_obj["ResponseToRequestResource"];
-  if(id != "") {
-    msg.MessageID = req_res["MessageID"];
+  if(id == "") {
+    msg.MessageID = req_res["MessageID"] == nullptr ? "" : req_res["MessageID"];
   }
 
   msg.SentDateTime = req_res["SentDateTime"] == nullptr ? "" : req_res["SentDateTime"];
