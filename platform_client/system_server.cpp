@@ -147,18 +147,24 @@ void communication(pool *p) {
               RequestResource request = t_engine.json_to_request_resource_msg("", tmp);
               std::string out = t_engine.request_resource_msg_to_xml(request) + "\n";
               //strcpy(tmp_xml, out.c_str());
-              stringstream logMessage2;
-              logMessage2 << "[RequestResource Message]"<<out;
-              l.log(Logger::LogLevel::INFO, logMessage2.str());
+              stringstream logMessageIn;
+              logMessageIn << "[RequestResource Message]"<<tmp;
+              l.log(Logger::LogLevel::INFO, logMessageIn.str());
               handle_xml_client(out, p->clientfd[j]);
+              stringstream logMessageOut;
+              logMessageOut << "[Sent Message to "<<p->clientfd[j]<<"]"<<out;
+              l.log(Logger::LogLevel::INFO, logMessageOut.str());
             } else if(tmp_std_str.find("ResponseToRequestResource") != std::string::npos) {
               ResponseToRequestResource response = t_engine.json_to_response_to_request_resource_msg("", tmp);
               std::string out = t_engine.response_to_request_resource_msg_to_xml(response) + "\n";
               //strcpy(tmp_xml, out.c_str());
-              stringstream logMessage2;
-              logMessage2 << "[ResponseToRequestResource Message]"<<out;
-              l.log(Logger::LogLevel::INFO, logMessage2.str());
+              stringstream logMessageIn;
+              logMessageIn << "[ResponseToRequestResource Message]"<<tmp;
+              l.log(Logger::LogLevel::INFO, logMessageIn.str());
               handle_xml_client(out, p->clientfd[j]);
+              stringstream logMessageOut;
+              logMessageOut << "[Sent Message to "<<p->clientfd[j]<<"]"<<out;
+              l.log(Logger::LogLevel::INFO, logMessageOut.str());
             }
           } else if (tmp[0] == '<') { // xml clients 
             xml_byte_cnt+= n; // increment bytes received by xml client 
@@ -170,18 +176,25 @@ void communication(pool *p) {
               RequestResource request = t_engine.xml_to_request_resource_msg("", tmp);
               std::string out = t_engine.request_resource_msg_to_json(request) + "\n";
               //strcpy(tmp_json, out.c_str());
-              stringstream logMessage2;
-              logMessage2 << "[RequestResource Message]"<<out;
-              l.log(Logger::LogLevel::INFO, logMessage2.str());
+              stringstream logMessageIn;
+              logMessageIn << "[RequestResource Message]"<<tmp;
+              l.log(Logger::LogLevel::INFO, logMessageIn.str());
               handle_json_client(out, p->clientfd[j]);
+              stringstream logMessageOut;
+              logMessageOut << "[Sent Message to "<<p->clientfd[j]<<"]"<<out;
+              l.log(Logger::LogLevel::INFO, logMessageOut.str());
+              
             } else if(tmp_std_str.find("ResponseToRequestResource") != std::string::npos) {
               ResponseToRequestResource response = t_engine.xml_to_response_to_request_resource_msg("", tmp);
               std::string out = t_engine.response_to_request_resource_msg_to_json(response) + "\n";
               //strcpy(tmp_json, out.c_str());
-              stringstream logMessage2;
-              logMessage2 << "[ResponseToRequestResource Message]"<<out;
-              l.log(Logger::LogLevel::INFO, logMessage2.str());
+              stringstream logMessageIn;
+              logMessageIn << "[ResponseToRequestResource Message]"<<tmp;
+              l.log(Logger::LogLevel::INFO, logMessageIn.str());
               handle_json_client(out, p->clientfd[j]);
+              stringstream logMessageOut;
+              logMessageOut << "[Sent Message to "<<p->clientfd[j]<<"]"<<out;
+              l.log(Logger::LogLevel::INFO, logMessageOut.str());
             }
             //TODO: handle_xml_client(tmp, connfd);
           } else { // we don't mess with this
