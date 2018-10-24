@@ -88,7 +88,11 @@ void ScheduleInformation::insertIntoDatabase(){
 		prep_stmt->setInt(1, this->ScheduleInformationID);
 		prep_stmt->setString(2, this->ScheduleType);
 		prep_stmt->setDateTime(3, this->DateTime);
-		prep_stmt->setInt(4, this->LocationTypeID);
+		if (this->LocationTypeID != -1) {
+			prep_stmt->setInt(4, this->LocationTypeID);
+		} else {
+			prep_stmt->setNull(4, sql::DataType::INTEGER);
+		}
 
 		prep_stmt->execute();
 

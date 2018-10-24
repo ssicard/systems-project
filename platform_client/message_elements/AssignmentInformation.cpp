@@ -89,7 +89,11 @@ void AssignmentInformation::insertIntoDatabase() {
 		prep_stmt->setString(4, this->AnticipatedFunction);
 		prep_stmt->setString(5, this->PriceQuote);
 		prep_stmt->setString(6, this->OrderID);
-		prep_stmt->setInt(7, this->_AssignmentInstructionID);
+		if (this->_AssignmentInstructionID != -1) {
+			prep_stmt->setInt(7, this->_AssignmentInstructionID);
+		} else {
+			prep_stmt->setNull(7, sql::DataType::INTEGER);
+		}
 
 		prep_stmt->execute();
 

@@ -122,8 +122,16 @@ void ResourceInformation::insertIntoDatabase(){
 		prep_stmt = con->prepareStatement("INSERT INTO `ResourceInformation`(`ResourceInfoElementID`, `ResponseInformation`, `Resource`, `AssignmentInformationID`, `ScheduleInformationID`) VALUES (?,?,?,?,?)");
 
 		prep_stmt->setString(1, this->ResourceInfoElementID);
-		prep_stmt->setString(2, this->ResponseInformationID);
-		prep_stmt->setString(3, this->ResourceID);
+		if (this->ResponseInformationID != "") {
+			prep_stmt->setString(2, this->ResponseInformationID);
+		} else {
+			prep_stmt->setNull(2, sql::DataType::VARCHAR);
+		}
+		if (this->ResourceID != "") {
+			prep_stmt->setString(3, this->ResourceID);
+		} else {
+			prep_stmt->setNull(3, sql::DataType::VARCHAR);
+		}
 		prep_stmt->setInt(4, this->AssignmentInformationID);
 		prep_stmt->setInt(5, this->ScheduleInformationID);
 
