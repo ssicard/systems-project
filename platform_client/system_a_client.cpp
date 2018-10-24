@@ -74,8 +74,14 @@ int main(int argc, char **argv){
     }
     if(FD_ISSET(clientfd, &ready_set)){
       Rio_readlineb(&rio, data, MAXLINE);
+<<<<<<< HEAD
       Fputs(data, stdout);
       logger.log(Logger::LogLevel::INFO,data);
+=======
+      if(data[0] == '{' || data[0] == '[') {
+        Fputs(data, stdout);
+      }
+>>>>>>> platform_client
       memset(&data, 0, sizeof(data));
     }
   }

@@ -28,8 +28,8 @@ std::map<std::string, int> xml_name_to_fd; // to track xml client
 void init_pool(int listenfd, pool *p);
 void add_client(int connfd, pool *p);
 void communication(pool *p); 
-void handle_json_client(char* tmp, int connfd);
-void handle_xml_client(char* tmp, int connfd);
+void handle_json_client(std::string json_str, int connfd);
+void handle_xml_client(std::string xml_str, int connfd);
 void show_current_map(std::map<std::string, int> map);
 uint32_t json_byte_cnt{0}; 
 uint32_t xml_byte_cnt{0};
@@ -133,48 +133,38 @@ void communication(pool *p) {
           // TODO: at this point we're just sending back the data to all p->client[j]
           // but we need to convert this buf to both formats
           // and iterate through both maps and send the right format to the right client
-          Rio_writen(p->clientfd[j], buf, n); // write buffer into fd
-          l.log(Logger::INFO, buf); // 
+          //Rio_writen(p->clientfd[j], buf, n); // write buffer into fd
+          l.log(Logger::INFO, buf); //
           if (tmp[0] == '{' || tmp[0] == '['){ // json client
             json_byte_cnt += n; // increment bytes received by json client
         
             printf("Received %d (%d total) bytes by a json client with fd[%d]\n",n,json_byte_cnt,connfd);
             handle_json_client(tmp, connfd);
-            std::cout << tmp_std_str;
             if(tmp_std_str.find("RequestResource") != std::string::npos) {
-              char tmp_xml[MAXLINE];
               RequestResource request = t_engine.json_to_request_resource_msg("", tmp);
-              std::string out = t_engine.request_resource_msg_to_xml(request);
-              strcpy(tmp_xml, out.c_str());
-              l.log(Logger::LogLevel::INFO, "Logging RequestResource message from "+connfd);
-              l.log(Logger::LogLevel::INFO, out);
-              handle_xml_client(tmp_xml, connfd);
+              std::string out = t_engine.request_resource_msg_to_xml(request) + "\n";
+              //strcpy(tmp_xml, out.c_str());
+              handle_xml_client(out, p->clientfd[j]);
             } else if(tmp_std_str.find("ResponseToRequestResource") != std::string::npos) {
-              char tmp_xml[MAXLINE];
               ResponseToRequestResource response = t_engine.json_to_response_to_request_resource_msg("", tmp);
-              std::string out = t_engine.response_to_request_resource_msg_to_xml(response);
-              strcpy(tmp_xml, out.c_str());
-              l.log(Logger::LogLevel::INFO, ("RequestResource message from "+connfd)+std::string(": "+std::string(out.c_str())));
-              handle_xml_client(tmp_xml, connfd);
+              std::string out = t_engine.response_to_request_resource_msg_to_xml(response) + "\n";
+              //strcpy(tmp_xml, out.c_str());
+              handle_xml_client(out, p->clientfd[j]);
             }
           } else if (tmp[0] == '<') { // xml clients 
             xml_byte_cnt+= n; // increment bytes received by xml client 
             printf("Received %d (%d total) bytes by a xml_client with fd[%d]\n",n,xml_byte_cnt,connfd);
             l.log(Logger::LogLevel::INFO, "Message received from XML Client.");
             if(tmp_std_str.find("RequestResource") != std::string::npos) {
-              char tmp_json[MAXLINE];
               RequestResource request = t_engine.xml_to_request_resource_msg("", tmp);
-              std::string out = t_engine.request_resource_msg_to_xml(request);
-              strcpy(tmp_json, out.c_str());
-              l.log(Logger::LogLevel::INFO, out);
-              handle_json_client(tmp_json, connfd);
+              std::string out = t_engine.request_resource_msg_to_json(request) + "\n";
+              //strcpy(tmp_json, out.c_str());
+              handle_json_client(out, p->clientfd[j]);
             } else if(tmp_std_str.find("ResponseToRequestResource") != std::string::npos) {
-              char tmp_json[MAXLINE];
               ResponseToRequestResource response = t_engine.xml_to_response_to_request_resource_msg("", tmp);
-              std::string out = t_engine.response_to_request_resource_msg_to_json(response);
-              strcpy(tmp_json, out.c_str());
-              l.log(Logger::LogLevel::INFO, out);
-              handle_json_client(tmp_json, connfd);
+              std::string out = t_engine.response_to_request_resource_msg_to_json(response) + "\n";
+              //strcpy(tmp_json, out.c_str());
+              handle_json_client(out, p->clientfd[j]);
             }
             //TODO: handle_xml_client(tmp, connfd);
           } else { // we don't mess with this
@@ -192,20 +182,24 @@ void communication(pool *p) {
 }
 
 // right now only trying to see if client is new or not, if it is add to map
-void handle_json_client(char* tmp, int connfd){
-  nlohmann::json j = nlohmann::json::parse(tmp); // parse tmp
-  std::cout << j.dump(2) << '\n'; // print whole json for debugging purposes
+void handle_json_client(std::string out, int connfd){
+  //std::cout << std::string(tmp) << '\n'; // print whole json for debugging purposes
   //std::string identity = j["identity"]; // name is here
   //if (json_name_to_fd.find(identity) == json_name_to_fd.end()){
     //never seen this name before, adding to map
     //printf("[This is a new json client, adding %s with fd %d to map]\n",identity.c_str(),connfd);
     //json_name_to_fd[j["identity"]] = connfd; // addding this connection fd to map
-    //show_current_map(json_name_to_fd); //for debugging purposes  
-  //} 
+    //show_current_map(json_name_to_fd); //for debugging purposes
+  //}
+  char json_str[MAXLINE];
+  strcpy(json_str, out.c_str());
+  Rio_writen(connfd, json_str, out.size());
 }
 
-void handle_xml_client(char* tmp, int connfd) {
-  std::cout << std::string(tmp)<<'\n';
+void handle_xml_client(std::string out, int connfd) {
+  char xml_str[MAXLINE];
+  strcpy(xml_str, out.c_str());
+  Rio_writen(connfd, xml_str, out.size());
 }
 // if you need to look at any maps
 void show_current_map(std::map<std::string, int> map){

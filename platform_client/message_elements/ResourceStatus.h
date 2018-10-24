@@ -1,5 +1,6 @@
 #include <string>
-#pragma once
+#ifndef RESOURCESTATUS_H
+#define RESOURCESTATUS_H
 using namespace std;
 class ResourceStatus
 {
@@ -12,4 +13,4 @@ public:
 	string Availability;
 	string HomeUnit;
 };
-
+#endif
