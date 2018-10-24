@@ -28,6 +28,8 @@ int main(int argc, char **argv){
   FD_SET(STDIN_FILENO, &read_set); /* Adding stdin to read_set */
   FD_SET(clientfd, &read_set); /* setting client descriptors to read_set */
 
+  bool connection_msg_seen = true;
+
   while (1){
     ready_set = read_set;
     /* waiting for event */
@@ -62,23 +64,30 @@ int main(int argc, char **argv){
 
       //read the json file
       std::ifstream i(filename);
-      i >> j;
-      std::string send_this = j.dump();
-      send_this += "\n";
-      char *msg = new char[send_this.length()];
-      strcpy(msg,send_this.c_str());
-      Rio_writen(clientfd, msg, strlen(msg));
-      string dataString(msg);
-      logger.log(Logger::LogLevel::INFO, "Sending message from "+name_string);
-      logger.log(Logger::LogLevel::INFO, dataString);
-      memset(&data, 0, sizeof(data));
-      delete[] msg;
+      try {
+        i >> j;
+        std::string send_this = j.dump();
+        send_this += "\n";
+        char *msg = new char[send_this.length()];
+        strcpy(msg,send_this.c_str());
+        Rio_writen(clientfd, msg, strlen(msg));
+        string dataString(msg);
+        logger.log(Logger::LogLevel::INFO, "Sending message from "+name_string);
+        logger.log(Logger::LogLevel::INFO, dataString);
+        memset(&data, 0, sizeof(data));
+        delete[] msg;
+      } catch (nlohmann::detail::parse_error e) {
+        puts("[ERROR] Not a valid JSON object\n");
+      }
     }
     if(FD_ISSET(clientfd, &ready_set)){
       Rio_readlineb(&rio, data, MAXLINE);
       logger.log(Logger::LogLevel::INFO, "Message Recieved by "+name_string);
       logger.log(Logger::LogLevel::INFO, data);
-      if(data[0] == '{' || data[0] == '[') {
+      if(!connection_message_seen) {
+        if(data[0] == '<') Fputs(data, stdout);
+      }
+      else if(data[0] == '{' || data[0] == '[') {
         Fputs(data, stdout);
       }
       memset(&data, 0, sizeof(data));
