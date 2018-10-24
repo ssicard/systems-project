@@ -1,7 +1,7 @@
 #include "MessageProperties.h"
 
 
-MessageProperties::MessageProperties(int id, string messageTypeName)
+MessageProperties::MessageProperties(int id, std::string messageTypeName)
 {
 	this->id = id;
 	this->MessageTypeName = messageTypeName;
