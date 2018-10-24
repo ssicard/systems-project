@@ -201,7 +201,7 @@ void parse_data(string *rawXml){
 
 
 int main(int argc, char **argv){
-
+	Logger logger(Logger::LogLevel::INFO, Logger::LogMode::NORMAL);
 	int clientfd;
 	char *host, *port, data[MAXLINE], buf[MAXLINE];
 	rio_t rio;
@@ -260,6 +260,7 @@ int main(int argc, char **argv){
 			//Write message to output
 			Fputs(data, stdout);
 			string dataString(data);
+			logger.log(Logger::LogLevel::INFO, dataString);
 			//Temporarily read an xml file to simulate reading an XML message
 			ifstream xmlStream("tree.xml");
 			string content;

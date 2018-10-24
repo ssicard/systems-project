@@ -6,7 +6,7 @@
 #include "./message_elements/Message.h"
 
 int main(int argc, char **argv){
-  
+  Logger logger(Logger::LogLevel::INFO, Logger::LogMode::NORMAL);
   int clientfd;
   char *host, *port, data[MAXLINE], buf[MAXLINE];
   rio_t rio;
@@ -68,11 +68,14 @@ int main(int argc, char **argv){
       char char_star[send_this.length()];
       strcpy(char_star,send_this.c_str());
       Rio_writen(clientfd, char_star, strlen(char_star));
+      string dataString(char_star);
+      logger.log(Logger::LogLevel::INFO, dataString); 
       memset(&data, 0, sizeof(data));
     }
     if(FD_ISSET(clientfd, &ready_set)){
       Rio_readlineb(&rio, data, MAXLINE);
       Fputs(data, stdout);
+      logger.log(Logger::LogLevel::INFO,data);
       memset(&data, 0, sizeof(data));
     }
   }
