@@ -3,42 +3,42 @@
 #include <sstream>
 #include <stdexcept>
 
-
-#include <jdbc/mysql_connection.h> 
-#include <jdbc/mysql_driver.h>
-#include <jdbc/cppconn/driver.h>
-#include <jdbc/cppconn/exception.h>
-#include <jdbc/cppconn/resultset.h>
-#include <jdbc/cppconn/statement.h>
-#include <jdbc/cppconn/prepared_statement.h>
+// change to refer to where these are in your include folders
+#include <mysql_connection.h> 
+#include <mysql_driver.h>
+#include <cppconn/driver.h>
+#include <cppconn/exception.h>
+#include <cppconn/resultset.h>
+#include <cppconn/statement.h>
+#include <cppconn/prepared_statement.h>
 //#include "MessageObjectBase.cpp"
 
-#include "cppclasses/AssignmentInformation.h"
-#include "cppclasses/AssignmentInstructions.h"
-#include "cppclasses/ContactInformationType.h"
-#include "cppclasses/ContactRoleLookup.h"
-#include "cppclasses/Funding.h"
-#include "cppclasses/IncidentInformation.h"
-#include "cppclasses/LocationType.h"
-#include "cppclasses/MessageProperties.h"
-#include "cppclasses/MessagePropertiesLookup.h"
-#include "cppclasses/MessageRecall.h"
-#include "cppclasses/OwnershipInformation.h"
-#include "cppclasses/RadioElement.h"
-#include "cppclasses/Resource.h"
-#include "cppclasses/ResourceInformation.h"
-#include "cppclasses/ResourceMessage.h"
-#include "cppclasses/ResourceStatus.h"
-#include "cppclasses/ResponseInformation.h"
-#include "cppclasses/ResponseTypeLookup.h"
-#include "cppclasses/ScheduleInformation.h"
-#include "cppclasses/TypeInfoType.h"
-#include "cppclasses/ValueListType.h"
+#include "../../platform_client/message_elements/AssignmentInformation.h"
+#include "../../platform_client/message_elements/AssignmentInstructions.h"
+#include "../../platform_client/message_elements/ContactInformationType.h"
+#include "../../platform_client/message_elements/ContactRoleLookup.h"
+#include "../../platform_client/message_elements/Funding.h"
+#include "../../platform_client/message_elements/IncidentInformation.h"
+#include "../../platform_client/message_elements/LocationType.h"
+#include "../../platform_client/message_elements/MessageProperties.h"
+#include "../../platform_client/message_elements/MessagePropertiesLookup.h"
+#include "../../platform_client/message_elements/MessageRecall.h"
+#include "../../platform_client/message_elements/OwnershipInformation.h"
+#include "../../platform_client/message_elements/RadioElement.h"
+#include "../../platform_client/message_elements/Resource.h"
+#include "../../platform_client/message_elements/ResourceInformation.h"
+#include "../../platform_client/message_elements/ResourceMessage.h"
+#include "../../platform_client/message_elements/ResourceStatus.h"
+#include "../../platform_client/message_elements/ResponseInformation.h"
+#include "../../platform_client/message_elements/ResponseTypeLookup.h"
+#include "../../platform_client/message_elements/ScheduleInformation.h"
+#include "../../platform_client/message_elements/TypeInfoType.h"
+#include "../../platform_client/message_elements/ValueListType.h"
 
 int main() {
 	std::cout << "Connector/C++ tutorial framework..." << std::endl;
 
-	/*
+	
 	AssignmentInstructions* a_instr = new AssignmentInstructions(1);
 	a_instr->ModeOfTransportation = "ambulance";
 	a_instr->NavigationInstructions = "left right left right";
@@ -50,19 +50,21 @@ int main() {
 
 	a_instr->getFromDatabase();
 	std::cout << "Mode of transportation: " << a_instr->ModeOfTransportation << std::endl;
-	*/
+	
 
 	
-	/*
-	AssignmentInformation* a = new AssignmentInformation(2);
+	
+	AssignmentInformation* a = new AssignmentInformation(1);
 	a->Quantity = "1";
 	a->Restrictions = "restrictions string";
 	a->AnticipatedFunction = "anticipated function string";
 	a->PriceQuote = "price quote string";
 	a->OrderID = "aaaa11111zzzzzz";
-	a->AssignmentInstructionsID = 1;
+	//a->AssignmentInstructionsID = 1;
+	a->_AssignmentInstructionID = 1;
 
 	a->insertIntoDatabase();
+
 
 	a->OrderID = "";
 	a->Quantity = "";
@@ -71,10 +73,10 @@ int main() {
 	std::cout << "OrderID: " << a->OrderID << std::endl;
 	std::cout << "Quantity: " << a->Quantity << std::endl;
 	std::cout << "Assignment Instructions ModeOfTransportation: " << a->_AssignmentInstructions.ModeOfTransportation << std::endl;
-	*/
-
-	/*
 	
+
+	
+		
 	ContactRoleLookup* c;
 	c = new ContactRoleLookup(10);
 	c->Description = "This is a description test";
@@ -85,10 +87,8 @@ int main() {
 
 	c->getFromDatabase();
 	std::cout << "int is " << c->ContactRoleID << std::endl;
-	std::cout << "description is " << c->Description << std::endl;
-	*/
-
-	/*
+	std::cout << "description is " << c->Description << std::endl;	
+	
 	Funding* f;
 	f = new Funding("this is annother test");
 	f->FundingInfo = "this is a fund info test"; 
@@ -98,9 +98,10 @@ int main() {
 	std::cout << "Before printf\n";
 	// printf("%s\n", f->FundingInfo);
 	std::cout << "Funding info " << f->FundingInfo << std::endl;
-	*/
+	
 
-	/*	
+		
+	
 	IncidentInformation ii{"Incident information test"};
 	ii.IncidentDescription = "This is a test description";
 
@@ -111,9 +112,9 @@ int main() {
 	ii.getFromDatabase();
 
 	std::cout << "Incident Description: " << ii.IncidentDescription << std::endl;
-	*/
+	
 
-	/*
+		
 	LocationType l{1};
 	l.LocationDescription = "This is a location description";
 	l.Address = "This is an address? Not really.";
@@ -127,9 +128,9 @@ int main() {
 	std::cout << "Location Description: " << l.LocationDescription << std::endl;
 	std::cout << "Address: " << l.Address << std::endl;
 	std::cout << "Target Area: " << l.TargetArea << std::endl;
-	*/
+	
 
-	/*	
+		
 	ContactInformationType cit{2};
 	cit.ContactDescription = "This is a test description";
 	cit.ContactRole = 10;
@@ -151,9 +152,9 @@ int main() {
 	std::cout << "AdditionalContactInformation: " << cit.AdditionalContactInformation << std::endl;
 	std::cout << "CIT.ContactRole Description: " << cit._ContactRoleLookup.Description << std::endl;
 	std::cout << "CIT.Location Description: " << cit._ContactLocation.LocationDescription << std::endl;
-	*/
+	
 
-	/*	
+		
 	MessagePropertiesLookup mpl{4};
 	mpl.RequirementDesc = "Description test";
 
@@ -164,9 +165,9 @@ int main() {
 	mpl.getFromDatabase();
 
 	std::cout << "RequirementDesc: " << mpl.RequirementDesc << std::endl;
-	*/
 	
 	
+		
 	MessageProperties mp{17, "Request Resource (Test)"};
 	mp.Location = 2;
 	mp.DateTime = 2;
@@ -188,7 +189,7 @@ int main() {
 	std::cout << "RequirementDesc: " << mp.messagePropertiesLookup.RequirementDesc << std::endl;
 	
 
-	/*
+	
 	MessageRecall mr{"Recalled ID test"};
 	mr.RecallType = "Recall type test";
 
@@ -199,9 +200,9 @@ int main() {
 	mr.getFromDatabase();
 
 	std::cout << "RecallType: " << mr.RecallType << std::endl;
-	*/
+	
 
-	/*
+	
 	OwnershipInformation oi{1};
 	oi.Owner = "Test owner";
 	oi.OwningJurisdiction = "Test jurisdiction";
@@ -221,9 +222,9 @@ int main() {
 	std::cout << "OwningJurisdiction: " << oi.OwningJurisdiction << std::endl;
 	std::cout << "HomeDispatch: " << oi.HomeDispatch << std::endl;
 	std::cout << "HomeUnit: " << oi.HomeUnit << std::endl;
-	*/
+	
 
-	/*
+	
 	RadioElement re{1};
 	re.RadioType = "Type test";
 	re.RadioChannel = "Channel test";
@@ -236,9 +237,9 @@ int main() {
 	re.getFromDatabase();
 	std::cout << "RadioType: " << re.RadioType << std::endl;
 	std::cout << "RadioChannel: " << re.RadioChannel << std::endl;
-	*/
+	
 
-	/*	
+		
 	ScheduleInformation si{1};
 	si.ScheduleType = "Schedule type test";
 	si.DateTime = "2018/10/20 12:00:00";
@@ -255,9 +256,9 @@ int main() {
 	std::cout << "Schedule Type: " << si.ScheduleType << std::endl;
 	std::cout << "DateTime: " << si.DateTime << std::endl;
 	std::cout << "LocationDescription: " << si._Location.LocationDescription << std::endl;
-	*/
+	
 
-	/*
+	
 	TypeInfoType tit{1};
 	tit.ChildInfo = "Child info test";
 
@@ -268,9 +269,9 @@ int main() {
 	tit.getFromDatabase();
 
 	std::cout << "Child info: " << tit.ChildInfo << std::endl;
-	*/
+	
 
-	/*
+	
 	ValueListType vlt{1};
 	vlt.ValueListURN = "URN test";
 	vlt.ValueType = "Value type test";
@@ -283,18 +284,19 @@ int main() {
 	vlt.getFromDatabase();
 	std::cout << "ValueListURN: " << vlt.ValueListURN << std::endl;
 	std::cout << "ValueType: " << vlt.ValueType << std::endl;
-	*/
+	
 
-	/*	
+		
 	ResourceStatus rs{1};
-	rs.InventoryRefreshDateTime = "2018/10/20 12:00:00";
+	//rs.InventoryRefreshDateTime = "2018/10/20 12:00:00";
+	rs._InventoryRefreshDateTime = "2018/10/20 12:00:00";
 	rs.DeploymentStatus = 1;
 	rs.Availability = "Availability test";
 	rs.HomeUnit = "Home unit test";
 
 	rs.insertIntoDatabase();
 
-	rs.InventoryRefreshDateTime = "";
+	rs._InventoryRefreshDateTime = "";
 	rs.DeploymentStatus = 1;
 	rs.Availability = "";
 	rs.HomeUnit = "";
@@ -306,11 +308,12 @@ int main() {
 	std::cout << "Availability: " << rs.Availability << std::endl;
 	std::cout << "HomeUnit: " << rs.HomeUnit << std::endl;
 	std::cout << "Deployment status value list URN: " << rs._DeploymentStatus.ValueListURN << std::endl;
-	*/
+	
 
-	/*	
+		
 	Resource r{"Resource test id"};
-	r.NAME = "Test name";
+//	r.NAME = "Test name";
+	r.Name = "Test name";
 	r.TypeStructureID = 1;
 	r.TypeInfoID = 1;
 	r.KeywordID = 1;
@@ -324,7 +327,7 @@ int main() {
 
 	r.insertIntoDatabase();
 
-	r.NAME = "";
+	r.Name = "";
 	r.TypeStructureID = 0;
 	r.TypeInfoID = 0;
 	r.KeywordID = 0;
@@ -338,7 +341,7 @@ int main() {
 
 	r.getFromDatabase();
 
-	std::cout << "NAME: " << r.NAME << std::endl;
+	std::cout << "NAME: " << r.Name << std::endl;
 	std::cout << "Description: " << r.Description << std::endl;
 	std::cout << "Credentials: " << r.Credentials << std::endl;
 	std::cout << "Certifications: " << r.Certifications << std::endl;
@@ -352,9 +355,9 @@ int main() {
 	std::cout << "OwnershipInformation.Owner: " << r._OwnershipInformation.Owner << std::endl;
 	std::cout << "ResourceStatus.Availability: " << r._ResourceStatus.Availability << std::endl;
 	std::cout << "ResourceStatus._DeploymentStatys.ValueListURN: " << r._ResourceStatus._DeploymentStatus.ValueListURN << std::endl;
-	*/	
+		
 
-	/*
+	
 	ResponseTypeLookup rtl{1};
 	rtl.Description = "Test description";
 
@@ -365,10 +368,10 @@ int main() {
 	rtl.getFromDatabase();
 
 	std::cout << "Description: " << rtl.Description << std::endl;
-	*/
+	
 
-	/*	
-	ResponseInformation resi{"Resource information test"};
+		
+	platform::ResponseInformation resi{"Resource information test"};
 	resi.ResponseTypeID = 1;
 	resi.ReasonCodeID = 1;
 	resi.ResponseReason = "Response reason test";
@@ -384,9 +387,9 @@ int main() {
 	std::cout << "Reaponse reason: " << resi.ResponseReason << std::endl;
 	std::cout << "Reason Code valueListURN: " << resi._ReasonCode.ValueListURN << std::endl;
 	std::cout << "Reaponse Type Description: " << resi._ResponseType.Description << std::endl;
-	*/	
+		
 
-	/*	
+		
 	ResourceInformation ri{"Resource information test"};
 	ri.ResponseInformationID = "Resource information test";
 	ri.ResourceID = "Resource test id";
@@ -406,15 +409,15 @@ int main() {
 	std::cout << "Response Reason: " << ri._ResponseInformation.ResponseReason << std::endl;
 	std::cout << "Response Reason valueListURN: " << ri._ResponseInformation._ReasonCode.ValueListURN << std::endl;
 	std::cout << "Response type description: " << ri._ResponseInformation._ResponseType.Description << std::endl;
-	std::cout << "Resource NAME: " << ri._Resource.NAME << std::endl;
+	std::cout << "Resource NAME: " << ri._Resource.Name << std::endl;
 	std::cout << "Assignment Order ID: " << ri._AssignmentInformation.OrderID << std::endl;
 	std::cout << "Schedule informatioe Type: " << ri._ScheduleInformation.ScheduleType << std::endl;
 	std::cout << "Schedule location: " << ri._ScheduleInformation._Location.Address << std::endl;	
-	*/	
+		
 
-	/*	
+		
 	ResourceMessage rm{"messageID"};
-	rm.SentDateTime = "2018/10/20 12:00:00";
+	rm._SentDateTime = "2018/10/20 12:00:00";
 	rm.MessageContentType = "Test message content type";
 	rm.MessageDescription = "Test message description";
 	rm.OriginatingMessageID = "Test originating message ID";
@@ -422,12 +425,12 @@ int main() {
 	rm.IncidentID = "Incident information test";
 	rm.RecalledMessageID = "Recalled ID test";
 	rm.FundCode = "Funding Code Test";
-	rm.ContactInformationID = 1;
+	rm._ContactInformationID = 1;
 	rm.ResourceInfoElementID = "Resource information test";
 
 	rm.insertIntoDatabase();
 
-	rm.SentDateTime = "";
+	rm._SentDateTime = "";
 	rm.MessageContentType = "";
 	rm.MessageDescription = "";
 	rm.OriginatingMessageID = "";
@@ -435,20 +438,20 @@ int main() {
 	rm.IncidentID = "";
 	rm.RecalledMessageID = "";
 	rm.FundCode = "";
-	rm.ContactInformationID = 0;
+	rm._ContactInformationID = 0;
 	rm.ResourceInfoElementID = "";
 
 	rm.getFromDatabase();
 
-	std::cout << "DataTime: " << rm.SentDateTime << std::endl;
+	std::cout << "DataTime: " << rm._SentDateTime << std::endl;
 	std::cout << "MessageContentType: " << rm.MessageContentType << std::endl;
 	std::cout << "Message Description: " << rm.MessageDescription << std::endl;
 	std::cout << "Incident description: " << rm._IncidentInformation.IncidentDescription << std::endl;
 	std::cout << "Message Recall type: " << rm._MessageRecall.RecallType << std::endl;
 	std::cout << "Funding Info: " << rm._Funding.FundingInfo << std::endl;
 	std::cout << "Contact Description: " << rm._ContactInformationType.ContactDescription << std::endl;
-	std::cout << "Resource name: " << rm._ResourceInformation._Resource.NAME << std::endl;
-	*/	
+	std::cout << "Resource name: " << rm._ResourceInformation._Resource.Name << std::endl;
+		
 
 	return EXIT_SUCCESS;
 }
