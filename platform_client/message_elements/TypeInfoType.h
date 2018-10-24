@@ -1,13 +1,17 @@
 #include <string>
+#include "SqlBase.h"
 
 #ifndef TYPEINFOTYPE_H
 #define TYPEINFOTYPE_H
 
-class TypeInfoType {
+class TypeInfoType : public SqlBase {
 public:
-	TypeInfoType(int TypeInfoID, std::string ChildInfo) : TypeInfoID(TypeInfoID),
+	TypeInfoType(int TypeInfoID = -1, std::string ChildInfo = "") : TypeInfoID(TypeInfoID),
 					ChildInfo(ChildInfo) {}
 	~TypeInfoType() {}
+	void getFromDatabase();
+    void insertIntoDatabase();
+    bool areFieldsValid();
 
 	int TypeInfoID;
 	std::string ChildInfo;
