@@ -72,7 +72,9 @@ int main(int argc, char **argv){
     }
     if(FD_ISSET(clientfd, &ready_set)){
       Rio_readlineb(&rio, data, MAXLINE);
-      Fputs(data, stdout);
+      if(data[0] == '{' || data[0] == '[') {
+        Fputs(data, stdout);
+      }
       memset(&data, 0, sizeof(data));
     }
   }
