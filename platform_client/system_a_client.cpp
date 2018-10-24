@@ -69,19 +69,17 @@ int main(int argc, char **argv){
       strcpy(char_star,send_this.c_str());
       Rio_writen(clientfd, char_star, strlen(char_star));
       string dataString(char_star);
+      logger.log(Logger::LogLevel::INFO, "Sending message from "+name_string);
       logger.log(Logger::LogLevel::INFO, dataString); 
       memset(&data, 0, sizeof(data));
     }
     if(FD_ISSET(clientfd, &ready_set)){
       Rio_readlineb(&rio, data, MAXLINE);
-<<<<<<< HEAD
-      Fputs(data, stdout);
-      logger.log(Logger::LogLevel::INFO,data);
-=======
+      logger.log(Logger::LogLevel::INFO, "Message Recieved by "+name_string);
+      logger.log(Logger::LogLevel::INFO, data);
       if(data[0] == '{' || data[0] == '[') {
         Fputs(data, stdout);
       }
->>>>>>> platform_client
       memset(&data, 0, sizeof(data));
     }
   }
