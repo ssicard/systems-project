@@ -1,5 +1,6 @@
 #include <string>
-#pragma once
+#ifndef CONTACTINFORMATIONTYPE_H
+#define CONTACTINFORMATIONTYPE_H
 using namespace std;
 class ContactInformationType
 {
@@ -12,4 +13,4 @@ public:
 	int ContactLocationID;
 	string AdditionalContactInformation;
 };
-
+#endif
