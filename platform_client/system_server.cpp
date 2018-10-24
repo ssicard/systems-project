@@ -139,7 +139,6 @@ void communication(pool *p) {
             json_byte_cnt += n; // increment bytes received by json client
             printf("Received %d (%d total) bytes by a json client with fd[%d]\n",n,json_byte_cnt,connfd);
             handle_json_client(tmp, connfd);
-            std::cout << tmp_std_str;
             if(tmp_std_str.find("RequestResource") != std::string::npos) {
               char tmp_xml[MAXLINE];
               RequestResource request = t_engine.json_to_request_resource_msg("", tmp);
@@ -186,8 +185,7 @@ void communication(pool *p) {
 
 // right now only trying to see if client is new or not, if it is add to map
 void handle_json_client(char* tmp, int connfd){
-  nlohmann::json j = nlohmann::json::parse(tmp); // parse tmp
-  std::cout << j.dump(2) << '\n'; // print whole json for debugging purposes
+  std::cout << std::string(tmp) << '\n'; // print whole json for debugging purposes
   //std::string identity = j["identity"]; // name is here
   //if (json_name_to_fd.find(identity) == json_name_to_fd.end()){
     //never seen this name before, adding to map
