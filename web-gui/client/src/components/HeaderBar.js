@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button';
 import SearchIcon from '@material-ui/icons/Search';
 import FilterIcon from '@material-ui/icons/FilterList';
 import XIcon from '@material-ui/icons/HighlightOff';
-import {changeSender, changeRecipient, changeStartRange, changeEndRange, clearFilter} from '../actions/FilterActions';
+import {changeRequest, changeResponse, changeStartRange, changeEndRange, clearFilter} from '../actions/FilterActions';
 import {filterLogs} from '../actions/LogActions';
 class HeaderBar extends Component{
     styles = {
@@ -78,17 +78,17 @@ class HeaderBar extends Component{
                       <SearchIcon />
                     </div>
                     <InputBase
-                      placeholder="Search for a Sender…"
+                      placeholder="Search Requests"
                       style={this.styles.searchInput}
-                      onChange={(change)=>{this.props.changeSender(change.target.value);}}
+                      onChange={(change)=>{this.props.changeRequest(change.target.value);}}
                       value={this.props.filter.sender}
                     />
                   </div>
                   <div style={this.styles.searchBar}>
                     <InputBase
-                      placeholder="Search for a Recipient…"
+                      placeholder="Search Responses"
                       style={this.styles.searchInput}
-                      onChange={(change)=>{this.props.changeRecipient(change.target.value);}}
+                      onChange={(change)=>{this.props.changeResponse(change.target.value);}}
                       value={this.props.filter.recipient}
                     />
                   </div>
@@ -111,4 +111,4 @@ const mapStateToProps = store =>{
     filter:store.filter,
   })
 }
-export default connect(mapStateToProps,{changeSender, changeRecipient, changeStartRange, changeEndRange, clearFilter, filterLogs})(HeaderBar);
+export default connect(mapStateToProps,{changeRequest, changeResponse, changeStartRange, changeEndRange, clearFilter, filterLogs})(HeaderBar);

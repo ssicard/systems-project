@@ -5,7 +5,7 @@ class LogContainer extends Component {
     styles={
         container:{
             display:'flex',
-            flex:1,
+            flex:1.5,
             flexDirection: 'column',
             padding: '10px'
         },
@@ -33,7 +33,7 @@ class LogContainer extends Component {
   renderLogs = ()=>{
         return this.props.logs.map((log,i)=>{
             return(
-                <LogEntry sender={log.sender} recipient={log.recipient} time={log.timestamp} guid={log.guid} />
+                <LogEntry log={log} />
             );
         })
   }

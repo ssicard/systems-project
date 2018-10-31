@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import Paper from '@material-ui/core/Paper';
-import ArrowIcon from '@material-ui/icons/ArrowRightAlt'
+import ArrowIcon from '@material-ui/icons/ArrowRightAlt';
 import { connect } from 'react-redux';
 import {selectLog} from '../actions/LogActions';
 
@@ -19,8 +18,8 @@ class LogEntry extends Component {
             borderRight: "2px solid black",
             borderColor: "#85aef2",
             borderRadius: "2px",
-            alignItems: "center",
-            flexDirection: 'column',
+            flexDirection: 'row',
+            display:'flex'
 
         },
         entryDataMiddleCell: {
@@ -28,6 +27,7 @@ class LogEntry extends Component {
             paddingRight: "10px",
             alignItems: "center",
             flexDirection: 'column',
+            flex: 4,
         },
         entryDataRightCell: {
             paddingLeft: "10px",
@@ -46,15 +46,12 @@ class LogEntry extends Component {
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'center',
+        },
+        attribContainer:{
+            alignItems: "center",
+            flexDirection: 'column',
         }
     }
-  getEntryContainerStyle = () =>{
-      if(this.props.selectedLog==this.props.guid){
-          return {marginBottom:'5px', border: '2px solid red'};
-      } else {
-          return {marginBottom: '5px'};
-      }
-  }
   getLeftCellStyle = () => {
     if(this.props.selectedLog == this.props.guid){
         return {...this.styles.entryDataLeftCell, borderColor:'red'};
@@ -76,42 +73,46 @@ class LogEntry extends Component {
         this.props.selectLog(this.props.guid);
     }
   }
+  getLabelStyle = () => {
+    if(this.props.selectedLog == this.props.guid){
+        return {...this.styles.label,color:'red'};
+    } else {
+        return this.styles.label;
+    }
+}
   render() {
     return (
-      <Paper
-       style={this.getEntryContainerStyle()}
-       onClick={this.selectLog}
-      >
-        <div name="entryInnerContainer" style={this.styles.entryInnerContainer}>
-          <div name="time" style={this.getLeftCellStyle()}>
-                <div style={this.styles.label}>
-                    Time
+        <div name="entryInnerContainer" style={this.styles.entryInnerContainer} onClick={this.selectLog}>        
+            <div name="time" style={this.getLeftCellStyle()}>
+                <ArrowIcon style={this.getArrowIconStyle()}/>  
+                <div style={this.styles.attribContainer}>
+                    <div style={this.getLabelStyle()}>
+                        Time Received
+                    </div>
+                    <div>
+                        {this.props.time}
+                    </div>
                 </div>
-                <div>
-                    {this.props.time}
-                </div>
-          </div>
-          <div name="sourceDestContainer" style={this.styles.sourceDestContainer}>
-            <div name="sender" style={this.styles.entryDataMiddleCell}>
-                    <div style={this.styles.label}>
+            </div>
+            <div name="sourceDestContainer" style={this.styles.sourceDestContainer}>
+                <div name="sender" style={this.styles.entryDataMiddleCell}>
+                    <div style={this.getLabelStyle()}>
                         Sender
                     </div>
                     <div>
                         {this.props.sender}
                     </div>
-            </div>
-            <ArrowIcon style={this.getArrowIconStyle()}/>
-            <div name="recipient" style={this.styles.entryDataRightCell}>
-                    <div style={this.styles.label}>
-                        Recipient
+                </div>
+                <div name="recipient" style={this.styles.entryDataRightCell}>
+                    <div style={this.getLabelStyle()}>
+                        Type
                     </div>
                     <div>
-                        {this.props.recipient}
+                        Response To Request
                     </div>
+                </div>
             </div>
-          </div>
         </div>
-      </Paper>
     );
   }
 }

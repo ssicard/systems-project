@@ -5,7 +5,7 @@ import LogContainer from './LogContainer';
 import MessageViewer from './MessageViewer';
 import HeaderBar from './HeaderBar';
 import {PENDING_STATE, INITIAL_STATE} from '../constants';
-import {loadLogs} from '../actions/LogActions';
+import {loadLogs, createLogs} from '../actions/LogActions';
 import Button from '@material-ui/core/Button/Button';
 class RootContainer extends Component {
   styles = {
@@ -17,6 +17,9 @@ class RootContainer extends Component {
       flexDirection: 'row',
       display: 'flex',
     },
+  }
+  componentWillMount() {
+    this.props.loadLogs();
   }
   renderContent=()=>{
     if(this.props.loadState == PENDING_STATE){
@@ -32,7 +35,7 @@ class RootContainer extends Component {
             Load Logs
           </Button>
         </div>
-      )
+      );
     }else {
       return (
         <div style={this.styles.mainAppContainer}>
@@ -49,8 +52,7 @@ class RootContainer extends Component {
         <HeaderBar />
         </div>
         <div style={this.styles.mainAppContainer}>
-            <LogContainer />
-            <MessageViewer />
+            {this.renderContent()}
         </div>
       </div>
     );
@@ -58,7 +60,9 @@ class RootContainer extends Component {
 }
 const mapStateToProps = store =>{
   return ({
-    loadState: store.loadState,
+    loadState: store.loadState.loadState,
+    requests: store.requests,
+    responses: store.responses,
   })
 }
-export default connect(mapStateToProps,{loadLogs})(RootContainer);
+export default connect(mapStateToProps,{loadLogs,createLogs})(RootContainer);

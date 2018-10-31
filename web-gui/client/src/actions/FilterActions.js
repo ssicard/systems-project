@@ -1,4 +1,4 @@
-import {CHANGE_START_RANGE, CHANGE_END_RANGE, CHANGE_SENDER_FILTER, CLEAR_FILTER, CHANGE_RECIPIENT_FILTER} from '../constants';
+import {CHANGE_START_RANGE, CHANGE_END_RANGE, CHANGE_REQUEST_FILTER, CLEAR_FILTER, CHANGE_RESPONSE_FILTER} from '../constants';
 
 export function changeStartRange(datetime){
     return {
@@ -14,17 +14,17 @@ export function changeEndRange(datetime){
     };
 }
 
-export function changeSender(sender){
+export function changeRequest(sender){
     return {
-        type: CHANGE_SENDER_FILTER,
+        type: CHANGE_REQUEST_FILTER,
         payload: sender,
     };
 }
 
-export function changeRecipient(recipient){
+export function changeResponse(sender){
     return {
-        type: CHANGE_RECIPIENT_FILTER,
-        payload: recipient,
+        type: CHANGE_RESPONSE_FILTER,
+        payload: sender,
     };
 }
 
