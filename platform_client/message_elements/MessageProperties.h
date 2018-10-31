@@ -1,13 +1,18 @@
 #include <string>
-#pragma once
-using namespace std;
+#ifndef MESSAGEPROPERTIES_H
+#define MESSAGEPROPERTIES_H
+#include <string>
+//#include "SqlBase.h"
+#include "MessagePropertiesLookup.h"
+
 class MessageProperties
 {
 public:
-	MessageProperties(int id, string messageTypeName);
+	MessageProperties(int id, std::string messageTypeName);
+	MessageProperties();
 	~MessageProperties();
 	int id;
-	string MessageTypeName;
+	std::string MessageTypeName;
 	int MessageID=0;
 	int SentDateTime=0;
 	int MessageContentType = 0;
@@ -64,4 +69,4 @@ public:
 	int Location = 0;
 	int MessagePropertyLookupID = 0;
 };
-
+#endif

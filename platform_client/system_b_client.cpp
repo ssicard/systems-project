@@ -201,7 +201,7 @@ void parse_data(string *rawXml){
 
 
 int main(int argc, char **argv){
-
+	Logger logger(Logger::LogLevel::INFO, Logger::LogMode::NORMAL);
 	int clientfd;
 	char *host, *port, data[MAXLINE], buf[MAXLINE];
 	rio_t rio;
@@ -250,6 +250,7 @@ int main(int argc, char **argv){
 			
 			char message_cstyle[send_this.length()];
 			strcpy(message_cstyle, send_this.c_str());
+			logger.log(Logger::LogLevel::INFO, "[MESSAGE SENT]"+(std::string(send_this.c_str())));
 			Rio_writen(clientfd, message_cstyle, strlen(message_cstyle));
 			memset(&data, 0, sizeof(data));
 		}
@@ -260,6 +261,7 @@ int main(int argc, char **argv){
 			//Write message to output
 			Fputs(data, stdout);
 			string dataString(data);
+			logger.log(Logger::LogLevel::INFO, "[MESSAGE RECEIVED]"+dataString);
 			//Temporarily read an xml file to simulate reading an XML message
 			ifstream xmlStream("tree.xml");
 			string content;

@@ -1,17 +1,25 @@
 #include <string>
-#pragma once
-using namespace std;
+
+#ifndef ASSIGNMENTINFORMATION_H
+#define ASSIGNMENTINFORMATION_H
 class AssignmentInformation
 {
 public:
-	AssignmentInformation(int assignmentInstructionsID);
-	~AssignmentInformation();
+	AssignmentInformation(int AssignmentInformationID = 0, std::string Quantity = "",
+                              std::string Restrictions = "", std::string AnticipatedFunction = "",
+                              std::string PriceQuote = "", std::string OrderID = "",
+                              std::string AssignmentInstructionID = "") :
+                              AssignmentInformationID(AssignmentInformationID), Quantity(Quantity),
+                              Restrictions(Restrictions), AnticipatedFunction(AnticipatedFunction),
+                              PriceQuote(PriceQuote), OrderID(OrderID),
+                              AssignmentInstructionID(AssignmentInstructionID) {}
+	~AssignmentInformation() {}
 	int AssignmentInformationID;
-	string Quantity;
-	string Restrctions;
-	string AnticipatedFunction;
-	string PriceQuote;
-	string OrderID;
-	string AssignmentInstructionsID;
+	std::string Quantity;
+	std::string Restrictions;
+	std::string AnticipatedFunction;
+	std::string PriceQuote;
+	std::string OrderID;
+	std::string AssignmentInstructionID;
 };
-
+#endif /* ASSIGNMENTINFORMATION_H */

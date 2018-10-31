@@ -1,14 +1,19 @@
 #include <string>
-#pragma once
-using namespace std;
-class AssignmentInstructions
-{
-public:
-	AssignmentInstructions(int assignmentInstructionsID);
-	~AssignmentInstructions();
-	int AssignmentInstructionsID;
-	string ModeOfTransportation;
-	string NavigationInstructions;
-	string ReportingInstructions;
-};
 
+#ifndef ASSIGNMENTINSTRUCTIONS_H
+#define ASSIGNMENTINSTRUCTIONS_H
+
+class AssignmentInstructions {
+public:
+	AssignmentInstructions(int AssignmentInstructionsID, std::string ModeOfTransportation,
+							std::string NavigationInstructions, std::string ReportingInstructions) :
+							AssignmentInstructionsID(AssignmentInstructionsID), ModeOfTransportation(ModeOfTransportation),
+							NavigationInstructions(NavigationInstructions), ReportingInstructions(ReportingInstructions) {}
+	~AssignmentInstructions() {}
+
+	int AssignmentInstructionsID;
+	std::string ModeOfTransportation;
+	std::string NavigationInstructions;
+	std::string ReportingInstructions;
+};
+#endif /* ASSIGNMENTINSTRUCTIONS_H */

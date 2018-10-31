@@ -1,14 +1,18 @@
 #include <string>
-#pragma once
-using namespace std;
-class LocationType
-{
-public:
-	LocationType(int locationTypeID);
-	~LocationType();
-	int LocationTypeID;
-	string LocationDescription;
-	string Address;
-	string TargetArea;
-};
 
+#ifndef LOCATIONTYPE_H
+#define LOCATIONTYPE_H
+
+class LocationType {
+public:
+	LocationType(int LocationTypeID, std::string LocationDescription, std::string Address,
+					std::string TargetArea) : LocationTypeID(LocationTypeID), LocationDescription(LocationDescription),
+					Address(Address), TargetArea(TargetArea) {}
+	~LocationType() {}
+
+	int LocationTypeID;
+	std::string LocationDescription;
+	std::string Address;
+	std::string TargetArea;
+};
+#endif /* LOCATIONTYPE_H */

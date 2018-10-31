@@ -1,15 +1,16 @@
 #include <string>
-#pragma once
+#ifndef OWNERSHIPINFORMATION_H
+#define OWNERSHIPINFORMATION_H
 using namespace std;
 class OwnershipInformation
 {
 public:
-	OwnershipInformation(int ownershipInformationID);
-	~OwnershipInformation();
+	OwnershipInformation(int ownershipInformationID = 0) {}
+	~OwnershipInformation() {}
 	int OwnershipInformationID;
 	string Owner;
 	string OwningJurisdiction;
 	string HomeDispatch;
 	string HomeUnit;
 };
-
+#endif

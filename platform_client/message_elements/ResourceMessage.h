@@ -1,21 +1,31 @@
 #include <string>
-#pragma once
-using namespace std;
-class ResourceMessage
-{
-public:
-	ResourceMessage(string messageID);
-	~ResourceMessage();
-	string MessageID;
-	int SentDateTime;
-	string MessageContentType;
-	string MessageDescription;
-	string OriginatingMessageID;
-	string PrecedingMessageID;
-	string IncidentID;
-	string RecalledMessageID;
-	string FundCode;
-	string ContactInformationID;
-	string ResourceInfoElementID;
-};
 
+#ifndef RESOURSEMESSAGE_H
+#define RESOURSEMESSAGE_H
+
+class ResourceMessage {
+public:
+	ResourceMessage(std::string MessageID, int SentDateTime, std::string MessageContentType,
+					std::string MessageDescription, std::string OriginatingMessageID,
+					std::string PrecedingMessageID, std::string IncidentID, std::string RecalledMessageID,
+					std::string FundCode, std::string ContactInformationID, std::string ResourceInfoElementID) :
+					MessageID(MessageID), SentDateTime(SentDateTime), MessageContentType(MessageContentType),
+					MessageDescription(MessageDescription), OriginatingMessageID(OriginatingMessageID),
+					PrecedingMessageID(PrecedingMessageID), IncidentID(IncidentID),
+					RecalledMessageID(RecalledMessageID), FundCode(FundCode), ContactInformationID(ContactInformationID),
+					ResourceInfoElementID(ResourceInfoElementID) {}
+	~ResourceMessage() {}
+
+	std::string MessageID;
+	int SentDateTime;
+	std::string MessageContentType;
+	std::string MessageDescription;
+	std::string OriginatingMessageID;
+	std::string PrecedingMessageID;
+	std::string IncidentID;
+	std::string RecalledMessageID;
+	std::string FundCode;
+	std::string ContactInformationID;
+	std::string ResourceInfoElementID;
+};
+#endif /* RESOURSEMESSAGE_H */

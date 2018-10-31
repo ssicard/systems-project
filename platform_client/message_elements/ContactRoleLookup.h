@@ -1,12 +1,15 @@
 #include <string>
-#pragma once
-using namespace std;
-class ContactRoleLookup
-{
-public:
-	ContactRoleLookup(int contactRoleID);
-	~ContactRoleLookup();
-	int ContactRoleID;
-	string Description;
-};
 
+#ifndef CONTACTROLELOOKUP_H
+#define CONTACTROLELOOKUP_H
+
+class ContactRoleLookup {
+public:
+	ContactRoleLookup(int ContactRoleID, std::string Description) : ContactRoleID(ContactRoleID),
+						Description(Description) {}
+	~ContactRoleLookup() {}
+
+	int ContactRoleID;
+	std::string Description;
+};
+#endif /* CONTACTROLELOOKUP_H */

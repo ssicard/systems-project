@@ -1,13 +1,16 @@
 #include <string>
-#pragma once
-using namespace std;
-class ValueListType
-{
-public:
-	ValueListType(int valueListID);
-	~ValueListType();
-	int ValueListID;
-	string ValueListURN;
-	string ValueType;
-};
 
+#ifndef VALUELISTTYPE_H
+#define VALUELISTTYPE_H
+
+class ValueListType {
+public:
+	ValueListType(int ValueListID, std::string ValueListURN, std::string ValueType) :
+	 				ValueListID(ValueListID), ValueListURN(ValueListURN), ValueType(ValueType) {}
+	~ValueListType() {}
+
+	int ValueListID;
+	std::string ValueListURN;
+	std::string ValueType;
+};
+#endif /* VALUELISTTYPE_H */
