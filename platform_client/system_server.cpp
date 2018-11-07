@@ -245,7 +245,6 @@ void communication(pool *p) {
               //TODO: handle_xml_client(tmp, connfd);
             } else { // we don't mess with this
               printf("[error] unknown protocol\n");
-//>>>>>>> 5f6e923e4ddf97b190bb0f23911274b03993c498
             }
           }
           j++;
