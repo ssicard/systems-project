@@ -155,6 +155,7 @@ void communication(pool *p) {
               if(tmp_std_str.find("RequestResource") != std::string::npos) {
 				// TODO: Change this to ResourceMessage
                 //RequestResource request = t_engine.json_to_request_resource_msg("", tmp);
+				  std::cout << "Before json to RR\n";
                 ResourceMessage request = t_engine.json_to_request_resource_msg("", tmp);
 
 
@@ -179,7 +180,9 @@ void communication(pool *p) {
 			    request.res_info.insertIntoDatabase();
 			    request.contact_info.insertIntoDatabase();
 				*/
-				
+			
+				std::cout << "ResourceInfoElementID is " << request.ResourceInfoElementID << std::endl;
+
 				std::cout << "Before insert into database at line " << __LINE__ << std::endl;
 				request.insertIntoDatabase();
 				std::cout << "after insert into database at line " << __LINE__ << std::endl;

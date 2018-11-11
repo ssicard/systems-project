@@ -224,10 +224,10 @@ ResourceMessage TranslationEngine::json_to_request_resource_msg(std::string id, 
   msg._Funding.FundingInfo = req_res["Funding"]["FundingInfo"] == nullptr ? "" : req_res["Funding"]["FundingInfo"];
 
   // Initialize ResourceInfoElementID
-  msg._ResourceInformation.ResourceInfoElementID = req_res["ResourceInformation"]["Resource"]["ResourceInfoElementID"] == nullptr ? "" : req_res["ResourceInformation"]["Resource"]["ResourceInfoElementID"];
+  msg.ResourceInfoElementID = req_res["ResourceInformation"]["ResourceInfoElementID"] == nullptr ? "" : req_res["ResourceInformation"]["ResourceInfoElementID"];
 
   // Initialize _ResourceInformation object
-  msg._ResourceInformation.ResourceInfoElementID = req_res["ResourceInformation"]["Resource"]["ResourceInfoElementID"] == nullptr ? "" : req_res["ResourceInformation"]["Resource"]["ResourceInfoElementID"];
+  msg._ResourceInformation.ResourceInfoElementID = req_res["ResourceInformation"]["ResourceInfoElementID"] == nullptr ? "" : req_res["ResourceInformation"]["ResourceInfoElementID"];
 
   // Initialize ResourceID field in _ResourceInformation object
   msg._ResourceInformation.ResourceID = req_res["ResourceInformation"]["Resource"]["ResourceID"]  == nullptr ? "" : req_res["ResourceInformation"]["Resource"]["ResourceID"];
@@ -298,10 +298,10 @@ ResourceMessage TranslationEngine::json_to_response_to_request_resource_msg(std:
   msg._Funding.FundingInfo = req_res["Funding"]["FundingInfo"] == nullptr ? "" : req_res["Funding"]["FundingInfo"];
   
   // Initiailze ResourceInfoElementID
-  msg.ResourceInfoElementID = req_res["ResourceInformation"]["Resource"]["ResourceInfoElementID"] == nullptr ? "" : req_res["ResourceInformation"]["Resource"]["ResourceInfoElementID"];
+  msg.ResourceInfoElementID = req_res["ResourceInformation"]["ResourceInfoElementID"] == nullptr ? "" : req_res["ResourceInformation"]["ResourceInfoElementID"];
 
   // Initiailze _ResourceInformation object
-  msg._ResourceInformation.ResourceInfoElementID = req_res["ResourceInformation"]["Resource"]["ResourceInfoElementID"] == nullptr ? "" : req_res["ResourceInformation"]["Resource"]["ResourceInfoElementID"];
+  msg._ResourceInformation.ResourceInfoElementID = req_res["ResourceInformation"]["ResourceInfoElementID"] == nullptr ? "" : req_res["ResourceInformation"]["ResourceInfoElementID"];
 
   // Intiialize ResourceID field in _ResourceInformation object
   msg._ResourceInformation.ResourceID = req_res["ResourceInformation"]["Resource"]["ResourceID"]  == nullptr ? "" : req_res["ResourceInformation"]["Resource"]["ResourceID"];
