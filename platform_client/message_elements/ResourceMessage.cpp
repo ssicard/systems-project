@@ -124,28 +124,36 @@ void ResourceMessage::insertIntoDatabase() {
 		sql::PreparedStatement *prep_stmt;
 		sql::mysql::MySQL_Driver *driver;
 		sql::Statement *stmt;
+		sql::ResultSet *res;
 
 		driver = sql::mysql::get_mysql_driver_instance();
 		con = driver->connect(EXAMPLE_HOST, EXAMPLE_USER, EXAMPLE_PASS);
 		stmt = con->createStatement();
 		stmt->execute("USE " EXAMPLE_DB);
 
-		prep_stmt = con->prepareStatement("INSERT INTO `ResourceMessage`(`MessageID`, `SentDateTime`, `MessageContentType`, `MessageDescription`, `OriginatingMessageID`, `PrecedingMessageID`, `IncidentID`, `RecalledMessageID`, `FundCode`, `ContactInformationID`, `ResourceInfoElementID`) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+		prep_stmt = con->prepareStatement("INSERT INTO `ResourceMessage`(`SentDateTime`, `MessageContentType`, `MessageDescription`, `OriginatingMessageID`, `PrecedingMessageID`, `IncidentID`, `RecalledMessageID`, `FundCode`, `ContactInformationID`, `ResourceInfoElementID`) VALUES (?,?,?,?,?,?,?,?,?,?)");
 
-		prep_stmt->setString(1, this->MessageID);
-		prep_stmt->setString(2, this->_SentDateTime);
-		prep_stmt->setString(3, this->MessageContentType);
-		prep_stmt->setString(4, this->MessageDescription);
-		prep_stmt->setString(5, this->OriginatingMessageID);
-		prep_stmt->setString(6, this->PrecedingMessageID);
-		prep_stmt->setString(7, this->IncidentID);
-		prep_stmt->setString(8, this->RecalledMessageID);
-		prep_stmt->setString(9, this->FundCode);
-		prep_stmt->setInt(10, this->_ContactInformationID);
-		prep_stmt->setString(11, this->ResourceInfoElementID);
+		prep_stmt->setString(1, this->_SentDateTime);
+		prep_stmt->setString(2, this->MessageContentType);
+		prep_stmt->setString(3, this->MessageDescription);
+		prep_stmt->setString(4, this->OriginatingMessageID);
+		prep_stmt->setString(5, this->PrecedingMessageID);
+		prep_stmt->setString(6, this->IncidentID);
+		prep_stmt->setString(7, this->RecalledMessageID);
+		prep_stmt->setString(8, this->FundCode);
+		prep_stmt->setInt(9, this->_ContactInformationID);
+		prep_stmt->setString(10, this->ResourceInfoElementID);
 
 		prep_stmt->execute();
 
+		prep_stmt = con->prepareStatement("SELECT MAX(MessageID) as MessageID FROM ResouceMessage");
+
+		res = prep_stmt->executeQuery();
+
+		while (res->next()) {
+			this->MessageID = res->getString("MessageID");
+		}
+		printf("the message id was theoretically %d\n",this->MessageID);
 		delete stmt;
 		delete prep_stmt;
 		delete con;
