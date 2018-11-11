@@ -148,7 +148,9 @@ void communication(pool *p) {
               l.log(Logger::LogLevel::INFO, logMessage.str());
               handle_json_client(tmp, connfd);
               if(tmp_std_str.find("RequestResource") != std::string::npos) {
-                RequestResource request = t_engine.json_to_request_resource_msg("", tmp);
+				// TODO: Change this to ResourceMessage
+                //RequestResource request = t_engine.json_to_request_resource_msg("", tmp);
+                ResourceMessage request = t_engine.json_to_request_resource_msg("", tmp);
 
 
 			    // SAVE TO DATABASE
@@ -158,6 +160,7 @@ void communication(pool *p) {
 				// when db needs them to be ints and vice versa. 
 				// Too lazy to do parsing so just added the fields to the classes
 				// with the right type and have the sql code just pulling from those
+				/*
 			    request.res_info._AssignmentInformation = request.res_info.assign_info;
 			    request.res_info._ScheduleInformation = request.res_info.sched_info;
 				int id = id_count++;
@@ -170,7 +173,11 @@ void communication(pool *p) {
 			    request.fund.insertIntoDatabase();
 			    request.res_info.insertIntoDatabase();
 			    request.contact_info.insertIntoDatabase();
+				*/
 
+				request.insertIntoDatabase();
+
+				// TODO: Check that parameter change didn't break anything
                 std::string out = t_engine.request_resource_msg_to_xml(request) + "\n";
                 //strcpy(tmp_xml, out.c_str());
                 stringstream logMessageIn;
@@ -181,7 +188,13 @@ void communication(pool *p) {
                 logMessageOut << "[Sent Message to "<<p->clientfd[j]<<"]"<<out;
                 l.log(Logger::LogLevel::INFO, logMessageOut.str());
               } else if(tmp_std_str.find("ResponseToRequestResource") != std::string::npos) {
-                ResponseToRequestResource response = t_engine.json_to_response_to_request_resource_msg("", tmp);
+				// TODO: Change this to ResourceMessage
+                //ResponseToRequestResource response = t_engine.json_to_response_to_request_resource_msg("", tmp);
+                ResourceMessage response = t_engine.json_to_response_to_request_resource_msg("", tmp);
+
+				response.insertIntoDatabase();
+
+				// TODO: Make sure that parameter type change didn't break anything
                 std::string out = t_engine.response_to_request_resource_msg_to_xml(response) + "\n";
                 //strcpy(tmp_xml, out.c_str());
                 stringstream logMessageIn;
@@ -199,7 +212,9 @@ void communication(pool *p) {
               logMessage << "Received "<<n<<"("<<xml_byte_cnt<<" total) bytes by a xml client with fd["<<connfd<<"]";
               l.log(Logger::LogLevel::INFO, logMessage.str());
               if(tmp_std_str.find("RequestResource") != std::string::npos) {
-                RequestResource request = t_engine.xml_to_request_resource_msg("", tmp);
+				// TODO: Change this to ResourceMessage
+                //RequestResource request = t_engine.xml_to_request_resource_msg("", tmp);
+                ResourceMessage request = t_engine.xml_to_request_resource_msg("", tmp);
 			    
 				// SAVE TO DATABASE
 				// TODO: CLEAN THIS HACKY CODE
@@ -208,6 +223,7 @@ void communication(pool *p) {
 				// when db needs them to be ints and vice versa. 
 				// Too lazy to do parsing so just added the fields to the classes
 				// with the right type and have the sql code just pulling from those
+				/*
 			    request.res_info._AssignmentInformation = request.res_info.assign_info;
 			    request.res_info._ScheduleInformation = request.res_info.sched_info;
 				int id = id_count++;
@@ -220,7 +236,11 @@ void communication(pool *p) {
 			    request.fund.insertIntoDatabase();
 			    request.res_info.insertIntoDatabase();
 			    request.contact_info.insertIntoDatabase();
+				*/
+
+				request.insertIntoDatabase();
                 
+				// TODO: Ensure parameter type change didn't break anything
 				std::string out = t_engine.request_resource_msg_to_json(request) + "\n";
                 //strcpy(tmp_json, out.c_str());
                 stringstream logMessageIn;
@@ -231,7 +251,13 @@ void communication(pool *p) {
                 logMessageOut << "[Sent Message to "<<p->clientfd[j]<<"]"<<out;
                 l.log(Logger::LogLevel::INFO, logMessageOut.str());
               } else if(tmp_std_str.find("ResponseToRequestResource") != std::string::npos) {
-                ResponseToRequestResource response = t_engine.xml_to_response_to_request_resource_msg("", tmp);
+				// TODO: Change to ResourceMessage
+                //ResponseToRequestResource response = t_engine.xml_to_response_to_request_resource_msg("", tmp);
+                ResourceMessage response = t_engine.xml_to_response_to_request_resource_msg("", tmp);
+
+				response.insertIntoDatabase();
+
+				// TODO: Ensure paramter change does not break anything
                 std::string out = t_engine.response_to_request_resource_msg_to_json(response) + "\n";
                 //strcpy(tmp_json, out.c_str());
                 stringstream logMessageIn;
