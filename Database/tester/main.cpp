@@ -38,7 +38,7 @@
 int main() {
 	std::cout << "Connector/C++ tutorial framework..." << std::endl;
 
-	
+	/*
 	AssignmentInstructions* a_instr = new AssignmentInstructions(1);
 	a_instr->ModeOfTransportation = "ambulance";
 	a_instr->NavigationInstructions = "left right left right";
@@ -414,7 +414,7 @@ int main() {
 	std::cout << "Schedule informatioe Type: " << ri._ScheduleInformation.ScheduleType << std::endl;
 	std::cout << "Schedule location: " << ri._ScheduleInformation._Location.Address << std::endl;	
 		
-
+*/
 		
 	ResourceMessage rm{"messageID"};
 	rm._SentDateTime = "2018/10/20 12:00:00";
@@ -429,6 +429,8 @@ int main() {
 	rm.ResourceInfoElementID = "Resource information test";
 
 	rm.insertIntoDatabase();
+
+	std::cout << "INSERTED" << std::endl;
 
 	rm._SentDateTime = "";
 	rm.MessageContentType = "";
