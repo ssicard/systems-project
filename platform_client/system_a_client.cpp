@@ -70,7 +70,9 @@ int main(int argc, char **argv){
         send_this += "\n";
         char *msg = new char[send_this.length()];
         strcpy(msg,send_this.c_str());
+		std::cout << "Sending to server!\n";
         Rio_writen(clientfd, msg, strlen(msg));
+		std::cout << "After send to server!\n";
         string dataString(msg);
         logger.log(Logger::LogLevel::INFO, "Sending message from "+name_string);
         logger.log(Logger::LogLevel::INFO, dataString);
@@ -81,7 +83,9 @@ int main(int argc, char **argv){
       }
     }
     if(FD_ISSET(clientfd, &ready_set)){
+	  //std::cout << "Reading from server\n";
       Rio_readlineb(&rio, data, MAXLINE);
+	  //std::cout << "After read from server\n";
       logger.log(Logger::LogLevel::INFO, "Message Recieved by "+name_string);
       logger.log(Logger::LogLevel::INFO, data);
       if(!connection_msg_seen) {

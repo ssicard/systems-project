@@ -85,29 +85,37 @@ void ResourceMessage::getFromDatabase() {
 
 void ResourceMessage::insertIntoDatabase() {
 		if (this->IncidentID != "") {
+			std::cout << "Inserting IncidentInformation\n";
 			this->_IncidentInformation.IncidentID = this->IncidentID;
 			this->_IncidentInformation.insertIntoDatabase();
 		}
 
 		if (this->RecalledMessageID != "") {
+			std::cout << "Insertint Message Recall\n";
 			this->_MessageRecall.RecalledMessageID = this->RecalledMessageID;
 			this->_MessageRecall.insertIntoDatabase();
 		}
 
 		if (this->FundCode != "") {
+			std::cout << "Inserting Funding\n";
 			this->_Funding.FundCode = this->FundCode;
 			this->_Funding.insertIntoDatabase();
 		}
 
 		if (this->_ContactInformationID != -1) {
+			std::cout << "Inserting ContactInformation\n";
 			this->_ContactInformationType.ContactInformationID = this->_ContactInformationID;
 			this->_ContactInformationType.insertIntoDatabase();
 		}
 
 		if (this->ResourceInfoElementID != "") {
+			std::cout << "Inserting ResourceInformation\n";
 			this->_ResourceInformation.ResourceInfoElementID = this->ResourceInfoElementID;
 			this->_ResourceInformation.insertIntoDatabase();
 		}
+
+		std::cout << "After all object inserts\n";
+		/*
 		char* strUuid;
 	sprintf(strUuid, "%x%x-%x-%x-%x-%x%x%x", 
     rand(), rand(),                 // Generates a 64-bit Hex number
@@ -115,10 +123,13 @@ void ResourceMessage::insertIntoDatabase() {
     ((rand() & 0x0fff) | 0x4000),   // Generates a 32-bit Hex number of the form 4xxx (4 indicates the UUID version)
     rand() % 0x3fff + 0x8000,       // Generates a 32-bit Hex number in the range [0x8000, 0xbfff]
     rand(), rand(), rand());        // Generates a 96-bit Hex number
-
+	*/
+	std::cout << "After uuid thing\n";
 	try {
+		/*
 			std::cout << strUuid << std::endl;
 			this->MessageID = strUuid;
+			*/
 		// ...
 		sql::Connection *con;
 		sql::PreparedStatement *prep_stmt;
@@ -144,7 +155,9 @@ void ResourceMessage::insertIntoDatabase() {
 		prep_stmt->setInt(9, this->_ContactInformationID);
 		prep_stmt->setString(10, this->ResourceInfoElementID);
 
+		std::cout << "before execute in resourcemessage.cpp\n";
 		prep_stmt->execute();
+		std::cout << "after execute in resourcemessage.cpp\n";
 
 		prep_stmt = con->prepareStatement("SELECT MAX(MessageID) as MessageID FROM ResouceMessage");
 

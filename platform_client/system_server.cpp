@@ -127,17 +127,22 @@ void communication(pool *p) {
     // check if any fd is ready 
     if ((connfd > 0) && (FD_ISSET(connfd, &p->ready_set))) { 
       p->nready--;
+	  std::cout << "Client ready for reading\n";
       // reading rio to buf
       if ((n = Rio_readlineb(&rio, buf, MAXLINE)) != 0) {
+		std::cout << "After readline from client\n";
         int j = 0; // going through all j
         strcpy(tmp, buf); // we don't wanna mess with buf
         json_byte_cnt = xml_byte_cnt = 0;
         while(p->clientfd[j] >= 0){
+		  std::cout << "In loop\n";
           std::string tmp_std_str(tmp);
           if(p->clientfd[j] != connfd) {
+			std::cout << "In check that != connfd\n";
             //Rio_writen(p->clientfd[j], buf, n); // write buffer into fd
             //l.log(Logger::INFO, buf); //
             if (tmp[0] == '{' || tmp[0] == '['){ // json client
+			  std::cout << "JSON client!\n";
               json_byte_cnt += n; // increment bytes received by json client
               //print to stdout that a message was received by client connfd
               stringstream logMessage;
@@ -174,8 +179,10 @@ void communication(pool *p) {
 			    request.res_info.insertIntoDatabase();
 			    request.contact_info.insertIntoDatabase();
 				*/
-
+				
+				std::cout << "Before insert into database at line " << __LINE__ << std::endl;
 				request.insertIntoDatabase();
+				std::cout << "after insert into database at line " << __LINE__ << std::endl;
 
 				// TODO: Check that parameter change didn't break anything
                 std::string out = t_engine.request_resource_msg_to_xml(request) + "\n";
@@ -191,8 +198,9 @@ void communication(pool *p) {
 				// TODO: Change this to ResourceMessage
                 //ResponseToRequestResource response = t_engine.json_to_response_to_request_resource_msg("", tmp);
                 ResourceMessage response = t_engine.json_to_response_to_request_resource_msg("", tmp);
-
+				std::cout << "Before insert into database at " << __LINE__ << std::endl;
 				response.insertIntoDatabase();
+				std::cout << "after insert into database at line " << __LINE__ << std::endl;
 
 				// TODO: Make sure that parameter type change didn't break anything
                 std::string out = t_engine.response_to_request_resource_msg_to_xml(response) + "\n";
@@ -238,7 +246,9 @@ void communication(pool *p) {
 			    request.contact_info.insertIntoDatabase();
 				*/
 
+				std::cout << "Before insert into database at " << __LINE__ << std::endl;
 				request.insertIntoDatabase();
+				std::cout << "after insert into database at line " << __LINE__ << std::endl;
                 
 				// TODO: Ensure parameter type change didn't break anything
 				std::string out = t_engine.request_resource_msg_to_json(request) + "\n";
@@ -255,7 +265,9 @@ void communication(pool *p) {
                 //ResponseToRequestResource response = t_engine.xml_to_response_to_request_resource_msg("", tmp);
                 ResourceMessage response = t_engine.xml_to_response_to_request_resource_msg("", tmp);
 
+				std::cout << "Before insert into database at " << __LINE__ << std::endl;
 				response.insertIntoDatabase();
+				std::cout << "after insert into database at line " << __LINE__ << std::endl;
 
 				// TODO: Ensure paramter change does not break anything
                 std::string out = t_engine.response_to_request_resource_msg_to_json(response) + "\n";
@@ -311,5 +323,3 @@ void show_current_map(std::map<std::string, int> map){
     std::cout << "Name: [" << it.first << "] Connfd: [" << it.second <<  "]" << std::endl;
   }
 }
-
-
