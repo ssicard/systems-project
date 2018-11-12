@@ -1,4 +1,9 @@
 #!/bin/bash
+#
+# This file is meant to be run as a cron job on the platform server. It aims to
+# get all new messages from platform and load into the clientc database. This
+# client must handle updating thier system themselves.
+# 
 
 #====== Set clientc variables ======
 MYSQL_CLIENTC_USER="platform"
