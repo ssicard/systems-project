@@ -1,9 +1,9 @@
 #include "ScheduleInformation.h"
 
-ScheduleInformation::ScheduleInformation(int scheduleInformationID)
-{
-	this->ScheduleInformationID = scheduleInformationID;
-}
+// ScheduleInformation::ScheduleInformation(int scheduleInformationID)
+// {
+// 	this->ScheduleInformationID = scheduleInformationID;
+// }
 
 /*
 ScheduleInformation::ScheduleInformation()
@@ -67,7 +67,7 @@ void ScheduleInformation::getFromDatabase(){
 
 void ScheduleInformation::insertIntoDatabase(){
 	if(this->LocationTypeID != -1){
-		_Location.insertIntoDatabase();
+		this->_Location.insertIntoDatabase();
 	}
 
 	try {
@@ -96,10 +96,10 @@ void ScheduleInformation::insertIntoDatabase(){
 
 		prep_stmt->execute();
 
-		if (this->LocationTypeID != -1) {
-			this->_Location.LocationTypeID = this->LocationTypeID;
-			this->_Location.insertIntoDatabase();
-		}
+		// if (this->LocationTypeID != -1) {
+		// 	this->_Location.LocationTypeID = this->LocationTypeID;
+		// 	this->_Location.insertIntoDatabase();
+		// }
 
 		delete stmt;
 		delete prep_stmt;

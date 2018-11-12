@@ -151,10 +151,16 @@ void ResourceMessage::insertIntoDatabase() {
 		prep_stmt->setString(4, this->MessageDescription);
 		prep_stmt->setString(5, this->OriginatingMessageID);
 		prep_stmt->setString(6, this->PrecedingMessageID);
+
+		// check these and set to null if not initialized past default values
 		prep_stmt->setString(7, this->IncidentID);
 		prep_stmt->setString(8, this->RecalledMessageID);
 		prep_stmt->setString(9, this->FundCode);
-		prep_stmt->setInt(10, this->_ContactInformationID);
+		if (this->_ContactInformationID != -1) {
+			prep_stmt->setInt(10, this->_ContactInformationID);
+		} else {
+			prep_stmt->setNull(10, sql::DataType::INTEGER);
+		}
 		prep_stmt->setString(11, this->ResourceInfoElementID);
 
 		std::cout << "before execute in resourcemessage.cpp\n";

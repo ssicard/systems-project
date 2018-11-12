@@ -15,7 +15,8 @@ public:
 	ResourceMessage(std::string MessageID = "", int SentDateTime = -1, std::string MessageContentType = "",
 					std::string MessageDescription = "", std::string OriginatingMessageID = "",
 					std::string PrecedingMessageID = "", std::string IncidentID = "", std::string RecalledMessageID = "",
-					std::string FundCode = "", std::string ContactInformationID = "", std::string ResourceInfoElementID = "", std::string _SentDateTime = "", int _ContactInformationID = -1) :
+					std::string FundCode = "", std::string ContactInformationID = "", std::string ResourceInfoElementID = "", 
+					std::string _SentDateTime = "", int _ContactInformationID = -1) :
 					MessageID(MessageID), SentDateTime(SentDateTime), MessageContentType(MessageContentType),
 					MessageDescription(MessageDescription), OriginatingMessageID(OriginatingMessageID),
 					PrecedingMessageID(PrecedingMessageID), IncidentID(IncidentID),

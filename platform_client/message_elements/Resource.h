@@ -14,11 +14,15 @@ class Resource : public SqlBase
 public:
 	Resource(std::string ResourceID = "", std::string Name = "", std::string TypeStructure = "",
                  std::string TypeInfo = "", std::string Keyword = "", std::string Description = "", std::string Credentials = "",
-                 std::string Certifications = "", std::string SpecialRequirements = "", std::string ResponsibleParty = "") :
+                 std::string Certifications = "", std::string SpecialRequirements = "", std::string ResponsibleParty = "",
+				 int TypeStructureID = -1, int TypeInfoID = -1, int KeywordID = -1, int ResponsiblePartyID = -1,
+				 int OwnershipInformationID = -1, int ResourceStatusID = -1) :
                  ResourceID(ResourceID), Name(Name), TypeStructure(TypeStructure),
                  TypeInfo(TypeInfo), Keyword(Keyword), Description(Description),
                  Credentials(Credentials), Certifications(Certifications), SpecialRequirements(SpecialRequirements),
-                 ResponsibleParty(ResponsibleParty) {}
+                 ResponsibleParty(ResponsibleParty), TypeStructureID{TypeStructureID}, TypeInfoID{TypeInfoID},
+				 KeywordID{KeywordID}, ResponsiblePartyID{ResponsiblePartyID}, OwnershipInformationID{OwnershipInformationID},
+				 ResourceStatusID{ResourceStatusID} {}
 	~Resource() {}
     void getFromDatabase();
     void insertIntoDatabase();

@@ -111,7 +111,8 @@ ResourceMessage TranslationEngine::xml_to_response_to_request_resource_msg(std::
   // TODO: std::string FundCode
   // TODO: std::string ContactInformationID
   // TODO: Initialize ResponseInformation information in Resource object
- 
+
+  std::cout << "Before initializing base fields\n"; 
   // Initalize base fields
   msg._SentDateTime = std::string(req_res.child_value("SentDateTime"));
   msg.MessageContentType = std::string(req_res.child_value("MessageContentType"));
