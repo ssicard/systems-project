@@ -18,11 +18,10 @@ ${MYSQL_CLIENTCDUMP} clientcDB > clientcDB.sql
 ${MYSQL_PLAT} -e "DROP DATABASE IF EXISTS clientcDB;"
 ${MYSQL_PLAT} -e "CREATE DATABASE clientcDB;"
 ${MYSQL_PLAT} clientcDB < clientcDB.sql
-echo ${LAST_CHECK}
-NEW_MESSAGES_TALLY=$(${MYSQL_PLAT} -ss -e 'SELECT COUNT(*) FROM clientcDB.ResourceMessage WHERE clientcDB.ResourceMessage.SentDateTime > ${LAST_CHECK};')
+NEW_MESSAGES_TALLY=$(${MYSQL_PLAT} -ss -e "SELECT COUNT(*) FROM clientcDB.ResourceMessage WHERE clientcDB.ResourceMessage.SentDateTime > '${LAST_CHECK}';")
 if [ "$NEW_MESSAGES_TALLY" -eq 0 ]
 then 
-   echo "No new messages for clientc"
+   echo "No new messages from clientc"
 else
    ${MYSQL_PLAT} -e "INSERT INTO progDB.IncidentInformation SELECT DISTINCT(IncidentInformation.IncidentID), IncidentDescription FROM clientcDB.ResourceMessage, clientcDB.IncidentInformation WHERE clientcDB.ResourceMessage.SentDateTime > ${LAST_CLIENTC_CHECK} AND clientcDB.ResourceMessage.IncidentID = clientcDB.IncidentInformation.IncidentID; 
 			 
@@ -38,3 +37,4 @@ INSERT INTO progDB.ResourceInformation(ResourceInfoElementID, ResponseInformatio
 
 INSERT INTO progDB.ResourceMessage(MessageID, SentDateTime, IncidentID, RecalledMessageID, FundCode, ContactInformationID, ResourceInfoElementID) SELECT DISTINCT(ResourceMessage.MessageID), SentDateTime, IncidentID, RecalledMessageID, FundCode, ContactInformationID, ResourceInfoElementID FROM clientcDB.ResourceMessage WHERE clientcDB.ResourceMessage.SentDateTime > ${LAST_CLIENTC_CHECK};"
 fi
+export LAST_CLIENTC_CHECK=2018-11-06

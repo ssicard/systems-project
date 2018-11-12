@@ -11,7 +11,7 @@ MYSQL_PLATFORM_USER=root
 MYSQL_PLATFORM_PASS=password
 MYSQL_PLATDUMP="mysqldump -u ${MYSQL_PLATFORM_USER} -p${MYSQL_PLATFORM_PASS}"
 MYSQL_PLAT="mysql -u ${MYSQL_PLATFORM_USER} -p${MYSQL_PLATFORM_PASS}"
-LAST_PLAT_CHECK=0
+LAST_CHECK=${LAST_PLAT_CHECK}
 
 #====== Actual Script ======
 ${MYSQL_PLATDUMP} progDB > progDB.sql
@@ -19,7 +19,7 @@ scp progDB.sql ubuntu@ip-172-31-19-66:~/
 ${MYSQL_CLIENTC} -e "DROP DATABASE IF EXISTS progDB;"
 ${MYSQL_CLIENTC} -e "CREATE DATABASE progDB;"
 ${MYSQL_CLIENTC} progDB < progDB.sql
-NEW_MESSAGES_TALLY=$(${MYSQL_CLIENTC} -ss -e 'SELECT COUNT(*) FROM progDB.ResourceMessage, progDB.ResourceInformation, progDB.Resource WHERE SentDateTime > 0 AND ResourceMessage.ResourceInfoElementID = ResourceInformation.ResourceInfoElementID AND ResourceInformation.Resource = Resource.ResourceID AND Resource.ResponsiblePartyID <> 2;')
+NEW_MESSAGES_TALLY=$(${MYSQL_CLIENTC} -ss -e "SELECT COUNT(*) FROM progDB.ResourceMessage, progDB.ResourceInformation, progDB.Resource WHERE SentDateTime > '${LAST_CHECK}' AND ResourceMessage.ResourceInfoElementID = ResourceInformation.ResourceInfoElementID AND ResourceInformation.Resource = Resource.ResourceID AND Resource.ResponsiblePartyID <> 2;")
 if [ "$NEW_MESSAGES_TALLY" -eq 0 ]
 then 
    echo "No new messages from platform"
@@ -38,3 +38,4 @@ INSERT INTO clientcDB.ResourceInformation(ResourceInfoElementID, ResponseInforma
 
 INSERT INTO clientcDB.ResourceMessage(MessageID, SentDateTime, IncidentID, RecalledMessageID, FundCode, ContactInformationID, ResourceInfoElementID) SELECT DISTINCT(ResourceMessage.MessageID), SentDateTime, IncidentID, RecalledMessageID, FundCode, ContactInformationID, ResourceInfoElementID FROM clientcDB.ResourceMessage WHERE clientcDB.ResourceMessage.SentDateTime > ${LAST_PLAT_CHECK};"
 fi
+#TODO last plat check
