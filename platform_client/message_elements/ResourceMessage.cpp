@@ -17,6 +17,55 @@ ResourceMessage::~ResourceMessage()
 }
 */
 
+
+std::string* ResourceMessage::getUnsentMessageIDs(std::string lastCheckedTime) {
+
+	std::string *messageIDs = new std::string[100];
+	try {
+		sql::Connection *con;
+		sql::PreparedStatement *prep_stmt;
+		sql::mysql::MySQL_Driver *driver;
+		sql::Statement *stmt;
+		sql::ResultSet *res;
+
+		driver = sql::mysql::get_mysql_driver_instance();
+		con = driver->connect(EXAMPLE_HOST, EXAMPLE_USER, EXAMPLE_PASS);
+		stmt = con->createStatement();
+		stmt->execute("USE " EXAMPLE_DB);
+
+		prep_stmt = con->prepareStatement("SELECT `MessageID` FROM `ResourceMessage` WHERE `SentDateTime` != ?");
+
+
+		prep_stmt->setString(1, lastCheckedTime);
+		
+		res = prep_stmt->executeQuery();
+
+		int i = 0;
+		while (res->next()) {
+			messageIDs[i] = res->getString("MesssageID");
+			i++;
+		}
+
+		delete res;
+		delete stmt;
+		delete prep_stmt;
+		delete con;
+
+		return messageIDs;
+		
+
+	} catch (sql::SQLException &e) {
+		std::cout << "# ERR: SQLException in " << __FILE__;
+		std::cout << "(" << __FUNCTION__ << ") on line " << __LINE__ << std::endl;
+		std::cout << "# ERR: " << e.what();
+		std::cout << " (MySQL error code: " << e.getErrorCode();
+		std::cout << ", SQLState: " << e.getSQLState() << " )" << std::endl;
+
+		return messageIDs;
+	}
+}
+
+
 void ResourceMessage::getFromDatabase() {
 
 	try {

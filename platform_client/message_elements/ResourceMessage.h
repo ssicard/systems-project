@@ -27,6 +27,8 @@ public:
 	~ResourceMessage() {}
 	void getFromDatabase();
 	void insertIntoDatabase();
+	// TODO: make dynamic
+	std::string *getUnsentMessageIDs(std::string lastCheckedTime);
 	bool areFieldsValid();
 
 	std::string MessageID;

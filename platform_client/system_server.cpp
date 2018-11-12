@@ -12,6 +12,10 @@
 #include <vector>
 #include <algorithm>
 #include <map>
+#include <thread>
+#include <ctime>
+
+
 
 // TODO: Remove this
 // hacky way for multiple messages to save to db and not all use same location id
@@ -32,17 +36,67 @@ std::map<std::string, int> xml_name_to_fd; // to track xml client
 void init_pool(int listenfd, pool *p);
 void add_client(int connfd, pool *p);
 void communication(pool *p); 
+void passiveCommunication(pool *p, std::string currentTime); 
 void handle_json_client(std::string json_str, int connfd);
 void handle_xml_client(std::string xml_str, int connfd);
 void show_current_map(std::map<std::string, int> map);
 uint32_t json_byte_cnt{0}; 
 uint32_t xml_byte_cnt{0};
 
+
+class CallBackTimer {
+public:
+		CallBackTimer() :_execute(false) {
+      time_t now = time(0);
+      currentTime = std::string(ctime(&now));
+    }
+
+		~CallBackTimer() {
+				if( _execute.load(std::memory_order_acquire) ) {
+						stop();
+				};
+		}
+
+		void stop() {
+				_execute.store(false, std::memory_order_release);
+				if( _thd.joinable() )
+						_thd.join();
+		}
+
+		void start(int interval, std::function<void(pool*, std::string)> func, pool *p) {
+				if( _execute.load(std::memory_order_acquire) ) {
+						stop();
+				};
+				_execute.store(true, std::memory_order_release);
+				_thd = std::thread([this, interval, func, p]()
+				{
+						while (_execute.load(std::memory_order_acquire)) {
+						    std::cout << "IN TIMER: TIME = " << currentTime << std::endl;
+								func(p, currentTime);                   
+                time_t now = time(0);
+                currentTime = std::string(ctime(&now));
+								std::this_thread::sleep_for(
+								std::chrono::milliseconds(interval));
+						}
+				});
+		}
+
+		bool is_running() const noexcept {
+				return ( _execute.load(std::memory_order_acquire) && _thd.joinable() );
+		}
+
+private:
+		std::atomic<bool> _execute;
+		std::thread _thd;
+    std::string currentTime;
+
+};
+
 int main(int argc, char **argv) {
   int listenfd, connfd;
   socklen_t clientlen;
   struct sockaddr_storage clientaddr;
-  static pool pool; 
+  static pool pool;
 
   if (argc != 2) {
     printf("<<<---Error:Invalid number of arguments--->>>\n");
@@ -53,6 +107,9 @@ int main(int argc, char **argv) {
 
   listenfd = Open_listenfd(argv[1]); // listening to port
   init_pool(listenfd, &pool); // initializing pool
+
+  CallBackTimer *timer = new CallBackTimer();
+  timer->start(10000, passiveCommunication, &pool);
 
   for(;;) {
     /* Wait for listening/connected descriptor(s) to become ready */
@@ -107,6 +164,45 @@ void add_client(int connfd, pool *p) {
       char too_many_clients[] = "add_client error: Too many clients\n";
       app_error(too_many_clients);
     }
+  }
+}
+
+
+void passiveCommunication(pool *p, std::string currentTime) {
+  Logger l(Logger::INFO, Logger::NORMAL);
+
+  int i, connfd, n;
+
+  TranslationEngine t_engine;
+  ResourceMessage request = *new ResourceMessage();
+  request.MessageID = "fdfdf-342rwe-23drftg-e999";
+  //std::string *messages = request.getUnsentMessageIDs(currentTime);
+//  for (int j = 0; j < 100; j++) {
+ //   if (messages[j].length() == 0) {
+//						std::cout << "NO NEW MESSAGES" << std::endl;
+//      break;
+//		}
+//    request.MessageID = messages[j];
+    request.getFromDatabase();
+    for (i = 0; i <= p->maxi; i++) {
+      connfd = p->clientfd[i];
+      if (connfd < 0)
+        continue;
+      cout << "CLIENT " << i << ": " << connfd << endl;
+      if (request.MessageContentType == "RequestResource") {
+        std::string requestResourceXML = t_engine.request_resource_msg_to_xml(request) + "\n";
+        handle_xml_client(requestResourceXML, connfd);
+        std::string requestResourceJSON = t_engine.request_resource_msg_to_json(request) + "\n";
+        handle_json_client(requestResourceJSON, connfd);
+
+      } else if (request.MessageContentType == "ResponseToRequestResource") {
+        std::string responseRequestXML = t_engine.response_to_request_resource_msg_to_xml(request) + "\n";
+        handle_xml_client(responseRequestXML, connfd);
+        std::string responseRequestJSON = t_engine.response_to_request_resource_msg_to_json(request) + "\n";
+        handle_json_client(responseRequestJSON, connfd);
+
+      }
+ //   }
   }
 }
 
