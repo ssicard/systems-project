@@ -11,14 +11,15 @@ MYSQL_CLIENTC="mysql -u ${MYSQL_CLIENTC_USER} -p${MYSQL_CLIENTC_PASS} -h ${MYSQL
 MYSQL_PLATFORM_USER=root
 MYSQL_PLATFORM_PASS=password
 MYSQL_PLAT="mysql -u ${MYSQL_PLATFORM_USER} -p${MYSQL_PLATFORM_PASS}"
-LAST_CLIENTC_CHECK=0
+LAST_CHECK=${LAST_CLIENTC_CHECK}
 
 #====== Actual Script ======
 ${MYSQL_CLIENTCDUMP} clientcDB > clientcDB.sql
 ${MYSQL_PLAT} -e "DROP DATABASE IF EXISTS clientcDB;"
 ${MYSQL_PLAT} -e "CREATE DATABASE clientcDB;"
 ${MYSQL_PLAT} clientcDB < clientcDB.sql
-NEW_MESSAGES_TALLY=$(${MYSQL_PLAT} -ss -e 'SELECT COUNT(*) FROM clientcDB.ResourceMessage WHERE SentDateTime > 0;')
+echo ${LAST_CHECK}
+NEW_MESSAGES_TALLY=$(${MYSQL_PLAT} -ss -e 'SELECT COUNT(*) FROM clientcDB.ResourceMessage WHERE clientcDB.ResourceMessage.SentDateTime > ${LAST_CHECK};')
 if [ "$NEW_MESSAGES_TALLY" -eq 0 ]
 then 
    echo "No new messages for clientc"
