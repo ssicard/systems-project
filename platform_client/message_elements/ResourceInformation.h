@@ -11,8 +11,12 @@
 class ResourceInformation : public SqlBase
 {
 public:
-	ResourceInformation(std::string ResourceInfoElementID = "", std::string ResponseInformation = "") :
-                            ResourceInfoElementID(std::move(ResourceInfoElementID)), ResponseInformation(std::move(ResponseInformation)) {}
+	ResourceInformation(std::string ResourceInfoElementID = "", std::string ResponseInformation = "",
+						std::string ResourceID = "", std::string ResponseInformationID = "", int AssignmentInformationID = -1,
+						int ScheduleInformationID = -1) :
+                            ResourceInfoElementID(std::move(ResourceInfoElementID)), ResponseInformation(std::move(ResponseInformation)),
+							ResourceID{ResourceID}, ResponseInformationID{ResponseInformationID},
+							AssignmentInformationID{AssignmentInformationID}, ScheduleInformationID{ScheduleInformationID} {}
 	~ResourceInformation() {}
 	void getFromDatabase();
     void insertIntoDatabase();

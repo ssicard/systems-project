@@ -132,16 +132,53 @@ void Resource::insertIntoDatabase() {
 			prep_stmt = con->prepareStatement("INSERT INTO `Resource` (`ResourceID`, `NAME`,`TypeStructureID`, `TypeInfoID`, `KeywordID`, `Description`, `Credentials`, `Certifications`, `SpecialRequirements`, `ResponsiblePartyID`, `OwnershipInformationID`, `ResourceStatusID`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
 			prep_stmt->setString(1, this->ResourceID);
 			prep_stmt->setString(2, this->Name);
-			prep_stmt->setInt(3, this->TypeStructureID);
-			prep_stmt->setInt(4, this->TypeInfoID);
-			prep_stmt->setInt(5, this->KeywordID);
+			if (this->TypeStructureID != -1) {
+				prep_stmt->setInt(3, this->TypeStructureID);
+			} else {
+				prep_stmt->setNull(3, sql::DataType::INTEGER);
+			}
+
+			if (this->TypeInfoID != -1) {
+				prep_stmt->setInt(4, this->TypeInfoID);
+			} else {
+				prep_stmt->setNull(4, sql::DataType::INTEGER);
+			}
+
+			if (this->KeywordID != -1) {
+				prep_stmt->setInt(5, this->KeywordID);
+			} else {
+				prep_stmt->setNull(5, sql::DataType::INTEGER);
+			}
+
+			// prep_stmt->setInt(3, this->TypeStructureID);
+			// prep_stmt->setInt(4, this->TypeInfoID);
+			// prep_stmt->setInt(5, this->KeywordID);
 			prep_stmt->setString(6, this->Description);
 			prep_stmt->setString(7, this->Credentials);
 			prep_stmt->setString(8, this->Certifications);
 			prep_stmt->setString(9, this->SpecialRequirements);
-			prep_stmt->setInt(10, this->ResponsiblePartyID);
-			prep_stmt->setInt(11, this->OwnershipInformationID);
-			prep_stmt->setInt(12, this->ResourceStatusID);
+
+			if (this->ResponsiblePartyID != -1) {
+				prep_stmt->setInt(10, this->ResponsiblePartyID);
+			} else {
+				prep_stmt->setNull(10, sql::DataType::INTEGER);
+			}
+
+			if (this->OwnershipInformationID != -1) {
+				prep_stmt->setInt(11, this->OwnershipInformationID);
+			} else {
+				prep_stmt->setNull(11, sql::DataType::INTEGER);
+			}
+
+			if (this->ResourceStatusID != -1) {
+				prep_stmt->setInt(12, this->ResourceStatusID);
+			} else {
+				prep_stmt->setNull(12, sql::DataType::INTEGER);
+			}
+			
+			// prep_stmt->setInt(10, this->ResponsiblePartyID);
+			// prep_stmt->setInt(11, this->OwnershipInformationID);
+			// prep_stmt->setInt(12, this->ResourceStatusID);
 
 			prep_stmt->execute();
 

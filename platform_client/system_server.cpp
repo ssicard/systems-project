@@ -12,6 +12,10 @@
 #include <vector>
 #include <algorithm>
 #include <map>
+#include <thread>
+#include <ctime>
+
+
 
 // TODO: Remove this
 // hacky way for multiple messages to save to db and not all use same location id
@@ -32,17 +36,67 @@ std::map<std::string, int> xml_name_to_fd; // to track xml client
 void init_pool(int listenfd, pool *p);
 void add_client(int connfd, pool *p);
 void communication(pool *p); 
+void passiveCommunication(pool *p, std::string currentTime); 
 void handle_json_client(std::string json_str, int connfd);
 void handle_xml_client(std::string xml_str, int connfd);
 void show_current_map(std::map<std::string, int> map);
 uint32_t json_byte_cnt{0}; 
 uint32_t xml_byte_cnt{0};
 
+
+class CallBackTimer {
+public:
+		CallBackTimer() :_execute(false) {
+      time_t now = time(0);
+      currentTime = std::string(ctime(&now));
+    }
+
+		~CallBackTimer() {
+				if( _execute.load(std::memory_order_acquire) ) {
+						stop();
+				};
+		}
+
+		void stop() {
+				_execute.store(false, std::memory_order_release);
+				if( _thd.joinable() )
+						_thd.join();
+		}
+
+		void start(int interval, std::function<void(pool*, std::string)> func, pool *p) {
+				if( _execute.load(std::memory_order_acquire) ) {
+						stop();
+				};
+				_execute.store(true, std::memory_order_release);
+				_thd = std::thread([this, interval, func, p]()
+				{
+						while (_execute.load(std::memory_order_acquire)) {
+						    std::cout << "IN TIMER: TIME = " << currentTime << std::endl;
+								func(p, currentTime);                   
+                time_t now = time(0);
+                currentTime = std::string(ctime(&now));
+								std::this_thread::sleep_for(
+								std::chrono::milliseconds(interval));
+						}
+				});
+		}
+
+		bool is_running() const noexcept {
+				return ( _execute.load(std::memory_order_acquire) && _thd.joinable() );
+		}
+
+private:
+		std::atomic<bool> _execute;
+		std::thread _thd;
+    std::string currentTime;
+
+};
+
 int main(int argc, char **argv) {
   int listenfd, connfd;
   socklen_t clientlen;
   struct sockaddr_storage clientaddr;
-  static pool pool; 
+  static pool pool;
 
   if (argc != 2) {
     printf("<<<---Error:Invalid number of arguments--->>>\n");
@@ -53,6 +107,9 @@ int main(int argc, char **argv) {
 
   listenfd = Open_listenfd(argv[1]); // listening to port
   init_pool(listenfd, &pool); // initializing pool
+
+  CallBackTimer *timer = new CallBackTimer();
+  timer->start(10000, passiveCommunication, &pool);
 
   for(;;) {
     /* Wait for listening/connected descriptor(s) to become ready */
@@ -110,6 +167,45 @@ void add_client(int connfd, pool *p) {
   }
 }
 
+
+void passiveCommunication(pool *p, std::string currentTime) {
+  Logger l(Logger::INFO, Logger::NORMAL);
+
+  int i, connfd, n;
+
+  TranslationEngine t_engine;
+  ResourceMessage request = *new ResourceMessage();
+  request.MessageID = "fdfdf-342rwe-23drftg-e999";
+  //std::string *messages = request.getUnsentMessageIDs(currentTime);
+//  for (int j = 0; j < 100; j++) {
+ //   if (messages[j].length() == 0) {
+//						std::cout << "NO NEW MESSAGES" << std::endl;
+//      break;
+//		}
+//    request.MessageID = messages[j];
+    request.getFromDatabase();
+    for (i = 0; i <= p->maxi; i++) {
+      connfd = p->clientfd[i];
+      if (connfd < 0)
+        continue;
+      cout << "CLIENT " << i << ": " << connfd << endl;
+      if (request.MessageContentType == "RequestResource") {
+        std::string requestResourceXML = t_engine.request_resource_msg_to_xml(request) + "\n";
+        handle_xml_client(requestResourceXML, connfd);
+        std::string requestResourceJSON = t_engine.request_resource_msg_to_json(request) + "\n";
+        handle_json_client(requestResourceJSON, connfd);
+
+      } else if (request.MessageContentType == "ResponseToRequestResource") {
+        std::string responseRequestXML = t_engine.response_to_request_resource_msg_to_xml(request) + "\n";
+        handle_xml_client(responseRequestXML, connfd);
+        std::string responseRequestJSON = t_engine.response_to_request_resource_msg_to_json(request) + "\n";
+        handle_json_client(responseRequestJSON, connfd);
+
+      }
+ //   }
+  }
+}
+
 /* allows all clients to communicates with each other */
 void communication(pool *p) {
   Logger l(Logger::INFO, Logger::NORMAL);
@@ -127,17 +223,22 @@ void communication(pool *p) {
     // check if any fd is ready 
     if ((connfd > 0) && (FD_ISSET(connfd, &p->ready_set))) { 
       p->nready--;
+	  std::cout << "Client ready for reading\n";
       // reading rio to buf
       if ((n = Rio_readlineb(&rio, buf, MAXLINE)) != 0) {
+		std::cout << "After readline from client\n";
         int j = 0; // going through all j
         strcpy(tmp, buf); // we don't wanna mess with buf
         json_byte_cnt = xml_byte_cnt = 0;
         while(p->clientfd[j] >= 0){
+		  std::cout << "In loop\n";
           std::string tmp_std_str(tmp);
           if(p->clientfd[j] != connfd) {
+			std::cout << "In check that != connfd\n";
             //Rio_writen(p->clientfd[j], buf, n); // write buffer into fd
             //l.log(Logger::INFO, buf); //
             if (tmp[0] == '{' || tmp[0] == '['){ // json client
+			  std::cout << "JSON client!\n";
               json_byte_cnt += n; // increment bytes received by json client
               //print to stdout that a message was received by client connfd
               stringstream logMessage;
@@ -148,7 +249,10 @@ void communication(pool *p) {
               l.log(Logger::LogLevel::INFO, logMessage.str());
               handle_json_client(tmp, connfd);
               if(tmp_std_str.find("RequestResource") != std::string::npos) {
-                RequestResource request = t_engine.json_to_request_resource_msg("", tmp);
+				// TODO: Change this to ResourceMessage
+                //RequestResource request = t_engine.json_to_request_resource_msg("", tmp);
+				  std::cout << "Before json to RR\n";
+                ResourceMessage request = t_engine.json_to_request_resource_msg("", tmp);
 
 
 			    // SAVE TO DATABASE
@@ -158,6 +262,7 @@ void communication(pool *p) {
 				// when db needs them to be ints and vice versa. 
 				// Too lazy to do parsing so just added the fields to the classes
 				// with the right type and have the sql code just pulling from those
+				/*
 			    request.res_info._AssignmentInformation = request.res_info.assign_info;
 			    request.res_info._ScheduleInformation = request.res_info.sched_info;
 				int id = id_count++;
@@ -170,7 +275,15 @@ void communication(pool *p) {
 			    request.fund.insertIntoDatabase();
 			    request.res_info.insertIntoDatabase();
 			    request.contact_info.insertIntoDatabase();
+				*/
+			
+				std::cout << "ResourceInfoElementID is " << request.ResourceInfoElementID << std::endl;
 
+				std::cout << "Before insert into database at line " << __LINE__ << std::endl;
+				request.insertIntoDatabase();
+				std::cout << "after insert into database at line " << __LINE__ << std::endl;
+
+				// TODO: Check that parameter change didn't break anything
                 std::string out = t_engine.request_resource_msg_to_xml(request) + "\n";
                 //strcpy(tmp_xml, out.c_str());
                 stringstream logMessageIn;
@@ -181,7 +294,14 @@ void communication(pool *p) {
                 logMessageOut << "[Sent Message to "<<p->clientfd[j]<<"]"<<out;
                 l.log(Logger::LogLevel::INFO, logMessageOut.str());
               } else if(tmp_std_str.find("ResponseToRequestResource") != std::string::npos) {
-                ResponseToRequestResource response = t_engine.json_to_response_to_request_resource_msg("", tmp);
+				// TODO: Change this to ResourceMessage
+                //ResponseToRequestResource response = t_engine.json_to_response_to_request_resource_msg("", tmp);
+                ResourceMessage response = t_engine.json_to_response_to_request_resource_msg("", tmp);
+				std::cout << "Before insert into database at " << __LINE__ << std::endl;
+				response.insertIntoDatabase();
+				std::cout << "after insert into database at line " << __LINE__ << std::endl;
+
+				// TODO: Make sure that parameter type change didn't break anything
                 std::string out = t_engine.response_to_request_resource_msg_to_xml(response) + "\n";
                 //strcpy(tmp_xml, out.c_str());
                 stringstream logMessageIn;
@@ -199,7 +319,9 @@ void communication(pool *p) {
               logMessage << "Received "<<n<<"("<<xml_byte_cnt<<" total) bytes by a xml client with fd["<<connfd<<"]";
               l.log(Logger::LogLevel::INFO, logMessage.str());
               if(tmp_std_str.find("RequestResource") != std::string::npos) {
-                RequestResource request = t_engine.xml_to_request_resource_msg("", tmp);
+				// TODO: Change this to ResourceMessage
+                //RequestResource request = t_engine.xml_to_request_resource_msg("", tmp);
+                ResourceMessage request = t_engine.xml_to_request_resource_msg("", tmp);
 			    
 				// SAVE TO DATABASE
 				// TODO: CLEAN THIS HACKY CODE
@@ -208,6 +330,7 @@ void communication(pool *p) {
 				// when db needs them to be ints and vice versa. 
 				// Too lazy to do parsing so just added the fields to the classes
 				// with the right type and have the sql code just pulling from those
+				/*
 			    request.res_info._AssignmentInformation = request.res_info.assign_info;
 			    request.res_info._ScheduleInformation = request.res_info.sched_info;
 				int id = id_count++;
@@ -220,7 +343,13 @@ void communication(pool *p) {
 			    request.fund.insertIntoDatabase();
 			    request.res_info.insertIntoDatabase();
 			    request.contact_info.insertIntoDatabase();
+				*/
+
+				std::cout << "Before insert into database at " << __LINE__ << std::endl;
+				request.insertIntoDatabase();
+				std::cout << "after insert into database at line " << __LINE__ << std::endl;
                 
+				// TODO: Ensure parameter type change didn't break anything
 				std::string out = t_engine.request_resource_msg_to_json(request) + "\n";
                 //strcpy(tmp_json, out.c_str());
                 stringstream logMessageIn;
@@ -231,7 +360,15 @@ void communication(pool *p) {
                 logMessageOut << "[Sent Message to "<<p->clientfd[j]<<"]"<<out;
                 l.log(Logger::LogLevel::INFO, logMessageOut.str());
               } else if(tmp_std_str.find("ResponseToRequestResource") != std::string::npos) {
-                ResponseToRequestResource response = t_engine.xml_to_response_to_request_resource_msg("", tmp);
+				// TODO: Change to ResourceMessage
+                //ResponseToRequestResource response = t_engine.xml_to_response_to_request_resource_msg("", tmp);
+                ResourceMessage response = t_engine.xml_to_response_to_request_resource_msg("", tmp);
+
+				std::cout << "Before insert into database at " << __LINE__ << std::endl;
+				response.insertIntoDatabase();
+				std::cout << "after insert into database at line " << __LINE__ << std::endl;
+
+				// TODO: Ensure paramter change does not break anything
                 std::string out = t_engine.response_to_request_resource_msg_to_json(response) + "\n";
                 //strcpy(tmp_json, out.c_str());
                 stringstream logMessageIn;
@@ -285,5 +422,3 @@ void show_current_map(std::map<std::string, int> map){
     std::cout << "Name: [" << it.first << "] Connfd: [" << it.second <<  "]" << std::endl;
   }
 }
-
-

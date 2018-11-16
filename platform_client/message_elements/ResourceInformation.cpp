@@ -53,22 +53,22 @@ void ResourceInformation::getFromDatabase(){
 		delete con;
 
 		if(this->AssignmentInformationID != -1){
-			this->_AssignmentInformation = this->AssignmentInformationID;
+			this->_AssignmentInformation.AssignmentInformationID = this->AssignmentInformationID;
 			this->_AssignmentInformation.getFromDatabase();
 		}
 
 		if(this->ResponseInformationID != ""){
-			this->_ResponseInformation = this->ResponseInformationID;
+			this->_ResponseInformation.PrecedingResourceInfoElementID = this->ResponseInformationID;
 			this->_ResponseInformation.getFromDatabase();
 		}
 
 		if(this->ResourceID != ""){
-			this->_Resource = this->ResourceID;
+			this->_Resource.ResourceID = this->ResourceID;
 			this->_Resource.getFromDatabase();
 		}
 
 		if(this->ScheduleInformationID != -1){
-			this->_ScheduleInformation = this->ScheduleInformationID;
+			this->_ScheduleInformation.ScheduleInformationID = this->ScheduleInformationID;
 			this->_ScheduleInformation.getFromDatabase();			
 		}
 
@@ -132,8 +132,21 @@ void ResourceInformation::insertIntoDatabase(){
 		} else {
 			prep_stmt->setNull(3, sql::DataType::VARCHAR);
 		}
-		prep_stmt->setInt(4, this->AssignmentInformationID);
-		prep_stmt->setInt(5, this->ScheduleInformationID);
+
+		if (this->AssignmentInformationID != -1) {
+			prep_stmt->setInt(4, this->AssignmentInformationID);
+		} else {
+			prep_stmt->setNull(4, sql::DataType::INTEGER);
+		}
+
+		if (this->ScheduleInformationID != -1) {
+			prep_stmt->setInt(5, this->ScheduleInformationID);
+		} else {
+			prep_stmt->setNull(5, sql::DataType::INTEGER);
+		}
+		
+		// prep_stmt->setInt(4, this->AssignmentInformationID);
+		// prep_stmt->setInt(5, this->ScheduleInformationID);
 
 		prep_stmt->execute();
 
