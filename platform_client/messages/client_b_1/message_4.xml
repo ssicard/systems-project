@@ -1,8 +1,8 @@
 <RequestResource>
-    <MessageID>1000-1000-1000-1000</MessageID>
-    <SentDateTime>1454100000</SentDateTime>
+    <MessageID>23e5f51b-9df2-46dc-9ab4-0f94e48dd57e</MessageID>
+    <SentDateTime>2016-08-01T13:37:00</SentDateTime>
     <MessageContentType>RequestResource</MessageContentType>
-    <OriginatingMessageID>0000-0000-0000-0000</OriginatingMessageID>
+    <OriginatingMessageID>23e5f51b-9df2-46dc-9ab4-0f94e48dd57e</OriginatingMessageID>
     <IncidentInformation>
         <IncidentDescription>Mass flooding</IncidentDescription>
     </IncidentInformation>
@@ -17,8 +17,8 @@
         </AssignmentInformation>
         <ScheduleInformation>
             <ScheduleType>RequestedArrival</ScheduleType>
-            <DateTime>1454100000</DateTime>
-            <Location>123 Main St, Baton Rouge LA</Location>
+            <DateTime>2016-08-01T13:37:00</DateTime>
+            <Location>456 Sherwood Forest Blvd, Baton Rouge LA</Location>
         </ScheduleInformation>
     </ResourceInformation>
 </RequestResource>

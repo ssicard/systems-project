@@ -1,9 +1,9 @@
 <ResponseToRequestResource>
-    <MessageID>1000-1000-1000-1000</MessageID>
-    <SentDateTime>1454100000</SentDateTime>
+    <MessageID>1b2748ad-e144-4002-9f5b-43bf5ee46a63</MessageID>
+    <SentDateTime>2016-08-01T14:14:00</SentDateTime>
     <MessageContentType>ResponseToRequestResource</MessageContentType>
-    <OriginatingMessageID>0000-0000-0000-0000</OriginatingMessageID>
-    <PrecedingMessageID>0000-0000-0000-0000</PrecedingMessageID>
+    <OriginatingMessageID>98217aef-3e26-4da7-865e-e42bdec8a652</OriginatingMessageID>
+    <PrecedingMessageID>98217aef-3e26-4da7-865e-e42bdec8a652</PrecedingMessageID>
     <IncidentInformation>
         <IncidentDescription>Mass flooding</IncidentDescription>
     </IncidentInformation>
@@ -22,8 +22,8 @@
         </AssignmentInformation>
         <ScheduleInformation>
             <ScheduleType>EstimatedArrival</ScheduleType>
-            <DateTime>1454100000</DateTime>
-            <Location>123 Main St, Denham Springs LA</Location>
+            <DateTime>2016-08-01T14:25:00</DateTime>
+            <Location>789 S Range Ave, Denham Springs LA</Location>
         </ScheduleInformation>
     </ResourceInformation>
 </ResponseToRequestResource>

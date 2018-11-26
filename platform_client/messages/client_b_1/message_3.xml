@@ -1,8 +1,8 @@
 <RequestResource>
-    <MessageID>1000-1000-1000-1000</MessageID>
-    <SentDateTime>1454100000</SentDateTime>
+    <MessageID>08818d23-0bea-4099-81ed-d779987b2b42</MessageID>
+    <SentDateTime>2016-08-01T13:35:00</SentDateTime>
     <MessageContentType>RequestResource</MessageContentType>
-    <OriginatingMessageID>0000-0000-0000-0000</OriginatingMessageID>
+    <OriginatingMessageID>08818d23-0bea-4099-81ed-d779987b2b42</OriginatingMessageID>
     <IncidentInformation>
         <IncidentDescription>Mass flooding</IncidentDescription>
     </IncidentInformation>
@@ -17,8 +17,8 @@
         </AssignmentInformation>
         <ScheduleInformation>
             <ScheduleType>RequestedArrival</ScheduleType>
-            <DateTime>1454100000</DateTime>
-            <Location>123 Main St, Baton Rouge LA</Location>
+            <DateTime>2016-08-01T13:35:00</DateTime>
+            <Location>123 Airline Hwy, Baton Rouge LA</Location>
         </ScheduleInformation>
     </ResourceInformation>
 </RequestResource>

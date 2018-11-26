@@ -1,9 +1,9 @@
 {
     "RequestResource": {
-        "MessageID": "1000-1000-1000-1000",
-        "SentDateTime": "1454100000",
+        "MessageID": "98217aef-3e26-4da7-865e-e42bdec8a652",
+        "SentDateTime": "2016-08-01T14:07:00",
         "MessageContentType": "RequestResource",
-        "OriginatingMessageID": "0000-0000-0000-0000",
+        "OriginatingMessageID": "98217aef-3e26-4da7-865e-e42bdec8a652",
         "IncidentInformation": {
             "IncidentDescription": "Mass flooding"
         },
@@ -18,8 +18,8 @@
             },
             "ScheduleInformation": {
                 "ScheduleType": "RequestedArrival",
-                "DateTime": "1454100000",
-                "Location": "123 Main St, Denham Springs LA"
+                "DateTime": "2016-08-01T14:07:00",
+                "Location": "789 S Range Ave, Denham Springs LA"
             }
         }
     }

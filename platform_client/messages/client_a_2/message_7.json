@@ -1,10 +1,10 @@
 {
     "ResponseToRequestResource": {
-        "MessageID": "1000-1000-1000-1000",
-        "SentDateTime": "1454100000",
+        "MessageID": "a1ab13d9-d392-4c14-a34e-96729f301ef3",
+        "SentDateTime": "2016-08-01T14:09:00",
         "MessageContentType": "ResponseToRequestResource",
-        "OriginatingMessageID": "0000-0000-0000-0000",
-        "PrecedingMessageID": "0000-0000-0000-0000",
+        "OriginatingMessageID": "08818d23-0bea-4099-81ed-d779987b2b42",
+        "PrecedingMessageID": "08818d23-0bea-4099-81ed-d779987b2b42",
         "IncidentInformation": {
             "IncidentDescription": "Mass flooding"
         },
@@ -16,15 +16,15 @@
             },
             "Resource": {
                 "ResourceID": "001",
-                "Name": "High-water vehicles"
+                "Name": "High-water vehicle"
             },
             "AssignmentInformation": {
                 "Quantity": "1"
             },
             "ScheduleInformation": {
                 "ScheduleType": "EstimatedArrival",
-                "DateTime": "1454100000",
-                "Location": "123 Main St, Baton Rouge LA"
+                "DateTime": "2016-08-01T14:28:00",
+                "Location": "123 Airline Hwy, Baton Rouge LA"
             }
         }
     }
