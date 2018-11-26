@@ -1,0 +1,26 @@
+{
+    "RequestResource": {
+        "MessageID": "1000-1000-1000-1000",
+        "SentDateTime": "1454100000",
+        "MessageContentType": "RequestResource",
+        "OriginatingMessageID": "0000-0000-0000-0000",
+        "IncidentInformation": {
+            "IncidentDescription": "Mass flooding"
+        },
+        "ResourceInformation": {
+            "ResourceInfoElementID": "002",
+            "Resource": {
+                "ResourceID": "002",
+                "Name": "Boat",
+            },
+            "AssignmentInformation": {
+                "Quantity": "5"
+            },
+            "ScheduleInformation": {
+                "ScheduleType": "RequestedArrival",
+                "DateTime": "1454100000",
+                "Location": "123 Main St, Denham Springs LA"
+            }
+        }
+    }
+}

@@ -1,0 +1,29 @@
+<ResponseToRequestResource>
+    <MessageID>1000-1000-1000-1000</MessageID>
+    <SentDateTime>1454100000</SentDateTime>
+    <MessageContentType>ResponseToRequestResource</MessageContentType>
+    <OriginatingMessageID>0000-0000-0000-0000</OriginatingMessageID>
+    <PrecedingMessageID>0000-0000-0000-0000</PrecedingMessageID>
+    <IncidentInformation>
+        <IncidentDescription>Mass flooding</IncidentDescription>
+    </IncidentInformation>
+    <ResourceInformation>
+        <ResourceInfoElementID>003</ResourceInfoElementID>
+        <ResponseInformation>
+            <PrecedingResourceInfoElementID>003</PrecedingResourceInfoElementID>
+            <ResponseType>Accept</ResponseType>
+        </ResponseInformation>
+        <Resource>
+            <ResourceID>003</ResourceID>
+            <Name>Rescue personnel</Name>
+        </Resource>
+        <AssignmentInformation>
+            <Quantity>4</Quantity>
+        </AssignmentInformation>
+        <ScheduleInformation>
+            <ScheduleType>EstimatedArrival</ScheduleType>
+            <DateTime>1454100000</DateTime>
+            <Location>123 Main St, Denham Springs LA</Location>
+        </ScheduleInformation>
+    </ResourceInformation>
+</ResponseToRequestResource>
