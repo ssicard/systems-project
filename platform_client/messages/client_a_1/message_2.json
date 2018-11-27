@@ -31,6 +31,9 @@
 					"Address": "123 Airline Hwy, Baton Rouge LA"
 				}
             }
+        },
+        "ContactInformationType":{
+          "ContactDescription":"client_a"
         }
     }
 }
