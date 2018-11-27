@@ -5,6 +5,7 @@ const initialState={
 export default function logs(state = initialState, action) {
     switch (action.type) {
       case CREATE_LOGS:
+        console.log(action.payload);
         let newLogs = action.payload.requests.map((el)=>{
             return {
                 ...el,

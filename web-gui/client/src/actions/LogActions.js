@@ -18,19 +18,37 @@ export function loadLogs(){
         });
         //Do load stuff
         console.log('in the load logs function');
-        fetch('/api/logs')
+        fetch('http://ec2-54-186-191-42.us-west-2.compute.amazonaws.com:5000/api/logs', {
+            method: "GET",
+        })
         .then(res => {console.log('got response'); console.log(res);return res.json()})
         .then(res=> {
             console.log('response');
             console.log(res);
+            let requests = [];
+            let responses = [];
+            let messages ={};
+            for(var i = 0;i<res.length;i++){
+                let newObj = {};
+                newObj.timestamp = res[i].SentDateTime;
+                newObj.sender = res[i].ContactDescription;
+                newObj.guid = res[i].MessageID;
+                messages[res[i].MessageID] = res[i].MessageDescription;
+                if(res[i].RecalledMessageID==null){
+                    requests.push(newObj);
+                } else {
+                    newObj.responseTo = res[i].RecalledMessageID;
+                    responses.push(newObj);
+                }
+            }
             dispatch({
                 type: CREATE_LOGS,
-                payload: {requests: res.requests, responses: res.responses},
+                payload: {requests: requests, responses: responses},
             });
             console.log('sending load logs success');
             dispatch({
                 type: LOAD_LOGS_SUCCESS,
-                payload: res
+                payload: {messages: messages}
             });
 
         })
