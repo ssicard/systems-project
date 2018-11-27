@@ -41,4 +41,4 @@ INSERT INTO progDB.ResourceInformation(ResourceInfoElementID, ResponseInformatio
 
 INSERT INTO progDB.ResourceMessage(MessageID, SentDateTime, IncidentID, RecalledMessageID, FundCode, ContactInformationID, ResourceInfoElementID) SELECT DISTINCT(ResourceMessage.MessageID), SentDateTime, IncidentID, RecalledMessageID, FundCode, ContactInformationID, ResourceInfoElementID FROM clientcDB.ResourceMessage WHERE clientcDB.ResourceMessage.SentDateTime > ${LAST_CLIENTC_CHECK};"
 fi
-export LAST_CLIENTC_CHECK=2018-11-06
+export LAST_CLIENTC_CHECK="2018-11-06"
