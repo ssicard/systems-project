@@ -31,4 +31,7 @@
 			</LocationType>
         </ScheduleInformation>
     </ResourceInformation>
+    <ContactInformationType>
+        <ContactDescription>client_b</ContactDescription>
+    </ContactInformationType>
 </ResponseToRequestResource>
