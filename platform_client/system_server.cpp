@@ -185,14 +185,14 @@ void passiveCommunication(pool *p, std::string currentTime) {
 
   TranslationEngine t_engine;
   ResourceMessage request = *new ResourceMessage();
-  request.MessageID = "fdfdf-342rwe-23drftg-e999";
-  //std::string *messages = request.getUnsentMessageIDs(currentTime);
-//  for (int j = 0; j < 100; j++) {
- //   if (messages[j].length() == 0) {
-//						std::cout << "NO NEW MESSAGES" << std::endl;
-//      break;
-//		}
-//    request.MessageID = messages[j];
+//  request.MessageID = "fdfdf-342rwe-23drftg-e999";
+  std::string *messages = request.getUnsentMessageIDs(currentTime);
+  for (int j = 0; j < 100; j++) {
+    if (messages[j].length() == 0) {
+      std::cout << "NO NEW MESSAGES" << std::endl;
+      break;
+    }
+    request.MessageID = messages[j];
     request.getFromDatabase();
     for (i = 0; i <= p->maxi; i++) {
       connfd = p->clientfd[i];
@@ -212,7 +212,7 @@ void passiveCommunication(pool *p, std::string currentTime) {
         handle_json_client(responseRequestJSON, connfd);
 
       }
- //   }
+    }
   }
 }
 

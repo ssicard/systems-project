@@ -1,0 +1,11 @@
+DELETE FROM ResourceMessage;
+DELETE FROM IncidentInformation;
+DELETE FROM ResourceInformation;
+DELETE FROM ScheduleInformation;
+DELETE FROM LocationType;
+DELETE FROM Funding;
+DELETE FROM ResponseTypeLookup;
+DELETE FROM ContactRoleLookup;
+DELETE FROM AssignmentInformation;
+DELETE FROM Resource;
+DELETE FROM MessageRecall;

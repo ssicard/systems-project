@@ -16,3 +16,12 @@
 
 	Updates with a message
 	mysql -u clientc -p < ClientC_UpdateDataScript.sql 
+
+# Running the scripts:
+## platToClientC.sql
+Takes the information from platform and sends messages sent by active clients 
+and other passive clients to clientc. 
+
+## clientcToPlat.sql
+Takes the information from the passive client and sends the messages to the 
+platform so it may send to active clients.
