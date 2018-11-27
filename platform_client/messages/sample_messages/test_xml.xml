@@ -3,7 +3,7 @@
   <MessageID>fdfdf-342rwe-23drftg-e999</MessageID>
   <SentDateTime>2323232455</SentDateTime>
   <MessageContentType>RequestResource</MessageContentType>
-  <MessageDescription>joe</MessageDescription>
+  <MessageDescription>sample message delete me</MessageDescription>
   <OriginatingMessageID>0000-0000-0000-0000</OriginatingMessageID>
   <IncidentInformation>
     <IncidentID>001</IncidentID>
@@ -38,7 +38,6 @@
     <ScheduleInformation>
       <ScheduleType>EstimatedArrival</ScheduleType>
 	  <DateTime>2018/10/24 13:30:00</DateTime>
-      <Location>Here and there</Location>
     </ScheduleInformation>
   </ResourceInformation>
 </RequestResource>

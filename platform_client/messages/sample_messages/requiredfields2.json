@@ -6,7 +6,7 @@
         "Name":"water bottles"
     },
     "MessageProperties":{
-        "MessageContentType":"json",
-        "MessageDescription":"request for resources cuz I'm thirsty"
+        "MessageContentType":"RequestResource",
+        "MessageDescription":"This is a sample message, delete me"
     }
 }

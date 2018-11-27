@@ -6,7 +6,7 @@
         "Name":"firetruck"
     },
     "MessageProperties":{
-        "MessageContentType":"json",
-        "MessageDescription":"request for resources"
+        "MessageContentType":"RequestResource",
+        "MessageDescription":"This is a sample message, delete me"
     }
 }
