@@ -2,6 +2,7 @@
     <MessageID>08818d23-0bea-4099-81ed-d779987b2b42</MessageID>
     <SentDateTime>2016-08-01T13:35:00</SentDateTime>
     <MessageContentType>RequestResource</MessageContentType>
+	<MessageDescription>Requesting 1 high water vehicle</MessageDescription>
     <OriginatingMessageID>08818d23-0bea-4099-81ed-d779987b2b42</OriginatingMessageID>
     <IncidentInformation>
         <IncidentDescription>Mass flooding</IncidentDescription>
@@ -18,7 +19,9 @@
         <ScheduleInformation>
             <ScheduleType>RequestedArrival</ScheduleType>
             <DateTime>2016-08-01T13:35:00</DateTime>
-            <Location>123 Airline Hwy, Baton Rouge LA</Location>
+			<LocationType>
+            	<Address>123 Airline Hwy, Baton Rouge LA</Address>
+			</LocationType>
         </ScheduleInformation>
     </ResourceInformation>
 </RequestResource>

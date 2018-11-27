@@ -3,6 +3,7 @@
         "MessageID": "98217aef-3e26-4da7-865e-e42bdec8a652",
         "SentDateTime": "2016-08-01T14:07:00",
         "MessageContentType": "RequestResource",
+		"MessageDescripton" : "Requesting 8 rescure personnel for flooding",
         "OriginatingMessageID": "98217aef-3e26-4da7-865e-e42bdec8a652",
         "IncidentInformation": {
             "IncidentDescription": "Mass flooding"
@@ -11,7 +12,7 @@
             "ResourceInfoElementID": "003",
             "Resource": {
                 "ResourceID": "003",
-                "Name": "Rescue personnel",
+                "Name": "Rescue personnel"
             },
             "AssignmentInformation": {
                 "Quantity": "8"
@@ -19,7 +20,9 @@
             "ScheduleInformation": {
                 "ScheduleType": "RequestedArrival",
                 "DateTime": "2016-08-01T14:07:00",
-                "Location": "789 S Range Ave, Denham Springs LA"
+                "LocationType": {
+					"Address": "789 S Range Ave, Denham Springs LA"
+				}
             }
         }
     }

@@ -2,6 +2,7 @@
     <MessageID>23e5f51b-9df2-46dc-9ab4-0f94e48dd57e</MessageID>
     <SentDateTime>2016-08-01T13:37:00</SentDateTime>
     <MessageContentType>RequestResource</MessageContentType>
+	<MessageDescripton>Requesting 2 boats</MessageDescription>
     <OriginatingMessageID>23e5f51b-9df2-46dc-9ab4-0f94e48dd57e</OriginatingMessageID>
     <IncidentInformation>
         <IncidentDescription>Mass flooding</IncidentDescription>
@@ -18,7 +19,9 @@
         <ScheduleInformation>
             <ScheduleType>RequestedArrival</ScheduleType>
             <DateTime>2016-08-01T13:37:00</DateTime>
-            <Location>456 Sherwood Forest Blvd, Baton Rouge LA</Location>
+            <LocationType>
+				<Address>456 Sherwood Forest Blvd, Baton Rouge LA</Address>
+			</LocationType>
         </ScheduleInformation>
     </ResourceInformation>
 </RequestResource>
