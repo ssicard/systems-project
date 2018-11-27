@@ -164,7 +164,7 @@ void ResourceMessage::insertIntoDatabase() {
 		}
 
 		std::cout << "After all object inserts\n";
-		/*
+		
 		char* strUuid;
 	sprintf(strUuid, "%x%x-%x-%x-%x-%x%x%x", 
     rand(), rand(),                 // Generates a 64-bit Hex number
@@ -172,13 +172,13 @@ void ResourceMessage::insertIntoDatabase() {
     ((rand() & 0x0fff) | 0x4000),   // Generates a 32-bit Hex number of the form 4xxx (4 indicates the UUID version)
     rand() % 0x3fff + 0x8000,       // Generates a 32-bit Hex number in the range [0x8000, 0xbfff]
     rand(), rand(), rand());        // Generates a 96-bit Hex number
-	*/
+	
 	std::cout << "After uuid thing\n";
 	try {
-		/*
+		
 			std::cout << strUuid << std::endl;
 			this->MessageID = strUuid;
-			*/
+			
 		// ...
 		sql::Connection *con;
 		sql::PreparedStatement *prep_stmt;
@@ -216,7 +216,7 @@ void ResourceMessage::insertIntoDatabase() {
 		prep_stmt->execute();
 		std::cout << "after execute in resourcemessage.cpp\n";
 
-		/*
+		
 		prep_stmt = con->prepareStatement("SELECT MAX(MessageID) as MessageID FROM ResouceMessage");
 
 		res = prep_stmt->executeQuery();
@@ -225,7 +225,7 @@ void ResourceMessage::insertIntoDatabase() {
 			this->MessageID = res->getString("MessageID");
 		}
 		printf("the message id was theoretically %d\n",this->MessageID);
-		*/
+		
 		delete stmt;
 		delete prep_stmt;
 		delete con;
