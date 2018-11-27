@@ -24,6 +24,9 @@
 					"Address" : "789 S Range Ave, Denham Springs LA"
 				}
             }
+        },
+        "ContactInformationType":{
+          "ContactDescription":"client_a"
         }
     }
 }
