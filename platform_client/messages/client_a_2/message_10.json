@@ -3,6 +3,7 @@
         "MessageID": "c814d0d9-7d91-4262-b46e-5aa977cc9647",
         "SentDateTime": "2016-08-01T14:16:00",
         "MessageContentType": "ResponseToRequestResource",
+		"MessageDescription": "Responding with 5 boats",
         "OriginatingMessageID": "ced34171-a592-41f6-9091-de8d498ead1c",
         "PrecedingMessageID": "ced34171-a592-41f6-9091-de8d498ead1c",
         "IncidentInformation": {
@@ -24,7 +25,9 @@
             "ScheduleInformation": {
                 "ScheduleType": "EstimatedArrival",
                 "DateTime": "2016-08-01T14:16:00",
-                "Location": "789 S Range Ave, Denham Springs LA"
+                "LocationType": {
+					"Address": "789 S Range Ave, Denham Springs LA"
+				}
             }
         }
     }

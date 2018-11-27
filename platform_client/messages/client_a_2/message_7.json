@@ -3,6 +3,7 @@
         "MessageID": "a1ab13d9-d392-4c14-a34e-96729f301ef3",
         "SentDateTime": "2016-08-01T14:09:00",
         "MessageContentType": "ResponseToRequestResource",
+		"MessageDescription": "Responding with 1 high water vehicle",
         "OriginatingMessageID": "08818d23-0bea-4099-81ed-d779987b2b42",
         "PrecedingMessageID": "08818d23-0bea-4099-81ed-d779987b2b42",
         "IncidentInformation": {
@@ -12,7 +13,9 @@
             "ResourceInfoElementID": "001",
             "ResponseInformation": {
                 "PrecedingResourceInfoElementID": "001",
-                "ResponseType": "Accept"
+				"ResponseTypeLookup" : {
+                	"Description": "Accept"
+				}
             },
             "Resource": {
                 "ResourceID": "001",
@@ -24,7 +27,9 @@
             "ScheduleInformation": {
                 "ScheduleType": "EstimatedArrival",
                 "DateTime": "2016-08-01T14:28:00",
-                "Location": "123 Airline Hwy, Baton Rouge LA"
+                "LocationType": {
+					"Address" : "123 Airline Hwy, Baton Rouge LA"
+				}
             }
         }
     }

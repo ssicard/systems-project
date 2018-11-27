@@ -3,16 +3,19 @@
         "MessageID": "15cb3ccc-a9c7-46a1-ae98-960b2e1404ae",
         "SentDateTime": "2016-08-01T13:10:00",
         "MessageContentType": "ResponseToRequestResource",
+		"MessageDescription": "Sending 3 high water vehicles",
         "OriginatingMessageID": "85effff3-069d-480c-b3f0-13911b76d25b",
         "PrecedingMessageID": "85effff3-069d-480c-b3f0-13911b76d25b",
         "IncidentInformation": {
-            "IncidentDescription": "Mass flooding"
+            "IncidentDescription": "Mass Flooding"
         },
         "ResourceInformation": {
             "ResourceInfoElementID": "001",
             "ResponseInformation": {
                 "PrecedingResourceInfoElementID": "001",
-                "ResponseType": "Provisional"
+				"ResponseTypeLookup" : {
+                	"Description": "Provisional"
+				}
             },
             "Resource": {
                 "ResourceID": "001",
@@ -24,7 +27,9 @@
             "ScheduleInformation": {
                 "ScheduleType": "EstimatedArrival",
                 "DateTime": "2016-08-01T13:30:00",
-                "Location": "123 Airline Hwy, Baton Rouge LA"
+                "LocationType": {
+					"Address": "123 Airline Hwy, Baton Rouge LA"
+				}
             }
         }
     }
