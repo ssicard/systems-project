@@ -271,8 +271,11 @@ ResourceMessage TranslationEngine::json_to_response_to_request_resource_msg(std:
     msg.MessageID = req_res["MessageID"] == nullptr ? "" : req_res["MessageID"];
   }
 
+  std::cout << "JSON: " << json_obj << std::endl;
+
   // Initialize base fields for ResourceMessage
-  msg.SentDateTime = req_res["SentDateTime"] == nullptr ? "" : req_res["SentDateTime"];
+  std::cout << "SentDateTime: " << msg._SentDateTime << std::endl;
+  msg._SentDateTime = req_res["SentDateTime"] == nullptr ? "" : req_res["SentDateTime"];
   msg.MessageContentType = req_res["MessageContentType"] == nullptr ? "" : req_res["MessageContentType"];
   msg.MessageDescription = req_res["MessageDescription"] == nullptr ? "" : req_res["MessageDescription"];
   msg.OriginatingMessageID = req_res["OriginatingMessageID"] == nullptr ? "" : req_res["OriginatingMessageID"];
@@ -397,6 +400,8 @@ std::string TranslationEngine::request_resource_msg_to_xml(ResourceMessage msg) 
 std::string TranslationEngine::response_to_request_resource_msg_to_xml(ResourceMessage msg) {
   std::string out;
 
+  std::cout << "SentDateTime: in response_to_request_resource_msg_to_xml: " << msg._SentDateTime << std::endl; 
+
   out.append("<RequestResource>");
   out.append("<MessageID>" + msg.MessageID + "</MessageID>");
   out.append("<SentDateTime>" + msg._SentDateTime + "</SentDateTime>");
@@ -487,7 +492,7 @@ std::string TranslationEngine::request_resource_msg_to_json(ResourceMessage msg)
 std::string TranslationEngine::response_to_request_resource_msg_to_json(ResourceMessage msg) {
   nlohmann::json j;
 
-  j["ResponseToRequestResource"]["SentDateTime"] = msg.SentDateTime;
+  j["ResponseToRequestResource"]["SentDateTime"] = msg._SentDateTime;
   j["ResponseToRequestResource"]["MessageContentType"] = msg.MessageContentType;
   j["ResponseToRequestResource"]["MessageDescription"] = msg.MessageDescription;
   j["ResponseToRequestResource"]["OriginatingMessageID"] = msg.OriginatingMessageID;
