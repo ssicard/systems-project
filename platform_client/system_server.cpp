@@ -40,9 +40,18 @@ uint32_t xml_byte_cnt{0};
 
 class CallBackTimer {
 public:
+    std::string currentTime;
 		CallBackTimer() :_execute(false) {
-      time_t now = time(0);
-      currentTime = std::string(ctime(&now));
+			char buffer[80];
+			struct tm * timeinfo;
+
+			time_t now;
+			time(&now);
+			timeinfo = localtime(&now);
+
+			strftime (buffer,80,"%F %T",timeinfo);
+			currentTime = std::string(buffer);
+
     }
 
 		~CallBackTimer() {
@@ -65,12 +74,9 @@ public:
 				_thd = std::thread([this, interval, func, p]()
 				{
 						while (_execute.load(std::memory_order_acquire)) {
-						    std::cout << "IN TIMER: TIME = " << currentTime << std::endl;
+//						    std::cout << "IN TIMER: TIME = " << currentTime << std::endl;
 								func(p, currentTime);                   
-                time_t now = time(0);
-                currentTime = std::string(ctime(&now));
-								std::this_thread::sleep_for(
-								std::chrono::milliseconds(interval));
+								std::this_thread::sleep_for(std::chrono::milliseconds(interval));
 						}
 				});
 		}
@@ -82,10 +88,14 @@ public:
 private:
 		std::atomic<bool> _execute;
 		std::thread _thd;
-    std::string currentTime;
 
 };
 
+<<<<<<< HEAD
+=======
+CallBackTimer *timer;
+
+>>>>>>> platform_client
 // main function
 int main(int argc, char **argv) {
   // socket file descriptors for listening and for connection
@@ -110,8 +120,8 @@ int main(int argc, char **argv) {
   init_pool(listenfd, &pool); // initializing pool
 
   // initializing timer for passive communication
-  CallBackTimer *timer = new CallBackTimer();
-  timer->start(10000, passiveCommunication, &pool);
+  timer = new CallBackTimer();
+  timer->start(60000, passiveCommunication, &pool);
 
   for(;;) {
     /* Wait for listening/connected descriptor(s) to become ready */
@@ -189,16 +199,24 @@ void passiveCommunication(pool *p, std::string currentTime) {
   std::string *messages = request.getUnsentMessageIDs(currentTime);
   for (int j = 0; j < 100; j++) {
     if (messages[j].length() == 0) {
+<<<<<<< HEAD
       std::cout << "NO NEW MESSAGES" << std::endl;
+=======
+      //std::cout << "NO NEW MESSAGES" << std::endl;
+>>>>>>> platform_client
       break;
     }
     request.MessageID = messages[j];
     request.getFromDatabase();
+    std::cout << "FOUND A MESSAGE" << std::endl;
     for (i = 0; i <= p->maxi; i++) {
       connfd = p->clientfd[i];
       if (connfd < 0)
         continue;
-      cout << "CLIENT " << i << ": " << connfd << endl;
+      if (i >= 1) {
+	      timer->currentTime = request._SentDateTime;
+	      std::cout << connfd <<  ": UPDATED TIME = " << timer->currentTime << std::endl;
+      }
       if (request.MessageContentType == "RequestResource") {
         std::string requestResourceXML = t_engine.request_resource_msg_to_xml(request) + "\n";
         handle_xml_client(requestResourceXML, connfd);
@@ -210,7 +228,8 @@ void passiveCommunication(pool *p, std::string currentTime) {
         handle_xml_client(responseRequestXML, connfd);
         std::string responseRequestJSON = t_engine.response_to_request_resource_msg_to_json(request) + "\n";
         handle_json_client(responseRequestJSON, connfd);
-
+      } else {
+          std::cout << "Unknown message type" << std::endl;
       }
     }
   }
@@ -363,14 +382,18 @@ void handle_json_client(std::string out, int connfd){
   //}
   char json_str[MAXLINE];
   strcpy(json_str, out.c_str());
+  std::cout << connfd << std::endl;
   Rio_writen(connfd, json_str, out.size());
 }
 
 void handle_xml_client(std::string out, int connfd) {
   char xml_str[MAXLINE];
   strcpy(xml_str, out.c_str());
+  std::cout << connfd << std::endl;
   Rio_writen(connfd, xml_str, out.size());
 }
+
+
 // if you need to look at any maps
 void show_current_map(std::map<std::string, int> map){
   printf("name and connfd in map:\n");

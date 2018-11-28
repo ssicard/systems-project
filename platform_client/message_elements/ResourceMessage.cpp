@@ -34,8 +34,7 @@ std::string* ResourceMessage::getUnsentMessageIDs(std::string lastCheckedTime) {
 		stmt = con->createStatement();
 		stmt->execute("USE " EXAMPLE_DB);
 
-		prep_stmt = con->prepareStatement("SELECT `MessageID` FROM `ResourceMessage` WHERE `SentDateTime` < ?");
-
+		prep_stmt = con->prepareStatement("SELECT `MessageID` FROM `ResourceMessage` WHERE `SentDateTime` > ? AND ContactInformationID = 2");
 
 		prep_stmt->setString(1, lastCheckedTime);
 		
@@ -43,7 +42,7 @@ std::string* ResourceMessage::getUnsentMessageIDs(std::string lastCheckedTime) {
 
 		int i = 0;
 		while (res->next()) {
-			messageIDs[i] = res->getString("MesssageID");
+			messageIDs[i] = res->getString("MessageID");
 			i++;
 		}
 
