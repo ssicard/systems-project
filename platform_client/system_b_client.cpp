@@ -133,10 +133,6 @@ int main(int argc, char **argv){
 			std::string filename = "./messages/client_b_1/";
 			filename += buf;
 
-			//std::cout << "File name is " << filename << std::endl;
-			//read the xml
-			//filename = "./messages/client_b_1/";
-			//std::cout << "File name is now " << filename << std::endl;
 			std::ifstream stream(filename);
 //			pugi::xml_parse_result result = x.load(stream);
 //			std::cout << "Load result: " << result.description() << std::endl;
