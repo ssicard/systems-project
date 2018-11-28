@@ -5,7 +5,9 @@
         "MessageContentType": "RequestResource",
 		"MessageDescripton" : "Requesting 8 rescure personnel for flooding",
         "OriginatingMessageID": "98217aef-3e26-4da7-865e-e42bdec8a652",
+        "IncidentID": "laks-0192",
         "IncidentInformation": {
+            "IncidentID": "laks-0192",
             "IncidentDescription": "Mass flooding"
         },
         "ResourceInformation": {

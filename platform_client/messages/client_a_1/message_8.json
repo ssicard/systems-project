@@ -5,7 +5,9 @@
         "MessageContentType": "RequestResource",
 		"MessageDescription": "Requesting 5 boats",
         "OriginatingMessageID": "ced34171-a592-41f6-9091-de8d498ead1c",
+        "IncidentID": "jksdafh-4234",
         "IncidentInformation": {
+            "IncidentID": "jksdafh-4234",
             "IncidentDescription": "Mass flooding"
         },
         "ResourceInformation": {

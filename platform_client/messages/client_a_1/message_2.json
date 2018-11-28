@@ -6,7 +6,9 @@
 		"MessageDescription": "Sending 3 high water vehicles",
         "OriginatingMessageID": "85effff3-069d-480c-b3f0-13911b76d25b",
         "PrecedingMessageID": "85effff3-069d-480c-b3f0-13911b76d25b",
+        "IncidentID": "asdf1234",
         "IncidentInformation": {
+            "IncidentID": "asdf1234",
             "IncidentDescription": "Mass Flooding"
         },
         "ResourceInformation": {
