@@ -152,7 +152,7 @@ void init_pool(int listenfd, pool *p) {
 
 void add_client(int connfd, pool *p) {
   int i;
-  char logon[] = "<<<---Connected to server--->>>\n";
+  //char logon[] = "<<<---Connected to server--->>>\n";
   p->nready--;
   for (i = 0; i < FD_SETSIZE; i++){  /* Find an available slot */
     if (p->clientfd[i] < 0) {
@@ -162,7 +162,7 @@ void add_client(int connfd, pool *p) {
       /* Add the descriptor to descriptor set */
       FD_SET(connfd, &p->read_set); 
       /* Send confirming connection to client */
-      Rio_writen(p->clientfd[i], logon, strlen(logon));
+      //Rio_writen(p->clientfd[i], logon, strlen(logon));
       /* Update max descriptor and pool highwater mark */
       if (connfd > p->maxfd)
 	    p->maxfd = connfd;
@@ -336,7 +336,7 @@ void communication(pool *p) {
                 l.log(Logger::LogLevel::INFO, logMessageOut.str());
               }
               //TODO: handle_xml_client(tmp, connfd);
-            } else { // we don't mess with this
+            } else { // not json or xml
               printf("[error] unknown protocol\n");
             }
           }

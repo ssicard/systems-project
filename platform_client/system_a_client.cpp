@@ -38,28 +38,10 @@ int main(int argc, char **argv){
       memset(&data, 0, sizeof(data));
       nlohmann::json j;
 
-      /*getting the inputs from stdin */
+      /*getting the filename from stdin */
       Fgets(buf, MAXLINE, stdin);
-      if(buf[0] == '\\'){
-        if (buf[1] == 'q'){
-          printf("\\q innitiated, are you sure you want to quit session"); 
-          printf("(enter c to continue, type any other keys to quit)?\n");
-          Fgets(buf, MAXLINE, stdin);
-          printf("%c\n", buf[0]);
-          if(buf[0]=='c'){
-            printf("<<<---Continuing Session--->>>\n");
-            continue;
-          } else {
-            printf("<<<---Session Terminating--->>>\n");
-            // TODO: send log out message
-            exit(0);
-          }
-        }
-      }
       buf[strlen(buf)-1] = '\0';
-
-      //read the json file
-      std::string filename = "./sample_messages/";
+      std::string filename = "./messages/";
       filename += buf;
 
       //read the json file
