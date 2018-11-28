@@ -228,7 +228,7 @@ void ResourceMessage::insertIntoDatabase() {
 			while (res->next()) {
 				this->MessageID = res->getString("MessageID");
 			}
-			printf("the message id was theoretically %d\n",this->MessageID);
+//			std::cout << "the message id was theoretically " << this->MessageID << std::endl;
 			
 			delete stmt;
 			delete prep_stmt;
