@@ -20,8 +20,8 @@ ResourceMessage::~ResourceMessage()
 
 
 std::string* ResourceMessage::getUnsentMessageIDs(std::string lastCheckedTime) {
-
 	std::string *messageIDs = new std::string[100];
+	
 	try {
 		sql::Connection *con;
 		sql::PreparedStatement *prep_stmt;
@@ -196,14 +196,26 @@ void ResourceMessage::insertIntoDatabase() {
 
 			// check these and set to null if not initialized past default values
 			prep_stmt->setString(7, this->IncidentID);
-			prep_stmt->setString(8, this->RecalledMessageID);
-			prep_stmt->setString(9, this->FundCode);
+			if (this->RecalledMessageID != "") {
+				prep_stmt->setString(8, this->RecalledMessageID);
+			} else {
+				prep_stmt->setNull(8, sql::DataType::VARCHAR);
+			}
+			if (this->FundCode != "") {
+				prep_stmt->setString(9, this->FundCode);
+			} else {
+				prep_stmt->setNull(9, sql::DataType::VARCHAR);
+			}
 			if (this->_ContactInformationID != -1) {
 				prep_stmt->setInt(10, this->_ContactInformationID);
 			} else {
 				prep_stmt->setNull(10, sql::DataType::INTEGER);
 			}
-			prep_stmt->setString(11, this->ResourceInfoElementID);
+			if (this->ResourceInfoElementID != "") {
+				prep_stmt->setString(11, this->ResourceInfoElementID);
+			} else {
+				prep_stmt->setNull(11, sql::DataType::VARCHAR);
+			}
 
 			prep_stmt->execute();
 
@@ -215,7 +227,7 @@ void ResourceMessage::insertIntoDatabase() {
 			while (res->next()) {
 				this->MessageID = res->getString("MessageID");
 			}
-			printf("the message id was theoretically %d\n",this->MessageID);
+//			std::cout << "the message id was theoretically " << this->MessageID << std::endl;
 			
 			delete stmt;
 			delete prep_stmt;

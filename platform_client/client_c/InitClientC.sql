@@ -32,12 +32,14 @@ VALUES  (0, 0, 0, 0),
 		(1, 2, 1, 1),
 		(2, 1, 2, 2);
 
+		/*
 INSERT INTO ContactInformationType(ContactInformationID, ContactDescription)
 VALUES  (0, "clienta"),
 		(1, "clientb"),
 		(2, "clientc");
+*/
 
 INSERT INTO ResourceMessage(MessageID, SentDateTime, MessageContentType, MessageDescription, OriginatingMessageID, IncidentID, FundCode, ContactInformationID, ResourceInfoElementID) 
-VALUES 	   (0, "2018-11-05", "ResourceRequest", "Request 10 trucks for Hurricane Percy", 0, 0, "0", 2, 0),
-	   (1, "2018-11-05", "ResourceRequest", "Request 30 water for Great Flood of 2016", 1, 2, "75", 2, 1),
-	   (2, "2018-11-06", "ResourceRequest", "Request 1 firetruck for Hurricane Percy", 2, 1, "50", 2, 2);
+VALUES 	   (0, "2018-11-27 22:45:00", "ResourceRequest", "Request 10 trucks for Hurricane Percy", 0, 0, "0", 2, 0),
+	   (1, "2018-11-27 22:50:00", "ResourceRequest", "Request 30 water for Great Flood of 2016", 1, 2, "75", 2, 1),
+	   (2, "2018-11-27 22:53:00", "ResourceRequest", "Request 1 firetruck for Hurricane Percy", 2, 1, "50", 2, 2);

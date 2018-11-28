@@ -41,6 +41,6 @@ INSERT INTO clientcDB.Resource(ResourceID, TypeStructureID, TypeInfoID, KeywordI
 
 INSERT INTO clientcDB.ResourceInformation(ResourceInfoElementID, ResponseInformation, Resource, AssignmentInformationID, ScheduleInformationID) SELECT DISTINCT(ResourceInformation.ResourceInfoElementID), ResponseInformation, Resource, AssignmentInformationID, ScheduleInformationID FROM clientcDB.ResourceMessage, clientcDB.ResourceInformation WHERE clientcDB.ResourceMessage.SentDateTime > ${LAST_PLAT_CHECK} AND clientcDB.ResourceMessage.ResourceInfoElementID = clientcDB.ResourceInformation.ResourceInfoElementID; 
 
-INSERT INTO clientcDB.ResourceMessage(MessageID, SentDateTime, IncidentID, RecalledMessageID, FundCode, ContactInformationID, ResourceInfoElementID) SELECT DISTINCT(ResourceMessage.MessageID), SentDateTime, IncidentID, RecalledMessageID, FundCode, ContactInformationID, ResourceInfoElementID FROM clientcDB.ResourceMessage WHERE clientcDB.ResourceMessage.SentDateTime > ${LAST_PLAT_CHECK};"
+INSERT INTO clientcDB.ResourceMessage(MessageID, SentDateTime, MessageContentType, MessageDescription, OriginatingMessageID, IncidentID, RecalledMessageID, FundCode, ContactInformationID, ResourceInfoElementID) SELECT DISTINCT(ResourceMessage.MessageID), SentDateTime, MessageContentType, MessageDescription, OriginatingMessageID, IncidentID, RecalledMessageID, FundCode, ContactInformationID, ResourceInfoElementID FROM clientcDB.ResourceMessage WHERE clientcDB.ResourceMessage.SentDateTime > ${LAST_PLAT_CHECK};"
 fi
 #TODO last plat check

@@ -39,6 +39,6 @@ INSERT INTO progDB.Resource(ResourceID, TypeStructureID, TypeInfoID, KeywordID, 
 
 INSERT INTO progDB.ResourceInformation(ResourceInfoElementID, ResponseInformation, Resource, AssignmentInformationID, ScheduleInformationID) SELECT DISTINCT(ResourceInformation.ResourceInfoElementID), ResponseInformation, Resource, AssignmentInformationID, ScheduleInformationID FROM clientcDB.ResourceMessage, clientcDB.ResourceInformation WHERE clientcDB.ResourceMessage.SentDateTime > ${LAST_CLIENTC_CHECK} AND clientcDB.ResourceMessage.ResourceInfoElementID = clientcDB.ResourceInformation.ResourceInfoElementID; 
 
-INSERT INTO progDB.ResourceMessage(MessageID, SentDateTime, IncidentID, RecalledMessageID, FundCode, ContactInformationID, ResourceInfoElementID) SELECT DISTINCT(ResourceMessage.MessageID), SentDateTime, IncidentID, RecalledMessageID, FundCode, ContactInformationID, ResourceInfoElementID FROM clientcDB.ResourceMessage WHERE clientcDB.ResourceMessage.SentDateTime > ${LAST_CLIENTC_CHECK};"
+INSERT INTO progDB.ResourceMessage(MessageID, SentDateTime, MessageContentType, MessageDescription, OriginatingMessageID, IncidentID, RecalledMessageID, FundCode, ContactInformationID, ResourceInfoElementID) SELECT DISTINCT(ResourceMessage.MessageID), SentDateTime, MessageContentType, MessageDescription, OriginatingMessageID, IncidentID, RecalledMessageID, FundCode, ContactInformationID, ResourceInfoElementID FROM clientcDB.ResourceMessage WHERE clientcDB.ResourceMessage.SentDateTime > ${LAST_CLIENTC_CHECK};"
 fi
 export LAST_CLIENTC_CHECK="2018-11-06"
