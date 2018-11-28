@@ -130,15 +130,21 @@ int main(int argc, char **argv){
 			//get filename from stdin
 			Fgets(buf, MAXLINE, stdin);
 			buf[strlen(buf)-1] = '\0';
-			std::string filename = "./messages/";
+			std::string filename = "./messages/client_b_1/";
 			filename += buf;
 
+			//std::cout << "File name is " << filename << std::endl;
 			//read the xml
+			//filename = "./messages/client_b_1/";
+			//std::cout << "File name is now " << filename << std::endl;
 			std::ifstream stream(filename);
-			pugi::xml_parse_result result = x.load(stream);
-			if(result){
-			    std::string send_this((std::istreambuf_iterator<char>(stream)), std::istreambuf_iterator<char>());
-			    std::cout <<"parse result" << send_this;
+//			pugi::xml_parse_result result = x.load(stream);
+//			std::cout << "Load result: " << result.description() << std::endl;
+			if(stream){
+			    std::string send_this;
+				send_this.assign((std::istreambuf_iterator<char>(stream)), (std::istreambuf_iterator<char>()));
+//				parse_data(&send_this);
+			    std::cout << "parse result" << send_this << std::endl;
 			    send_this += "\n";
 			    char *msg = new char[send_this.length()];
 			    //strcpy(msg, stream);
