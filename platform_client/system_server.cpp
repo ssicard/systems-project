@@ -91,11 +91,8 @@ private:
 
 };
 
-<<<<<<< HEAD
-=======
 CallBackTimer *timer;
 
->>>>>>> platform_client
 // main function
 int main(int argc, char **argv) {
   // socket file descriptors for listening and for connection
@@ -121,7 +118,7 @@ int main(int argc, char **argv) {
 
   // initializing timer for passive communication
   timer = new CallBackTimer();
-  timer->start(60000, passiveCommunication, &pool);
+  timer->start(10000, passiveCommunication, &pool);
 
   for(;;) {
     /* Wait for listening/connected descriptor(s) to become ready */
@@ -199,11 +196,7 @@ void passiveCommunication(pool *p, std::string currentTime) {
   std::string *messages = request.getUnsentMessageIDs(currentTime);
   for (int j = 0; j < 100; j++) {
     if (messages[j].length() == 0) {
-<<<<<<< HEAD
-      std::cout << "NO NEW MESSAGES" << std::endl;
-=======
       //std::cout << "NO NEW MESSAGES" << std::endl;
->>>>>>> platform_client
       break;
     }
     request.MessageID = messages[j];
