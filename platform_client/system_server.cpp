@@ -283,7 +283,22 @@ void communication(pool *p) {
               cout << logMessage.str();
               l.log(Logger::LogLevel::INFO, logMessage.str());
               handle_json_client(tmp, connfd);
-              if(tmp_std_str.find("RequestResource") != std::string::npos) {
+              if(tmp_std_str.find("ResponseToRequestResource") != std::string::npos) {
+				 std::cout << "Response to request resource json in server\n";
+                ResourceMessage response = t_engine.json_to_response_to_request_resource_msg("", tmp);
+				std::cout << "In server, sentdatetime: " << response._SentDateTime << std::endl;
+				response.insertIntoDatabase();
+
+                std::string out = t_engine.response_to_request_resource_msg_to_xml(response) + "\n";
+                //strcpy(tmp_xml, out.c_str());
+                stringstream logMessageIn;
+                logMessageIn << "[ResponseToRequestResource Message]"<<tmp;
+                l.log(Logger::LogLevel::INFO, logMessageIn.str());
+                handle_xml_client(out, p->clientfd[j]);
+                stringstream logMessageOut;
+                logMessageOut << "[Sent Message to "<<p->clientfd[j]<<"]"<<out;
+                l.log(Logger::LogLevel::INFO, logMessageOut.str());
+              } else if(tmp_std_str.find("RequestResource") != std::string::npos) {
                 ResourceMessage request = t_engine.json_to_request_resource_msg("", tmp);
 
 				request.insertIntoDatabase();
@@ -297,20 +312,6 @@ void communication(pool *p) {
                 stringstream logMessageOut;
                 logMessageOut << "[Sent Message to "<<p->clientfd[j]<<"]"<<out;
                 l.log(Logger::LogLevel::INFO, logMessageOut.str());
-              } else if(tmp_std_str.find("ResponseToRequestResource") != std::string::npos) {
-                ResourceMessage response = t_engine.json_to_response_to_request_resource_msg("", tmp);
-				
-				response.insertIntoDatabase();
-
-                std::string out = t_engine.response_to_request_resource_msg_to_xml(response) + "\n";
-                //strcpy(tmp_xml, out.c_str());
-                stringstream logMessageIn;
-                logMessageIn << "[ResponseToRequestResource Message]"<<tmp;
-                l.log(Logger::LogLevel::INFO, logMessageIn.str());
-                handle_xml_client(out, p->clientfd[j]);
-                stringstream logMessageOut;
-                logMessageOut << "[Sent Message to "<<p->clientfd[j]<<"]"<<out;
-                l.log(Logger::LogLevel::INFO, logMessageOut.str());
               }
             } else if (tmp[0] == '<') { // xml clients 
               xml_byte_cnt+= n; // increment bytes received by xml client 
@@ -318,22 +319,7 @@ void communication(pool *p) {
               stringstream logMessage;
               logMessage << "Received "<<n<<"("<<xml_byte_cnt<<" total) bytes by a xml client with fd["<<connfd<<"]";
               l.log(Logger::LogLevel::INFO, logMessage.str());
-              if(tmp_std_str.find("RequestResource") != std::string::npos) {
-//				std::cout << "Received string: " << tmp << std::endl;
-                ResourceMessage request = t_engine.xml_to_request_resource_msg("", tmp);
-				
-				request.insertIntoDatabase();
-                
-				std::string out = t_engine.request_resource_msg_to_json(request) + "\n";
-                //strcpy(tmp_json, out.c_str());
-                stringstream logMessageIn;
-                logMessageIn << "[RequestResource Message]"<<tmp;
-                l.log(Logger::LogLevel::INFO, logMessageIn.str());
-                handle_json_client(out, p->clientfd[j]);
-                stringstream logMessageOut;
-                logMessageOut << "[Sent Message to "<<p->clientfd[j]<<"]"<<out;
-                l.log(Logger::LogLevel::INFO, logMessageOut.str());
-              } else if(tmp_std_str.find("ResponseToRequestResource") != std::string::npos) {
+              if(tmp_std_str.find("ResponseToRequestResource") != std::string::npos) {
                 ResourceMessage response = t_engine.xml_to_response_to_request_resource_msg("", tmp);
 
 				response.insertIntoDatabase();
@@ -348,6 +334,22 @@ void communication(pool *p) {
                 logMessageOut << "[Sent Message to "<<p->clientfd[j]<<"]"<<out;
                 l.log(Logger::LogLevel::INFO, logMessageOut.str());
               }
+              else if(tmp_std_str.find("RequestResource") != std::string::npos) {
+//				std::cout << "Received string: " << tmp << std::endl;
+                ResourceMessage request = t_engine.xml_to_request_resource_msg("", tmp);
+				
+				request.insertIntoDatabase();
+                
+				std::string out = t_engine.request_resource_msg_to_json(request) + "\n";
+                //strcpy(tmp_json, out.c_str());
+                stringstream logMessageIn;
+                logMessageIn << "[RequestResource Message]"<<tmp;
+                l.log(Logger::LogLevel::INFO, logMessageIn.str());
+                handle_json_client(out, p->clientfd[j]);
+                stringstream logMessageOut;
+                logMessageOut << "[Sent Message to "<<p->clientfd[j]<<"]"<<out;
+                l.log(Logger::LogLevel::INFO, logMessageOut.str());
+			  }
               //TODO: handle_xml_client(tmp, connfd);
             } else { // not json or xml
               printf("[error] unknown protocol\n");

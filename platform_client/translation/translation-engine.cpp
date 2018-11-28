@@ -274,8 +274,8 @@ ResourceMessage TranslationEngine::json_to_response_to_request_resource_msg(std:
   std::cout << "JSON: " << json_obj << std::endl;
 
   // Initialize base fields for ResourceMessage
+  std::cout << "SentDateTime: " << msg._SentDateTime << std::endl;
   msg._SentDateTime = req_res["SentDateTime"] == nullptr ? "" : req_res["SentDateTime"];
-  std::cout << req_res["SentDateTime"] << std::endl;
   msg.MessageContentType = req_res["MessageContentType"] == nullptr ? "" : req_res["MessageContentType"];
   msg.MessageDescription = req_res["MessageDescription"] == nullptr ? "" : req_res["MessageDescription"];
   msg.OriginatingMessageID = req_res["OriginatingMessageID"] == nullptr ? "" : req_res["OriginatingMessageID"];
@@ -399,6 +399,8 @@ std::string TranslationEngine::request_resource_msg_to_xml(ResourceMessage msg) 
 // TODO: Change parameter type to ResourceMessage
 std::string TranslationEngine::response_to_request_resource_msg_to_xml(ResourceMessage msg) {
   std::string out;
+
+  std::cout << "SentDateTime: in response_to_request_resource_msg_to_xml: " << msg._SentDateTime << std::endl; 
 
   out.append("<RequestResource>");
   out.append("<MessageID>" + msg.MessageID + "</MessageID>");
