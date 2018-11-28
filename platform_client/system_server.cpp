@@ -307,6 +307,7 @@ void communication(pool *p) {
               logMessage << "Received "<<n<<"("<<xml_byte_cnt<<" total) bytes by a xml client with fd["<<connfd<<"]";
               l.log(Logger::LogLevel::INFO, logMessage.str());
               if(tmp_std_str.find("RequestResource") != std::string::npos) {
+//				std::cout << "Received string: " << tmp << std::endl;
                 ResourceMessage request = t_engine.xml_to_request_resource_msg("", tmp);
 				
 				request.insertIntoDatabase();
