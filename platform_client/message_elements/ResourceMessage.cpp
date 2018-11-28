@@ -1,5 +1,6 @@
 #include "ResourceMessage.h"
 #include <ctime>
+#include <cstdio>
 
 /*
 ResourceMessage::ResourceMessage(std::string messageID)
@@ -167,6 +168,17 @@ void ResourceMessage::insertIntoDatabase() {
 		rand() % 0x3fff + 0x8000,       // Generates a 32-bit Hex number in the range [0x8000, 0xbfff]
 		rand(), rand(), rand());        // Generates a 96-bit Hex number
 	
+
+		char buffer[80];
+		struct tm * timeinfo;
+
+		time_t now;
+		time(&now);
+		timeinfo = localtime(&now);
+
+		strftime (buffer,80,"%F %T",timeinfo);
+		std::string currentTime = std::string(buffer);
+
 		try {
 		
 			std::cout << strUuid << std::endl;
@@ -188,14 +200,18 @@ void ResourceMessage::insertIntoDatabase() {
 
 		prep_stmt = con->prepareStatement("INSERT INTO `ResourceMessage`(`MessageID`, `SentDateTime`, `MessageContentType`, `MessageDescription`, `OriginatingMessageID`, `PrecedingMessageID`, `IncidentID`, `RecalledMessageID`, `FundCode`, `ContactInformationID`, `ResourceInfoElementID`) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
 			prep_stmt->setString(1, this->MessageID);
-			prep_stmt->setString(2, this->_SentDateTime);
+			prep_stmt->setString(2, currentTime);
 			prep_stmt->setString(3, this->MessageContentType);
 			prep_stmt->setString(4, this->MessageDescription);
 			prep_stmt->setString(5, this->OriginatingMessageID);
 			prep_stmt->setString(6, this->PrecedingMessageID);
 
 			// check these and set to null if not initialized past default values
-			prep_stmt->setString(7, this->IncidentID);
+                        if (this->IncidentID != "") {
+				prep_stmt->setString(7, this->IncidentID);
+			} else {
+				prep_stmt->setNull(7, sql::DataType::VARCHAR);
+			}
 			if (this->RecalledMessageID != "") {
 				prep_stmt->setString(8, this->RecalledMessageID);
 			} else {
